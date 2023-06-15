@@ -1,0 +1,53 @@
+### Register
+POST http://localhost:8081/api/auth/signup HTTP/1.1
+content-type: application/json
+
+{
+  "username": "long",
+  "email": "thanhlong25042001@gmail.com",
+  "password": "12345678"
+}
+
+### confirm
+GET http://localhost:8081/api/auth/confirm/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoYW5obG9uZzI1MDQyMDAxQGdtYWlsLmNvbSIsImlhdCI6MTY4NTUwODA4NH0.TngYg74vxPIq4GY2MaEIOgAmyVkBzqF7l6A98DLn-bI HTTP/1.1
+content-type: application/json
+
+### forgot password
+POST http://localhost:8081/api/auth/forgotpassword HTTP/1.1
+content-type: application/json
+
+{
+  "email": "thanhlong25042001@gmail.com"
+}
+
+### reset password
+POST http://localhost:8081/api/auth/password_reset HTTP/1.1
+Content-Type: application/json
+
+{
+  "confirmationCode": "f730863324d78557779c37cf87800775d256eb0e",
+  "newPassword": "12345678"
+}
+
+### sign in
+POST http://localhost:8081/api/auth/signin HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "long",
+  "password": "12345678"
+}
+
+### change password
+POST http://localhost:8081/api/auth/change_password HTTP/1.1
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NTBhOTdhY2VjNWI4NmE3NGU4NTc3YiIsImlhdCI6MTY4MzExNDkwNiwiZXhwIjoxNjgzMjAxMzA2fQ.3RXkkviqpihOh3q4HWNVDGtVtjga9MfCmgxyzauDMrk
+
+{
+  "password":"12345678",
+  "newPassword": "12345678"
+}
+
+
+
+

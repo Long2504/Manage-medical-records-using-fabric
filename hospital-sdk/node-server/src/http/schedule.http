@@ -1,0 +1,58 @@
+
+
+
+### get schedule speciality
+// done
+POST http://localhost:8081/api/schedule/get-schedule-speciality HTTP/1.1
+Content-Type: application/json
+
+{
+  "specialityID": "647ee9e5aee1ff0c2b4ded18",
+  "appointmentDate": "2021-05-01"
+}
+
+### get schedule doctor
+//done
+POST http://localhost:8081/api/schedule/get-schedule-doctor HTTP/1.1
+Content-Type: application/json
+
+{
+  "doctorID": "64532f139ec3cad23c35c889",
+  "appointmentDate": "2021-05-01"
+}
+
+### create appointment schedule by speciality
+POST http://localhost:8081/api/schedule/create-appointment-schedule-by-speciality HTTP/1.1
+Content-Type: application/json
+
+{
+  "appointmentDate": "2021-05-01",
+  "appointmentTime": "10:00",
+  "specialityID": "647ee9e5aee1ff0c2b4ded1a",
+  "patientID": "64532f139ec3cad23c35c886",
+  "status": "booked",
+  "description": "description"
+}
+
+### create appointment schedule doctor
+//done 90% check error
+POST http://localhost:8081/api/schedule/create-schedule-doctor HTTP/1.1
+Content-Type: application/json
+
+{
+  "appointmentDate": "2021-05-01",
+  "appointmentTime": "10:00",
+  "specialityID": "647ee9e5aee1ff0c2b4ded18",
+  "patientID": "64532f139ec3cad23c35c886",
+  "status": "booked",
+  "description": "description",
+  "doctorID": "64532f139ec3cad23c35c889"
+}
+
+### get appointment schedule by speciality
+POST http://localhost:8081/api/schedule/check-update HTTP/1.1
+Content-Type: application/json
+
+{
+  "scheduleID": "6455fcc5a1069065a861ec37"
+}

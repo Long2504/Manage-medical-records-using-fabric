@@ -1,0 +1,47 @@
+###
+POST http://localhost:8081/api/doctor/create-medical-record
+Content-Type: application/json
+
+{
+  "patientID": "123452131212",
+  "doctorID": "long",
+  "symptonOfDisease": "Khó thở (triệu chứng)",
+  "diagosisOfDoctor": "Bệnh nhân bị viêm phổi (chuẩn đoán của bác sĩ)",
+  "treatmentProcess": "Quá trình điều trị",
+  "diseaseProgression": "Tiến trình bệnh",
+  "prescription": "Đơn thuốc",
+  "note": "Ghi chú"
+}
+
+### update medical record
+POST http://localhost:8081/api/doctor/update-medical-record
+Content-Type: application/json
+
+{
+  "medicalRecordID": "MR1686712604278",
+  "patientID": "123452131212",
+  "doctorID": "long",
+  "symptonOfDisease": "Khó thở (triệu chứng)",
+  "diagosisOfDoctor": "Bệnh nhân bị viêm phổi (chuẩn đoán của bác sĩ)",
+  "treatmentProcess": "Quá trình điều trị",
+  "diseaseProgression": "Tiến trình bệnh",
+  "prescription": "Đơn thuốc",
+  "note": "Ghi chú updated"
+}
+####
+//test
+POST http://localhost:8081/api/doctor/get-all-medical-record
+Content-Type: application/json
+
+{
+  "doctorID": "long"
+}
+
+### get doctors by speciality
+POST http://localhost:8081/api/doctor/get-doctors-by-speciality
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NzZjZmY0OWE0OTU4MWIzMDUwZGE0NCIsImlhdCI6MTY4NjgwMjU3MCwiZXhwIjoxNjg2ODg4OTcwfQ.N3CP_gX2mA8naoC7R12-6kiK1G72hvI3oMBufQKkG20
+
+{
+  "specialtyId": "647ee9e5aee1ff0c2b4ded1a"
+}

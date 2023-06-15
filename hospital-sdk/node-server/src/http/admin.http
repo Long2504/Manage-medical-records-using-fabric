@@ -1,0 +1,25 @@
+###
+POST http://localhost:8080/api/admin/create-account-doctor
+Content-Type: application/json
+
+{
+  "username": "doctor",
+}
+
+###
+POST http://localhost:8081/api/admin/get-all-medical-record HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "admin"
+}
+
+###
+//get doctor by id Specialty
+POST http://localhost:8081/api/doctor/get-doctor-by-specialty HTTP/1.1
+Content-Type: application/json
+
+{
+  "specialtyId": "123123"
+}
+

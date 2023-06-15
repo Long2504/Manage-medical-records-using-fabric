@@ -1,0 +1,461 @@
+[33mcommit 00b089d99643c8f292b1ad0b64e510a243d1993f[m[33m ([m[1;36mHEAD[m[33m)[m
+Author: root <root@Longg.localdomain>
+Date:   Thu Jun 15 20:55:48 2023 +0700
+
+    push to deploy
+
+[33mcommit 5aadeefc26d89f822dceea7893624b630eede996[m
+Author: Long2504 <thanhlong25042001@gmail.com>
+Date:   Wed May 31 09:17:21 2023 +0700
+
+    network config , node sdk
+
+[33mcommit 0fe4d091d2549607af61bb7c7e1f3b5fa356dc70[m[33m ([m[1;33mtag: v2.4.9[m[33m, [m[1;33mtag: v2.4.8[m[33m, [m[1;33mtag: v2.4.7[m[33m, [m[1;33mtag: v2.4.6[m[33m, [m[1;33mtag: v2.4.5[m[33m, [m[1;33mtag: v2.4.4[m[33m, [m[1;33mtag: v2.4.3[m[33m, [m[1;33mtag: v2.4.2[m[33m, [m[1;33mtag: v2.4.1[m[33m, [m[1;33mtag: v2.4.0[m[33m)[m
+Author: Arnaud J Le Hors <lehors@us.ibm.com>
+Date:   Wed Jan 18 15:16:05 2023 +0100
+
+    Fix network.sh (#886)
+    
+    This adds a missing reference to $CONTAINER_CLI.
+    
+    Signed-off-by: Arnaud J Le Hors <lehors@us.ibm.com>
+
+[33mcommit bcb2e1c910c0a73fde9d633678aa2b5eb9a82cb5[m
+Author: Rubén <20502699+rubcv@users.noreply.github.com>
+Date:   Wed Jan 18 15:14:38 2023 +0100
+
+    fix chaincodes typo (#900)
+    
+    Signed-off-by: Rubén <20502699+rubcv@users.noreply.github.com>
+    
+    Signed-off-by: Rubén <20502699+rubcv@users.noreply.github.com>
+
+[33mcommit 50959547569be9c2a80df374350cc1d8de08606e[m
+Author: Sam Yuan <yy19902439@126.com>
+Date:   Wed Jan 18 22:13:54 2023 +0800
+
+    doc: add zh version for Fabric Full Stack Development Workshop Cloud Native Fabric part (#901)
+    
+    Signed-off-by: Sam Yuan <yy19902439@126.com>
+
+[33mcommit e7d3b4128738e869e068d35e2b6398444df19b93[m
+Author: Matthew B White <whitemat@uk.ibm.com>
+Date:   Wed Jan 18 12:25:07 2023 +0000
+
+    Swap to use the Helper Function to create policies (#908)
+    
+    The old way used the direct protobuf functions, there is a helper function
+    in the chaincode does exactly that.
+    
+    Signed-off-by: Matthew B White <whitemat@uk.ibm.com>
+
+[33mcommit a70547dd94216bbecbba1caaed5534b071297914[m
+Author: Matthew B White <mbwhite@users.noreply.github.com>
+Date:   Mon Jan 9 15:16:03 2023 +0000
+
+    Update the name of the certificate. (#902)
+    
+    Late 2022 it was discovered that when used via the CA, the certificate had a fixed named covention. cert.pem
+    
+    Signed-off-by: Matthew B White <whitemat@uk.ibm.com>
+    
+    Signed-off-by: Matthew B White <whitemat@uk.ibm.com>
+
+[33mcommit 1e6fe3b26111dad8ccfa9a02ef95b10660f86e18[m
+Author: Ramesh M <62267259+ramesh-m99@users.noreply.github.com>
+Date:   Wed Jan 4 00:36:55 2023 +0530
+
+    Update 13-kube-public-cloud.md (#891)
+    
+    Signed-off-by: Ramesh M <62267259+ramdisk-ott@users.noreply.github.com>
+
+[33mcommit b23274b945f176d70190b2d9ed2669a240511983[m
+Author: skypos99 <116450739+skypos99@users.noreply.github.com>
+Date:   Wed Jan 4 00:33:59 2023 +0530
+
+    Update 10-kube.md (#890)
+    
+    Signed-off-by: skypos99 <116450739+skypos99@users.noreply.github.com>
+    
+    Signed-off-by: skypos99 <116450739+skypos99@users.noreply.github.com>
+
+[33mcommit 09959b967d1283355200f0f8adad5ba7ea8b1bcd[m
+Author: Deepak Singh <91736795+blockguardian@users.noreply.github.com>
+Date:   Wed Jan 4 00:32:45 2023 +0530
+
+    Update org1-peer2.yaml (#882)
+    
+    Fixing TLS issues while using org1-peer-gateway-svc.${DOMAIN}.
+    This would be needed so there are no TLS issues when sending requests.
+    
+    Signed-off-by: Deepak Singh <91736795+blockguardian@users.noreply.github.com>
+    
+    Signed-off-by: Deepak Singh <91736795+blockguardian@users.noreply.github.com>
+
+[33mcommit 8d0e632d8646a59cb553360b35886125810ba44f[m
+Author: Marcus Brandenburger <mbrandenburger@users.noreply.github.com>
+Date:   Wed Dec 14 17:24:23 2022 +0100
+
+    Clean up full-stack-asset-trasfer-guide docs (#889)
+    
+    Remove old repository (hyperledgendary) link from readme diagram.
+    
+    Signed-off-by: Marcus Brandenburger <bur@zurich.ibm.com>
+
+[33mcommit f838d6b5a810a9e90525f3b4f1d8f3c10b8cb5db[m
+Author: Parameswaran Selvam <parselva@in.ibm.com>
+Date:   Wed Dec 14 14:01:10 2022 +0530
+
+    added a check for prereq into deploycc script (#884)
+    
+    Signed-off-by: Parameswaran Selvam <parselva@in.ibm.com>
+    
+    Signed-off-by: Parameswaran Selvam <parselva@in.ibm.com>
+
+[33mcommit a96efaebdee250aa27dc821ea3e417f166b060da[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Wed Dec 14 09:23:23 2022 +0100
+
+    Bump qs and express in /asset-transfer-basic/rest-api-typescript (#880)
+    
+    Bumps [qs](https://github.com/ljharb/qs) to 6.11.0 and updates ancestor dependencies [qs](https://github.com/ljharb/qs), [qs](https://github.com/ljharb/qs) and [express](https://github.com/expressjs/express). These dependencies need to be updated together.
+    
+    
+    Updates `qs` from 6.10.2 to 6.11.0
+    - [Release notes](https://github.com/ljharb/qs/releases)
+    - [Changelog](https://github.com/ljharb/qs/blob/main/CHANGELOG.md)
+    - [Commits](https://github.com/ljharb/qs/compare/v6.10.2...v6.11.0)
+    
+    Updates `qs` from 6.10.1 to 6.11.0
+    - [Release notes](https://github.com/ljharb/qs/releases)
+    - [Changelog](https://github.com/ljharb/qs/blob/main/CHANGELOG.md)
+    - [Commits](https://github.com/ljharb/qs/compare/v6.10.2...v6.11.0)
+    
+    Updates `express` from 4.17.1 to 4.18.2
+    - [Release notes](https://github.com/expressjs/express/releases)
+    - [Changelog](https://github.com/expressjs/express/blob/master/History.md)
+    - [Commits](https://github.com/expressjs/express/compare/4.17.1...4.18.2)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: qs
+      dependency-type: indirect
+    - dependency-name: qs
+      dependency-type: indirect
+    - dependency-name: express
+      dependency-type: direct:production
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+    Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+[33mcommit 05c06f49318945eafc0bbf0ea0f3c3e2629e0253[m
+Author: ali <alishahverdi2010@yahoo.com>
+Date:   Wed Dec 14 11:48:21 2022 +0330
+
+    Fixed comment consistency problem (#844)
+    
+    * fixed comment consistency problem with erc20 chaincode
+    
+    Signed-off-by: Ali Shahverdi <ali@Alis-MacBook-Pro.local>
+    
+    * added more comment consistancy fix
+    
+    Signed-off-by: Ali Shahverdi <ali@Alis-MacBook-Pro.local>
+    
+    * added more comment consistancy fix
+    
+    Signed-off-by: Ali Shahverdi <ali@Alis-MacBook-Pro.local>
+    
+    * added more comment consistancy fix
+    
+    Signed-off-by: Ali Shahverdi <ali@Alis-MacBook-Pro.local>
+    
+    * added more comment consistancy fix
+    
+    Signed-off-by: Ali Shahverdi <ali@Alis-MacBook-Pro.local>
+    
+    Signed-off-by: Ali Shahverdi <ali@Alis-MacBook-Pro.local>
+    Co-authored-by: Ali Shahverdi <ali@Alis-MacBook-Pro.local>
+
+[33mcommit b2de360e1ca71ea1c8df5252000a541e23c938a0[m
+Author: Basil K Y <techiebasil@gmail.com>
+Date:   Wed Dec 14 13:46:09 2022 +0530
+
+    REST api added for asset transfer in Golang (#836)
+    
+    * REST api added for asset transfer in Golang
+    
+    Signed-off-by: Basil K Y <techiebasil@gmail.com>
+    
+    * add go.sum to git
+    
+    Signed-off-by: Basil K Y <techiebasil@gmail.com>
+    
+    * fix golint error
+    
+    Signed-off-by: Basil K Y <techiebasil@gmail.com>
+    
+    Signed-off-by: Basil K Y <techiebasil@gmail.com>
+
+[33mcommit 4109e741e4e4366f0b8d39568891b4d3ad1b3a67[m
+Author: Mark S. Lewis <Mark.S.Lewis@outlook.com>
+Date:   Tue Dec 13 13:18:50 2022 +0000
+
+    Parse transaction creator to Identity in off_chain_data samples (#883)
+    
+    Signed-off-by: Mark S. Lewis <mark_lewis@uk.ibm.com>
+    
+    Signed-off-by: Mark S. Lewis <mark_lewis@uk.ibm.com>
+
+[33mcommit a6028cd3985e3bac77409b839f4142eabaa53928[m
+Author: Mark S. Lewis <Mark.S.Lewis@outlook.com>
+Date:   Wed Nov 30 13:21:49 2022 +0000
+
+    Fix asset-transfer-basic/application-gateway-go (#874)
+    
+    Error handling example used a transaction invocation with the wrong number of arguments and so did not demonstrate the same error condition as other language samples. The error handling code was also not as comprehensive as it should be.
+    
+    Also changed the console output throughout to match the content and format of the Node and Java samples.
+    
+    Signed-off-by: Mark S. Lewis <mark_lewis@uk.ibm.com>
+    
+    Signed-off-by: Mark S. Lewis <mark_lewis@uk.ibm.com>
+
+[33mcommit 22e1af49353401441974c4ff57c1b052cd3df7d0[m
+Author: Satoshi Ito <satoshi.ito.tf@hitachi.com>
+Date:   Tue Nov 22 04:44:59 2022 +0900
+
+    Minor fixes to the ingress setting (#850)
+    
+    This patch fixes the ingress setting so that the peer-gateway works correctly.
+    
+    Signed-off-by: Satoshi Ito <satoshi.ito.tf@hitachi.com>
+
+[33mcommit 2e421139a0231393512567e54b6b2db1647347d1[m
+Author: Matthew B White <mbwhite@users.noreply.github.com>
+Date:   Fri Nov 18 14:54:08 2022 +0000
+
+    Remove mistaken msp path (#873)
+    
+    Signed-off-by: Matthew B White <whitemat@uk.ibm.com>
+    
+    Signed-off-by: Matthew B White <whitemat@uk.ibm.com>
+
+[33mcommit fd2fffbd435699f3e4a4b2a467b307895e266530[m
+Author: Josh Kneubuhl <jkneubuh@us.ibm.com>
+Date:   Tue Nov 15 15:33:47 2022 -0500
+
+    review feedback: un-pin fabric CLI targets
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+
+[33mcommit 94a154278236731abe97296488ff679e1baf66b8[m
+Author: Josh Kneubuhl <jkneubuh@us.ibm.com>
+Date:   Tue Nov 15 12:24:57 2022 -0500
+
+    Run Full Stack Asset Transfer Guide tests on GHA
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+
+[33mcommit 38a36c65d319fd0b5bf4eadee18ffcedfe462185[m
+Author: Josh Kneubuhl <jkneubuh@us.ibm.com>
+Date:   Tue Nov 15 10:00:53 2022 -0500
+
+    Move the remaining sample tests from Azure to GHA
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+
+[33mcommit b7b06b9de3622ae0c4ff70299f794cf2c0a87e44[m
+Author: Josh Kneubuhl <jkneubuh@us.ibm.com>
+Date:   Mon Nov 14 16:41:44 2022 -0500
+
+    Move Kube Test Network tests from Azure -> GHA
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+
+[33mcommit 156f6d42fbe4198c2f9ba47fcbcecf75b81a788e[m
+Author: Josh Kneubuhl <jkneubuh@us.ibm.com>
+Date:   Mon Nov 14 12:28:00 2022 -0500
+
+    Delete commercial paper and fabcar tests from Azure
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+
+[33mcommit 0ce94bbb9b2e9f64051987f73ee1f8c30dde985f[m
+Author: jkneubuh <86427252+jkneubuh@users.noreply.github.com>
+Date:   Mon Nov 14 08:36:55 2022 -0500
+
+    Move lint and test-network-basic tests from Azure to GHA - READY FOR MERGE (#862)
+    
+    * Move Test Network Basic tests from Azure to GHA
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+    
+    * Move linters from Azure to GHA
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+    
+    * Apply review comments - pin java, node, and go runtimes
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+
+[33mcommit 34734cfff2f3fe6319bfe7aa92cf81733ee2c1fc[m
+Author: Josh Kneubuhl <jkneubuh@us.ibm.com>
+Date:   Fri Nov 11 10:56:19 2022 -0500
+
+    Add FSAT appdev E2E test
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+
+[33mcommit 60a61b8241ecdc95cbdcc37a9b8c0196312da420[m
+Author: jkneubuh <86427252+jkneubuh@users.noreply.github.com>
+Date:   Fri Nov 11 10:16:58 2022 -0500
+
+    Only run GHA on PRs targeting the mainline (#860)
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+
+[33mcommit e908a30d3ac73d845fba43bd01991c9bb6f04cfa[m
+Author: jkneubuh <86427252+jkneubuh@users.noreply.github.com>
+Date:   Fri Nov 11 08:21:26 2022 -0500
+
+    Activate GHA on the fabric-samples project (#859)
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+
+[33mcommit 2c5ce16f0b68ef5fc96e529fb26b7fc485339b24[m
+Author: Ry Jones <ry@linux.com>
+Date:   Thu Nov 10 09:49:11 2022 -0800
+
+    Default branch
+    
+    Add issues
+    
+    Signed-off-by: Ry Jones <ry@linux.com>
+
+[33mcommit a299e18e263d012d17ec2c0b22f4db35af2e9eda[m
+Author: jkneubuh <86427252+jkneubuh@users.noreply.github.com>
+Date:   Thu Nov 10 10:40:27 2022 -0500
+
+    Moves the Full Stack Asset Transfer Development Guide to fabric-samples (#852)
+    
+    * Import Full Stack Asset Transfer Guide at commit fb554befdbbeff9e69159b54fce0b811603f29c7
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+    
+    * Update the workshop with a new WORKSHOP_PATH under fabric-samples
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+    
+    * Update the workshop with a new WORKSHOP_PATH under fabric-samples
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+    
+    * missed a .git ignored directory on add
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+    
+    * Updates to run the workshop on the Apple M1
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+    
+    * Workaround for https://github.com/eslint/eslint/issues/15299 in the contract tslinter
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+    
+    * Build an arch-specific CC images on M1
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+    
+    * empty commit - force a build
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+    
+    * revert an accidental commit that was building the top-level asset-transfer as arm64
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+    
+    Signed-off-by: Josh Kneubuhl <jkneubuh@us.ibm.com>
+
+[33mcommit 49749c65846b2d03e0b646150297532bc2543cc6[m
+Author: Tatsuya Sato <tatsuya.sato.so@hitachi.com>
+Date:   Wed Oct 26 18:43:26 2022 +0900
+
+    Minor fixes and improvements to test-network-k8s (#849)
+    
+    Signed-off-by: Tatsuya Sato <tatsuya.sato.so@hitachi.com>
+    
+    Signed-off-by: Tatsuya Sato <tatsuya.sato.so@hitachi.com>
+
+[33mcommit 63cc77bdc3be162a114bd822627970f89ee6dcc9[m
+Author: Mark S. Lewis <Mark.S.Lewis@outlook.com>
+Date:   Tue Oct 25 12:04:39 2022 +0100
+
+    Avoid usage of deprecated ioutil Go package (#843)
+    
+    * Refactor Go files
+    1. replace deprecated ioutil functions (ioutil is deprecated since Go 1.16)
+    2. fix variable names that collide with imported package name
+    3. fix typos
+    
+    Also update Go version specified by Go modules to ensure a Go version is used in which ioutil is deprecated and replacement functions are available in os and io packages.
+    
+    Signed-off-by: Tommy TIAN <xtianae@connect.ust.hk>
+    Co-authored-by: Mark S. Lewis <mark_lewis@uk.ibm.com>
+    
+    * Specify go 1.18 instead of go 1.19 in go.mod files
+    
+    Signed-off-by: Mark S. Lewis <mark_lewis@uk.ibm.com>
+    
+    Signed-off-by: Tommy TIAN <xtianae@connect.ust.hk>
+    Signed-off-by: Mark S. Lewis <mark_lewis@uk.ibm.com>
+    Co-authored-by: Tommy TIAN <xtianae@connect.ust.hk>
+
+[33mcommit c323c9580717dd6376e5e2b07ecbb00af5b3bf00[m
+Author: Mark S. Lewis <Mark.S.Lewis@outlook.com>
+Date:   Thu Oct 20 17:43:55 2022 +0100
+
+    Update samples to use fabric-gateway v1.1.1 (#842)
+    
+    Signed-off-by: Mark S. Lewis <mark_lewis@uk.ibm.com>
+    
+    Signed-off-by: Mark S. Lewis <mark_lewis@uk.ibm.com>
+
+[33mcommit 6b989299e036af91162282a5f4dac10377171297[m
+Author: yjwxfq <112159687+yjwxfq@users.noreply.github.com>
+Date:   Thu Oct 20 22:49:47 2022 +0800
+
+    Fix chaincode/abstore, add parameter judgment when the transaction makes payment. (#825)
+    
+    Signed-off-by: yjwxfq <yjwxfq@163.com>
+    
+    Signed-off-by: yjwxfq <yjwxfq@163.com>
+
+[33mcommit 0aa853e0c30ef61108343e4e58dfb6fe2127df5d[m
+Author: James Taylor <jamest@uk.ibm.com>
+Date:   Fri Oct 14 16:43:12 2022 +0100
+
+    Update go chaincode samples
+    
+    Update to the latest github.com/hyperledger/fabric-contract-api-go
+    
+    Signed-off-by: James Taylor <jamest@uk.ibm.com>
+
+[33mcommit ea533d61b966b81c24243ac52ebd7867594052e2[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Fri Sep 9 17:48:14 2022 +0200
+
+    Bump passport in /asset-transfer-basic/rest-api-typescript (#828)
+    
+    Bumps [passport](https://github.com/jaredhanson/passport) from 0.4.1 to 0.6.0.
+    - [Release notes](https://github.com/jaredhanson/passport/releases)
+    - [Changelog](https:

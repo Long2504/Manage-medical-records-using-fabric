@@ -1,0 +1,23 @@
+// get all medical records
+POST http://localhost:8081/api/medical-record/get-all HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "admin"
+}
+
+### get medical record by id patient
+POST http://localhost:8081/api/medical-record/get-by-id-patient HTTP/1.1
+Content-Type: application/json
+
+{
+  "patientId": "123452131212"
+}
+
+### get medical record by id doctor
+POST http://localhost:8081/api/medical-record/get-by-id-doctor HTTP/1.1
+Content-Type: application/json
+
+{
+  "doctorID": "long"
+}

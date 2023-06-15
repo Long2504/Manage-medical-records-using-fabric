@@ -1,0 +1,122 @@
+[
+    {
+        "medicalRecordID": 1,
+        "patientID": "123456789",
+        "doctor": {
+            "doctorID": "123456789",
+            "name": "123456789"
+        },
+        "date": "12-12-2020",
+        "resultTestAndPhotos": {
+            "date": "12-12-2020",
+            "test": "123456789",
+            "photos": "123456789"
+        },
+        "symptonOfDisease": "Khó thở (triệu chứng)",
+        "diagosisOfDoctor": "Bệnh nhân bị viêm phổi (chuẩn đoán của bác sĩ)",
+        "treatmentProcess": "Quá trình điều trị",
+        "diseaseProgression": "Tiến trình bệnh",
+        "prescription": "Đơn thuốc",
+        "note": "Ghi chú"
+    },
+    {
+        "medicalRecordID": 2,
+        "patientID": "12345678910",
+        "doctor": {
+            "doctorID": "123456789",
+            "name": "123456789"
+        },
+        "date": "12-12-2020",
+        "resultTestAndPhotos": {
+            "date": "12-12-2020",
+            "test": "123456789",
+            "photos": "123456789"
+        },
+        "symptonOfDisease": "Khó thở (triệu chứng)",
+        "diagosisOfDoctor": "Bệnh nhân bị viêm phổi (chuẩn đoán của bác sĩ)",
+        "treatmentProcess": "Quá trình điều trị",
+        "diseaseProgression": "Tiến trình bệnh",
+        "prescription": "Đơn thuốc",
+        "note": "Ghi chú"
+    },
+    {
+        "medicalRecordID": 3,
+        "patientID": "1234567891",
+        "doctor": {
+            "doctorID": "123456789",
+            "name": "123456789"
+        },
+        "date": "12-12-2020",
+        "resultTestAndPhotos": {
+            "date": "12-12-2020",
+            "test": "123456789",
+            "photos": "123456789"
+        },
+        "symptonOfDisease": "Khó thở (triệu chứng)",
+        "diagosisOfDoctor": "Bệnh nhân bị viêm phổi (chuẩn đoán của bác sĩ)",
+        "treatmentProcess": "Quá trình điều trị",
+        "diseaseProgression": "Tiến trình bệnh",
+        "prescription": "Đơn thuốc",
+        "note": "Ghi chú"
+    },
+    {
+        "medicalRecordID": 4,
+        "patientID": "1123456789",
+        "doctor": {
+            "doctorID": "123456789",
+            "name": "123456789"
+        },
+        "date": "12-12-2020",
+        "resultTestAndPhotos": {
+            "date": "12-12-2020",
+            "test": "123456789",
+            "photos": "123456789"
+        },
+        "symptonOfDisease": "Khó thở (triệu chứng)",
+        "diagosisOfDoctor": "Bệnh nhân bị viêm phổi (chuẩn đoán của bác sĩ)",
+        "treatmentProcess": "Quá trình điều trị",
+        "diseaseProgression": "Tiến trình bệnh",
+        "prescription": "Đơn thuốc",
+        "note": "Ghi chú"
+    },
+    {
+        "medicalRecordID": 5,
+        "patientID": "12233456789",
+        "doctor": {
+            "doctorID": "123456789",
+            "name": "123456789"
+        },
+        "date": "12-12-2020",
+        "resultTestAndPhotos": {
+            "date": "12-12-2020",
+            "test": "123456789",
+            "photos": "123456789"
+        },
+        "symptonOfDisease": "Khó thở (triệu chứng)",
+        "diagosisOfDoctor": "Bệnh nhân bị viêm phổi (chuẩn đoán của bác sĩ)",
+        "treatmentProcess": "Quá trình điều trị",
+        "diseaseProgression": "Tiến trình bệnh",
+        "prescription": "Đơn thuốc",
+        "note": "Ghi chú"
+    },
+    {
+        "medicalRecordID": 6,
+        "patientID": "12345678910",
+        "doctor": {
+            "doctorID": "123456789",
+            "name": "123456789"
+        },
+        "date": "12-12-2020",
+        "resultTestAndPhotos": {
+            "date": "12-12-2020",
+            "test": "123456789",
+            "photos": "123456789"
+        },
+        "symptonOfDisease": "Khó thở (triệu chứng)",
+        "diagosisOfDoctor": "Bệnh nhân bị viêm phổi (chuẩn đoán của bác sĩ)",
+        "treatmentProcess": "Quá trình điều trị",
+        "diseaseProgression": "Tiến trình bệnh",
+        "prescription": "Đơn thuốc",
+        "note": "Ghi chú"
+    }
+]
