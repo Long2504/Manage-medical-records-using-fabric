@@ -13,6 +13,9 @@ $ curl -sSL https://bit.ly/2ysbOFE | bash -s --  2.0.1 1.5.5 -s -b
 
 ```
 
+intall bin
+$./install-fabric.sh --fabric-version 2.5.0 binary
+
 It will pull the respective fabric docker images for the binaries.
 
 4. Change the working directory to hospital-network

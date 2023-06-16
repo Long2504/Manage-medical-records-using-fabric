@@ -1,13 +1,4 @@
-# Copyright IBM Corp. All Rights Reserved.
-#
-# SPDX-License-Identifier: Apache-2.0
-#
 
-###############################################################################
-#
-#    Peer section
-#
-###############################################################################
 peer:
 
     # The peer id provides a name for this peer instance and is used when
