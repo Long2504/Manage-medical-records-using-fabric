@@ -1,66 +1,175 @@
-[//]: # "SPDX-License-Identifier: CC-BY-4.0"
+1. Clone / Download the repository
 
-# Hyperledger Fabric Samples
+```bash
+$ git clone https://github.com/Long2504/Manage-medical-records-using-fabric.git
+```
 
-[![Build Status](https://dev.azure.com/Hyperledger/Fabric-Samples/_apis/build/status/Fabric-Samples?branchName=main)](https://dev.azure.com/Hyperledger/Fabric-Samples/_build/latest?definitionId=28&branchName=main)
+2. **Before starting with the network is set-up start the docker.**
 
-You can use Fabric samples to get started working with Hyperledger Fabric, explore important Fabric features, and learn how to build applications that can interact with blockchain networks using the Fabric SDKs. To learn more about Hyperledger Fabric, visit the [Fabric documentation](https://hyperledger-fabric.readthedocs.io/en/latest).
+3. Run the following command to pull the docker images.
 
-## Getting started with the Fabric samples
+```bash
+$ curl -sSL https://bit.ly/2ysbOFE | bash -s --  2.0.1 1.5.5 -s -b
 
-To use the Fabric samples, you need to download the Fabric Docker images and the Fabric CLI tools. First, make sure that you have installed all of the [Fabric prerequisites](https://hyperledger-fabric.readthedocs.io/en/latest/prereqs.html). You can then follow the instructions to [Install the Fabric Samples, Binaries, and Docker Images](https://hyperledger-fabric.readthedocs.io/en/latest/install.html) in the Fabric documentation. In addition to downloading the Fabric images and tool binaries, the Fabric samples will also be cloned to your local machine.
+```
 
-## Test network
+It will pull the respective fabric docker images for the binaries.
 
-The [Fabric test network](hospital-network) in the samples repository provides a Docker Compose based test network with two
-Organization peers and an ordering service node. You can use it on your local machine to run the samples listed below.
-You can also use it to deploy and test your own Fabric chaincodes and applications. To get started, see
-the [test network tutorial](https://hyperledger-fabric.readthedocs.io/en/latest/test_network.html).
+4. Change the working directory to hospital-network
 
-The [Kubernetes Test Network](hospital-network-k8s) sample builds upon the Compose network, constructing a Fabric
-network with peer, orderer, and CA infrastructure nodes running on Kubernetes. In addition to providing a sample
-Kubernetes guide, the Kube test network can be used as a platform to author and debug _cloud ready_ Fabric Client
-applications on a development or CI workstation.
+```bash
+$ cd ./hospital-sdk
+```
 
-## Asset transfer samples and tutorials
+5. Use the following command to start the network, with 2 organization hospital and an Orderer node & then create an hospital-channel & deploy & Instantiate the hospital Contract on two peers.
 
-The asset transfer series provides a series of sample smart contracts and applications to demonstrate how to store and transfer assets using Hyperledger Fabric.
-Each sample and associated tutorial in the series demonstrates a different core capability in Hyperledger Fabric. The **Basic** sample provides an introduction on how
-to write smart contracts and how to interact with a Fabric network using the Fabric SDKs. The **Ledger queries**, **Private data**, and **State-based endorsement**
-samples demonstrate these additional capabilities. Finally, the **Secured agreement** sample demonstrates how to bring all the capabilities together to securely
-transfer an asset in a more realistic transfer scenario.
+```bash
+$ ./hospitalNetwork.sh up
+```
 
-| **Smart Contract**                                    | **Description**                                                                                                                                                                                                                                                                                                                     | **Tutorial**                                                                                                                                      | **Smart contract languages**     | **Application languages**        |
-| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | -------------------------------- |
-| [Basic](asset-transfer-basic)                         | The Basic sample smart contract that allows you to create and transfer an asset by putting data on the ledger and retrieving it. This sample is recommended for new Fabric users.                                                                                                                                                   | [Writing your first application](https://hyperledger-fabric.readthedocs.io/en/latest/write_first_app.html)                                        | Go, JavaScript, TypeScript, Java | Go, JavaScript, TypeScript, Java |
-| [Ledger queries](asset-transfer-ledger-queries)       | The ledger queries sample demonstrates range queries and transaction updates using range queries (applicable for both LevelDB and CouchDB state databases), and how to deploy an index with your chaincode to support JSON queries (applicable for CouchDB state database only).                                                    | [Using CouchDB](https://hyperledger-fabric.readthedocs.io/en/latest/couchdb_tutorial.html)                                                        | Go, JavaScript                   | Java, JavaScript                 |
-| [Private data](asset-transfer-private-data)           | This sample demonstrates the use of private data collections, how to manage private data collections with the chaincode lifecycle, and how the private data hash can be used to verify private data on the ledger. It also demonstrates how to control asset updates and transfers using client-based ownership and access control. | [Using Private Data](https://hyperledger-fabric.readthedocs.io/en/latest/private_data_tutorial.html)                                              | Go, Java                         | JavaScript                       |
-| [State-Based Endorsement](asset-transfer-sbe)         | This sample demonstrates how to override the chaincode-level endorsement policy to set endorsement policies at the key-level (data/asset level).                                                                                                                                                                                    | [Using State-based endorsement](https://github.com/hyperledger/fabric-samples/tree/main/asset-transfer-sbe)                                       | Java, TypeScript                 | JavaScript                       |
-| [Secured agreement](asset-transfer-secured-agreement) | Smart contract that uses implicit private data collections, state-based endorsement, and organization-based ownership and access control to keep data private and securely transfer an asset with the consent of both the current owner and buyer.                                                                                  | [Secured asset transfer](https://hyperledger-fabric.readthedocs.io/en/latest/secured_asset_transfer/secured_private_asset_transfer_tutorial.html) | Go                               | JavaScript                       |
-| [Events](asset-transfer-events)                       | The events sample demonstrates how smart contracts can emit events that are read by the applications interacting with the network.                                                                                                                                                                                                  | [README](asset-transfer-events/README.md)                                                                                                         | JavaScript, Java                 | JavaScript                       |
-| [Attribute-based access control](asset-transfer-abac) | Demonstrates the use of attribute and identity based access control using a simple asset transfer scenario                                                                                                                                                                                                                          | [README](asset-transfer-abac/README.md)                                                                                                           | Go                               | None                             |
+7. Use the Following Command to test the Chaincode is Successfully Installed & Instantiated on Two Peers
 
-## Additional samples
+```bash
+$ ./hospitalNetwork.sh validate
+```
 
-Additional samples demonstrate various Fabric use cases and application patterns.
+8. Use the Following Command to Pause the hospital network (it will stop all the containers but does not remove the ledger details)
 
-| **Sample**                                 | **Description**                                                                                                                                                    | **Documentation**                                                                                                 |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| [Off chain data](off_chain_data)           | Learn how to use block events to build an off-chain database for reporting and analytics.                                                                          | [Peer channel-based event services](https://hyperledger-fabric.readthedocs.io/en/latest/peer_event_services.html) |
-| [Token ERC-20](token-erc-20)               | Smart contract demonstrating how to create and transfer fungible tokens using an account-based model.                                                              | [README](token-erc-20/README.md)                                                                                  |
-| [Token UTXO](token-utxo)                   | Smart contract demonstrating how to create and transfer fungible tokens using a UTXO (unspent transaction output) model.                                           | [README](token-utxo/README.md)                                                                                    |
-| [Token ERC-1155](token-erc-1155)           | Smart contract demonstrating how to create and transfer multiple tokens (both fungible and non-fungible) using an account based model.                             | [README](token-erc-1155/README.md)                                                                                |
-| [Token ERC-721](token-erc-721)             | Smart contract demonstrating how to create and transfer non-fungible tokens using an account-based model.                                                          | [README](token-erc-721/README.md)                                                                                 |
-| [High throughput](high-throughput)         | Learn how you can design your smart contract to avoid transaction collisions in high volume environments.                                                          | [README](high-throughput/README.md)                                                                               |
-| [Simple Auction](auction-simple)           | Run an auction where bids are kept private until the auction is closed, after which users can reveal their bid.                                                    | [README](auction-simple/README.md)                                                                                |
-| [Dutch Auction](auction-dutch)             | Run an auction in which multiple items of the same type can be sold to more than one buyer. This example also includes the ability to add an auditor organization. | [README](auction-dutch/README.md)                                                                                 |
-| [Chaincode](chaincode)                     | A set of other sample smart contracts, many of which were used in tutorials prior to the asset transfer sample series.                                             |                                                                                                                   |
-| [Interest rate swaps](interest_rate_swaps) | **Deprecated in favor of state based endorsement asset transfer sample**                                                                                           |                                                                                                                   |
-| [Fabcar](fabcar)                           | **Deprecated in favor of basic asset transfer sample**                                                                                                             |                                                                                                                   |
+```bash
+$ ./hospitalNetwork.sh pause
+```
 
-## License <a name="license"></a>
+9. Use the Following Command to Start the paused network
 
-Hyperledger Project source code files are made available under the Apache
-License, Version 2.0 (Apache-2.0), located in the [LICENSE](LICENSE) file.
-Hyperledger Project documentation files are made available under the Creative
-Commons Attribution 4.0 International License (CC-BY-4.0), available at http://creativecommons.org/licenses/by/4.0/.
+```bash
+$ ./hospitalNetwork.sh start
+```
+
+10. Use this command to bring the network down <br>
+    (Note: this will remove all the ledger details )
+
+```bash
+$ ./hospitalNetwork.sh down
+```
+
+## Hospital Node Server
+
+Hospital Node Server is a Node.js server for connecting Client apps to hospital fabric network for interacting with hospital chaincode using http api endpoints.
+
+### Installation
+
+1. Change the working directory to /hospital-sdk/fabric-network
+
+```bash
+$ cd ./hospital-sdk/fabric-network
+```
+
+2. Install dependencies
+
+```bash
+$ npm install
+```
+
+this will install the packages used for connecting fabric-client to the fabric network
+
+3. Change the working directory to /hospital-sdk/node-server
+
+```bash
+$ cd ./hospital-sdk/node-server
+```
+
+4. Install dependencies
+
+```bash
+$ npm install
+```
+
+3. Set up environment variables
+
+```bash
+$ cp .env.example .env
+```
+
+It will set the admin credentials for the mongodb containers into the .env file. <br>
+(Note: Modification of the credientials in the .env file will lead to connection error with the mongodb container.)
+
+### Usage
+
+1. Start the server
+
+```bash
+$ npm start
+```
+
+This will start the server on port 3001.
+
+2. Register and Enroll the Users. In Another Terminal, run the following command.
+
+```bash
+$ npm enroll
+```
+
+This will register,enroll and Create Wallet for Test users.
+
+3. Access the Swagger documentation
+
+```bash
+$ http://localhost:3001/api-docs/
+```
+
+This will open the Swagger UI, which provides an easy way to explore and test the API.
+
+## Troubleshooting
+
+Incase if any of the commands fail due to configurations or the network was not brought down properly use the following commands to clear the corrupted docker images and fix the issue.
+
+1. Stop the containers.
+
+```bash
+$docker stop $(docker ps -a -q)
+```
+
+2. Remove the containers
+
+```bash
+$docker rm -f $(docker ps -aq)
+```
+
+3. Remove all unused images not just dangling ones
+
+```bash
+$docker system prune -a
+```
+
+4. Remove all unused local volumes
+
+```bash
+$docker volume prune
+```
+
+5. Restart the docker.
+
+6. Once the docker is up ,open a new terminal and download the images. (same as Step 3 in Bring up the network section)
+
+```bash
+$ curl -sSL https://bit.ly/2ysbOFE | bash -s --  2.0.1 1.5.5 -s -b
+```
+
+## Acknowledgments
+
+We would like to express our gratitude to the following individuals and organizations for their contributions and support to our Fabric project:
+
+- The Hyperledger Fabric community for developing and maintaining such a powerful and flexible platform for enterprise blockchain solutions.
+- The authors and contributors of the following open-source projects, which we used extensively in our project:
+  - [Network Samples](https://github.com/hyperledger/fabric-samples) by Hyperledger Fabric
+  - [Patient Data Management Project](https://github.com/sgirdhar/hyperledger-fabric-patient-data-management) by [Sgirdhar](https://github.com/sgirdhar), [Vineet Bhat](https://github.com/bhatvineeth), [Towfi Caziz](https://github.com/towficaziz) and [Faraz Shamim](https://github.com/farazshamim9)
+
+## Note
+
+- This project is not yet production-ready and is intended for learning purposes only.
+
+- This project is a Hyperledger Fabric network implementation that showcases the basic features of Fabric and demonstrates how to interact with the network using chaincodes.
+
+- We created this project as a learning exercise to help us understand the basics of Fabric and how to build decentralized applications using the platform. We hope that it can serve as a starting point for others who are also interested in learning more about Fabric.
+
+- Please keep in mind that this project is a work in progress and may contain bugs or other issues. We welcome feedback and contributions from the community to help improve the project.
