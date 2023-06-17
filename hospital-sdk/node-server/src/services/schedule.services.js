@@ -80,7 +80,7 @@ const getScheduleBySpeciality = async (specialityId, Date) => {
     // check time of other doctor with time of first doctor
     // if time of first doctor is false => have schedule empty
     // if time of first doctor is true => check time of other doctor
-    if (scheduleSpeciality?.length > 1) {
+    if (scheduleSpeciality.length > 1) {
         const arrayCheck = scheduleSpeciality[0].appointmentTime;
         for (let i = 0; i < arrayCheck.length; i++) {
             if (arrayCheck[i] === true) {
