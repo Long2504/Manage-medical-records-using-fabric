@@ -7,6 +7,8 @@ const router = Router();
 // router.post("/init-doctor", doctorController.initDoctor);
 //done
 router.post("/create-medical-record", doctorController.createMedicalRecord);
+//create test medical record
+router.post("/create-test-medical-record", doctorController.createMedicalRecordWithTest);
 //done
 router.post("/update-medical-record", doctorController.updateMedicalRecord);
 //done

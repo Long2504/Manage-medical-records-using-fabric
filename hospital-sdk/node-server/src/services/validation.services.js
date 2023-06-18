@@ -2,7 +2,7 @@
 import Doctor from "../models/doctor.js";
 import Speciality from "../models/speciality.js";
 import User from "../models/user.js";
-import { checkFormatId } from "../utils/common.js";
+import { checkFormatDate, checkFormatId } from "../utils/common.js";
 const checkModelExits = async (model, field, value) => {
 	const data = await model.findOne({ [field]: value });
 	if (!data) {
@@ -22,15 +22,15 @@ const checkExistOfCreateSchedule = async (specialityId, patientID) => {
 		if (patient) return patient;
 	} catch (error) {
 		return {
-			status:500,
+			status: 500,
 			message: error
 		};
 	}
-};	
+};
 
 const isDoctorOfCreateSchedule = async (doctorID) => {
 	try {
-		if(checkFormatId(doctorID)){
+		if (checkFormatId(doctorID)) {
 			return await checkModelExits(Doctor, "_id", doctorID);
 		}
 		return {
@@ -38,12 +38,13 @@ const isDoctorOfCreateSchedule = async (doctorID) => {
 			message: "DoctorID is not valid",
 		};
 	} catch (error) {
-		return{
+		return {
 			status: 500,
 			message: error,
 		}
 	}
 };
+
 
 export default {
 	checkModelExits,

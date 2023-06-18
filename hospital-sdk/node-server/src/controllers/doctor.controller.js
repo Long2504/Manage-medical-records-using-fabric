@@ -168,21 +168,77 @@ const getAllMedicalRecord = async (req, res) => {
     }
 };
 
+const createMedicalRecordWithTest = async (req, res) => {
+    try {
+        const medicalRecord = {
+            resultTestAndPhotos: {
+                test: {
+                    testID: {}
+                }
+            }
+        };
+        // check doctor exists in network
+
+        if (!checkUserExists(req.body.doctorID)) {
+            return res.status(400).send({
+                message: "Doctor does not exist",
+            });
+        }
+        //check patient exists in network
+        if (!checkUserExists(medicalRecord.patientID)) {
+            return res.status(400).send({
+                message: "Patient does not exist",
+            });
+        }
+        const responeupdateMedicalRecordNetworkr =
+            await updateMedicalRecordNetwork(medicalRecord, req.body.doctorID);
+        if (responeupdateMedicalRecordNetworkr.error) {
+            return res.status(responeError.status).send({
+                message: responeupdateMedicalRecordNetworkr.error,
+            });
+        }
+        res.status(200).send(responeupdateMedicalRecordNetworkr);
+    } catch (error) {
+        handleError(500, error, res);
+    }
+};
+
 const updateMedicalRecordWithTestAndPhoto = async (req, res) => {
     try {
         const medicalRecord = {
             medicalRecordID: req.body.medicalRecordID,
-            patientID: req.body.patientID,
-            doctor: {
-                doctorID: req.body.doctor.doctorID,
-                name: req.body.doctor.name,
-            },
-            symptonOfDisease: req.body.symptonOfDisease,
-            diagosisOfDoctor: req.body.diagosisOfDoctor,
-            treatmentProcess: req.body.treatmentProcess,
-            diseaseProgression: req.body.diseaseProgression,
-            prescription: req.body.prescription,
-            note: req.body.note,
+            resultTestAndPhotos: {
+                test: {
+                    idDoctor: req.body.idDoctor,
+                    bloodGlucose: {
+                        value: req.body.bloodGlucose.value,
+                    },
+                    bloodPressure: {
+                        value: req.body.bloodPressure.value,
+                    },
+                    bodyTemperature: {
+                        value: req.body.bodyTemperature.value,
+                    },
+                    heartRate: {
+                        value: req.body.heartRate.value,
+                    },
+                    weight: {
+                        value: req.body.weight.value,
+                    },
+                    height: {
+                        value: req.body.height.value,
+                    },
+                    BMI: {
+                        value: req.body.BMI.value,
+                    },
+                    bloodType: {
+                        value: req.body.bloodType.value,
+                    },
+                },
+                photo: {
+                    idDoctor: '',
+                }
+            }
         };
         // check doctor exists in network
     } catch (error) {
@@ -239,5 +295,6 @@ export default {
     getAllMedicalRecord,
     getDoctorsBySpeciality,
     getAllDoctor,
-    getDoctorNotJoinChannel
+    getDoctorNotJoinChannel,
+    createMedicalRecordWithTest,
 };
