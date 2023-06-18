@@ -1,5 +1,4 @@
 const handleError = async (code, error, res) => {
-	console.error(error);
 	const errorMessage = error.toString();
 	if (errorMessage == "[object Object]") {
 		return res.status(code).send(error);

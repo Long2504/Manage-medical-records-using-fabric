@@ -2,7 +2,7 @@ import Speciality from "../models/speciality.js";
 import Doctor from "../models/doctor.js";
 import ScheduleDoctor from "../models/scheduleDoctor.js";
 import AppointmentSchedule from "../models/appointmentSchedule.js";
-import { randomElement } from "../utils/common.js";
+import { checkFormatId, checkFormatTime,checkFormatDate, randomElement } from "../utils/common.js";
 
 const arrayTime = [
     "08:00",
@@ -67,6 +67,39 @@ const getIdDoctorHaveScheduleEmpty = async (specialityId, Date, Time) => {
     }
 };
 
+// check field of schedule doctor is empty
+const checkCreateScheduleBySpeciality = async (specialityId, Date, Time,patientID) => {
+    if(specialityId && Date && Time && patientID) {
+        if(!checkFormatId(specialityId) || !checkFormatId(patientID)) {
+            return {
+                status: 400,
+                message: "SpecialityID or patientID is not valid",
+            };
+        }
+        if(!checkFormatTime(Time)) {
+            return {
+                status: 400,
+                message: "Time is not valid",
+            };
+        }
+        if(!checkFormatDate(Date)) {
+            return {
+                status: 400,
+                message: "Date is not valid",
+            };
+        }
+        return false;
+    }
+    return {
+        status: 400,
+        message: "Field is empty",
+    }
+
+};
+
+// const checkCreateScheduleByDoctor = async (doctorID, Date, Time,patientID) => {
+
+
 const getScheduleBySpeciality = async (specialityId, Date) => {
     const scheduleSpeciality = await ScheduleDoctor.find(
         {
@@ -75,12 +108,14 @@ const getScheduleBySpeciality = async (specialityId, Date) => {
         },
         "appointmentTime"
     );
+    console.log(scheduleSpeciality,
+        "scheduleSpeciality");
     // Speciality have many doctor
     // get time of first doctor
     // check time of other doctor with time of first doctor
     // if time of first doctor is false => have schedule empty
     // if time of first doctor is true => check time of other doctor
-    if (scheduleSpeciality.length > 1) {
+    if (scheduleSpeciality.length > 0) {
         const arrayCheck = scheduleSpeciality[0].appointmentTime;
         for (let i = 0; i < arrayCheck.length; i++) {
             if (arrayCheck[i] === true) {
@@ -277,4 +312,5 @@ export default {
     createOrUpdateScheduleDoctor,
     createAppointmentSchedule,
     handleAndCreateScheduleDocTor,
+    checkCreateScheduleBySpeciality,
 };

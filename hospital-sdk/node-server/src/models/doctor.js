@@ -27,6 +27,7 @@ const doctorSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
 });
 
 const Doctor = mongoose.model("doctor", doctorSchema);

@@ -63,22 +63,21 @@ const createMedicalRecord = async (req, res) => {
         const dateTime = moment(utc)
             .local()
             .format("dddd, hh:mm:ss, DD/MM/YYYY");
-        // const doctor = await doctorServices.getDoctorById("2321312");
-        // if (doctor) {
-        //     res.status(400).send({
-        //         message: "Doctor does not exist",
-        //     });
-        //     return;
-        // }
-        const doctor = {
-            name: "long21312",
-        };
+        // check null of fields or not exist
+        const errorCheckFields = await doctorServices.checkFieldOfCreateMedicordRecord(req.body.doctorID, req.body.patientID);
+
+        if (errorCheckFields.error) {
+            return res.status(errorCheckFields.status).send({
+                message: errorCheckFields.error,
+            });
+        }
+
         const medicalRecord = {
             medicalRecordID: `MR${Date.now()}`,
             patientID: req.body.patientID,
             doctor: {
                 doctorID: req.body.doctorID,
-                name: doctor.name,
+                name: errorCheckFields.name,
             },
             resultTestAndPhotos: {},
             date: dateTime,
@@ -90,14 +89,7 @@ const createMedicalRecord = async (req, res) => {
             note: req.body.note,
         };
 
-        // check null of fields or not exist
-        const responeError =
-            medicalRecordServices.checkNullOfFieldsMedicalRecord(medicalRecord);
-        if (responeError) {
-            return res.status(responeError.status).send({
-                message: responeError.error,
-            });
-        }
+
         // check doctor join network
         if (!(await checkUserExists(medicalRecord.doctor.doctorID))) {
             res.status(400).send({
@@ -221,6 +213,24 @@ const getDoctorsBySpeciality = async (req, res) => {
     }
 };
 
+const getAllDoctor = async (req, res) => {
+    try {
+        const doctors = await doctorServices.getAllDoctor();
+        res.status(200).send(doctors);
+    } catch (error) {
+        handleError(500, error, res);
+    }
+};
+
+const getDoctorNotJoinChannel = async (req, res) => {
+    try {
+        const doctors = await doctorServices.getDoctorNotJoinChannel();
+        res.status(200).send(doctors);
+    } catch (error) {
+        handleError(500, error, res);
+    }
+};
+
 export default {
     createDoctor,
     initDoctor,
@@ -228,4 +238,6 @@ export default {
     updateMedicalRecord,
     getAllMedicalRecord,
     getDoctorsBySpeciality,
+    getAllDoctor,
+    getDoctorNotJoinChannel
 };

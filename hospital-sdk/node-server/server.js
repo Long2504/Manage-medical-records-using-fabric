@@ -7,6 +7,7 @@ import http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
 import moment from "moment";
+import { logger } from "./src/utils/logger.js";
 
 const app = express();
 
@@ -41,4 +42,7 @@ app.use("/api", route);
 // });
 
 const port = process.env.PORT || 8081;
-app.listen(port, "0.0.0.0", () => console.log(`Listening on port ${port}...`));
+app.listen(port, "0.0.0.0", () => {
+    console.log(`Listening on port ${port}...`)
+    logger.info(`Server running at https://45.32.28.204:${port}/`);
+});

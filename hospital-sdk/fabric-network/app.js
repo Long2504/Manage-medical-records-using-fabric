@@ -142,8 +142,13 @@ export const registerUser = async (id) => {
 		console.log(
 			`Successfully registered and enrolled admin user ${id} and imported it into the wallet`
 		);
+		return true;
 	} catch (error) {
 		console.error(`Failed to submit transaction (registerUser): ${error}`);
+		return {
+			error: error,
+			status: 500,
+		}
 	}
 };
 

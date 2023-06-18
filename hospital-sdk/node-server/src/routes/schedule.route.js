@@ -35,4 +35,6 @@ router.post(
     scheduleController.createAppointmentScheduleByDoctor
 );
 
+// router.post("/create-appointment-schedule", scheduleController.createAppointmentSchedule);
+
 router.post("/check-update", scheduleController.checkUpdate);
