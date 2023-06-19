@@ -5,10 +5,11 @@ import {
     getMedicalRecordByIdDoctorNetwork,
 } from "../../../fabric-network/app.js";
 import handleError from "../middleware/error.middewares.js";
+import patientServices from "../services/patient.services.js";
 
 const getAllMedicalRecord = async (req, res) => {
     try {
-      
+
         const medicalRecords = await getAllMedicalRecordsNetwork(
             req.body.username
         );
@@ -29,7 +30,14 @@ const getMedicalRecordByIdDoctor = async (req, res) => {
         const medicalRecords = await getMedicalRecordByIdDoctorNetwork(
             idDoctor
         );
-        res.status(200).send(medicalRecords);
+        const result = [];
+        for (let i = 0; i < medicalRecords.length; i++) {
+            const patient = await patientServices.getPatientById(
+                medicalRecords[i].patientID
+            );
+            result.push({ medicalRecords: medicalRecords[i], patient });
+        }
+        res.status(200).send(result);
     } catch (error) {
         handleError(500, error, res);
     }

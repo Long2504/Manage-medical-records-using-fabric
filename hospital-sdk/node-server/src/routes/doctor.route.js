@@ -18,4 +18,9 @@ router.post(
     doctorController.getDoctorsBySpeciality
 );
 
+router.post(
+    "/get-schedule-doctor",
+    doctorController.getScheduleOfDoctorByDate,
+);
+
 export default router;

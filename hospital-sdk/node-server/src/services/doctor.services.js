@@ -25,7 +25,7 @@ const getDoctorById = async (doctorId) => {
 };
 
 const getDoctorByIdUser = async (userId) => {
-    const doctor = await Doctor.findOne({ user: userId }).select("-_id -__v").populate({ path: "specialityID", select: "_id name" });
+    const doctor = await Doctor.findOne({ user: userId }).select("-__v").populate({ path: "specialityID", select: "_id name" });
     return doctor;
 };
 
@@ -59,12 +59,12 @@ const checkFieldOfCreateMedicordRecord = async (doctorId, patientId) => {
             status: 400,
             error: "doctorId or patientId is not valid"
         };
-        const doctor = await Doctor.findOne({ doctorID: doctorId });
+        const doctor = await Doctor.findOne({ _id: doctorId });
         if (!doctor) return {
             status: 404,
             error: "doctorId is not found"
         };
-        const patient = await Patient.findOne({ patientID: patientId });
+        const patient = await Patient.findOne({ _id: patientId });
         if (!patient) return {
             status: 404,
             error: "patientId is not found"

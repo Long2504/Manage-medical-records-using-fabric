@@ -12,6 +12,8 @@ import {
 import medicalRecordServices from "../services/medicalRecord.services.js";
 import moment from "moment";
 import mongoose from "mongoose";
+import { isDateCurrent } from "../utils/common.js";
+import scheduleServices from "../services/schedule.services.js";
 const createDoctor = async (req, res) => {
     try {
         const doctor = {
@@ -287,6 +289,15 @@ const getDoctorNotJoinChannel = async (req, res) => {
     }
 };
 
+const getScheduleOfDoctorByDate = async (req, res) => {
+    try {
+        const listSchedule = await scheduleServices.getAppointmentScheduleByDoctor(req.body.doctorID, req.body.date);
+        res.status(200).send(listSchedule);
+    } catch (error) {
+        handleError(500, error, res);
+    }
+};
+
 export default {
     createDoctor,
     initDoctor,
@@ -297,4 +308,5 @@ export default {
     getAllDoctor,
     getDoctorNotJoinChannel,
     createMedicalRecordWithTest,
+    getScheduleOfDoctorByDate
 };

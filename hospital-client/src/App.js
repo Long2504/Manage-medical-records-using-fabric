@@ -22,7 +22,7 @@ function App() {
       return (
         <Router>
           <Routes>
-            <Route element={<HomePageAdmin></HomePageAdmin>} path="/"></Route>
+            <Route element={<HomePageAdmin></HomePageAdmin>} path="/infor"></Route>
 
           </Routes>
         </Router>)

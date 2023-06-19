@@ -2,7 +2,8 @@ import Speciality from "../models/speciality.js";
 import Doctor from "../models/doctor.js";
 import ScheduleDoctor from "../models/scheduleDoctor.js";
 import AppointmentSchedule from "../models/appointmentSchedule.js";
-import { checkFormatId, checkFormatTime,checkFormatDate, randomElement } from "../utils/common.js";
+import { checkFormatId, checkFormatTime, checkFormatDate, randomElement } from "../utils/common.js";
+import patientServices from "./patient.services.js";
 
 const arrayTime = [
     "08:00",
@@ -68,21 +69,21 @@ const getIdDoctorHaveScheduleEmpty = async (specialityId, Date, Time) => {
 };
 
 // check field of schedule doctor is empty
-const checkCreateScheduleBySpeciality = async (specialityId, Date, Time,patientID) => {
-    if(specialityId && Date && Time && patientID) {
-        if(!checkFormatId(specialityId) || !checkFormatId(patientID)) {
+const checkCreateScheduleBySpeciality = async (specialityId, Date, Time, patientID) => {
+    if (specialityId && Date && Time && patientID) {
+        if (!checkFormatId(specialityId) || !checkFormatId(patientID)) {
             return {
                 status: 400,
                 message: "SpecialityID or patientID is not valid",
             };
         }
-        if(!checkFormatTime(Time)) {
+        if (!checkFormatTime(Time)) {
             return {
                 status: 400,
                 message: "Time is not valid",
             };
         }
-        if(!checkFormatDate(Date)) {
+        if (!checkFormatDate(Date)) {
             return {
                 status: 400,
                 message: "Date is not valid",
@@ -155,23 +156,23 @@ const handleTimeFromDB = (times) => {
 };
 // create schedule doctor
 /*const createScheduleDoctor = async (scheduleDoctor) => {
-	const scheduleOfDoctor = getScheduleByDoctor(
-		scheduleDoctor.doctorID,
-		scheduleDoctor.appointmentDate
-	);
-	if (scheduleDoctor !== false) {
-		if (
-			scheduleDoctor.appointmentTime[
-				getIndexOfArrayTime(scheduleDoctor.appointmentTime)
-			]
-		) {
-			return false;
-		} else {
-		}
-	}
+    const scheduleOfDoctor = getScheduleByDoctor(
+        scheduleDoctor.doctorID,
+        scheduleDoctor.appointmentDate
+    );
+    if (scheduleDoctor !== false) {
+        if (
+            scheduleDoctor.appointmentTime[
+                getIndexOfArrayTime(scheduleDoctor.appointmentTime)
+            ]
+        ) {
+            return false;
+        } else {
+        }
+    }
 
-	const schedule = new ScheduleDoctor(scheduleDoctor);
-	await schedule.save();
+    const schedule = new ScheduleDoctor(scheduleDoctor);
+    await schedule.save();
 };*/
 
 // update schedule doctor
@@ -305,6 +306,33 @@ const handleAndCreateScheduleDocTor = async (
     }
 };
 
+const getAppointmentScheduleByDoctor = async (doctorId, Date) => {
+    try {
+        const scheduleDoctor = await AppointmentSchedule.find({
+            doctorID: doctorId,
+            appointmentDate: Date,
+        });
+        const result = [];
+        for (let i = 0; i < scheduleDoctor.length; i++) {
+            const patient = await patientServices.getPatientById(
+                scheduleDoctor[i].patientID
+            );
+            result.push({
+                patient: patient,
+                scheduleDoctor: scheduleDoctor[i],
+            });
+        }
+        return result;
+    } catch (error) {
+        console.error(error);
+        return {
+            error: error,
+            status: 500,
+        }
+    }
+
+};
+
 export default {
     getScheduleBySpeciality,
     getScheduleByDoctor,
@@ -313,4 +341,5 @@ export default {
     createAppointmentSchedule,
     handleAndCreateScheduleDocTor,
     checkCreateScheduleBySpeciality,
+    getAppointmentScheduleByDoctor,
 };

@@ -21,6 +21,11 @@ Auth.getInfo = () => {
   return info ? JSON.parse(info) : null;
 }
 
+Auth.getIdDoctor = () => {
+  const info = localStorage.getItem(LOCAL.INFO);
+  return info ? JSON.parse(info).doctor._id : null;
+}
+
 Auth.getToken = () => {
   const token = localStorage.getItem(LOCAL.TOKEN);
   return token ? JSON.parse(token) : null;

@@ -47,9 +47,17 @@ export const checkFormatTime = (time) => {
 // Check format id
 // if id is not valid, return false
 export const checkFormatId = (id) => {
-    if(!mongoose.Types.ObjectId.isValid(id)){
+    if (!mongoose.Types.ObjectId.isValid(id)) {
         return false;
     }
     return true;
 }
 
+export const isDateCurrent = (date) => {
+    const currentDate = moment().format("DD-MM-YYYY");
+    const providedDate = moment(date)._i;
+    console.log(providedDate);
+    if (!checkFormatDate(date)) return false;
+    if (providedDate.isBefore(currentDate, 'day')) return false;
+    return true;
+}
