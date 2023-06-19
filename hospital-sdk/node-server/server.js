@@ -26,7 +26,7 @@ const corsOptions = {
 moment.locale("vi");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("/api", route);
+app.use("/api", cors(corsOptions), route);
 // io.on("connection", (socket) => {
 //     console.log("a user connected");
 
@@ -44,5 +44,5 @@ app.use("/api", route);
 const port = process.env.PORT || 8081;
 app.listen(port, "0.0.0.0", () => {
     console.log(`Listening on port ${port}...`)
-    logger.info(`Server running at https://45.32.28.204:${port}/`);
+    logger.info(`Server running at http://45.32.28.204:${port}/`);
 });

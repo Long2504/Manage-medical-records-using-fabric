@@ -42,6 +42,16 @@ const updateDataPatient = async (data) => {
   }
 };
 
+const getPatientByUserId = async (userId) => {
+  try {
+    const patient = await Patient.findOne({ user: userId }).select("-_id -__v");
+    return patient;
+  } catch (error) {
+    console.error(error);
+    throw new Error(error);
+  }
+};
+
 export default {
-  checkFieldUpdateDataPatient, updateDataPatient
+  checkFieldUpdateDataPatient, updateDataPatient, getPatientByUserId
 };

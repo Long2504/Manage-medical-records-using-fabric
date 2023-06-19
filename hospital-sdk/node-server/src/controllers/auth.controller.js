@@ -5,6 +5,8 @@ import sendEmail from "../utils/email.js";
 import mailContent from "../utils/mailContent.js";
 import { randomBytes } from "crypto";
 import handleError from "../middleware/error.middewares.js";
+import doctorServices from "../services/doctor.services.js";
+import patientServices from "../services/patient.services.js";
 
 // register a new user
 const signup = async (req, res) => {
@@ -38,6 +40,27 @@ const signin = async (req, res) => {
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
             expiresIn: 86400, // 24 hours
         });
+        if (user.roles.includes("doctor")) {
+            const doctor = await doctorServices.getDoctorByIdUser(user._id);
+            return res.status(200).send({
+                id: user._id,
+                email: user.email,
+                roles: user.roles,
+                accessToken: token,
+                doctor: doctor
+            });
+        }
+        if (user.roles.includes("user")) {
+            const patient = await patientServices.getPatientByUserId(user._id);
+            return res.status(200).send({
+                id: user._id,
+                email: user.email,
+                roles: user.roles,
+                accessToken: token,
+                patient: patient
+            });
+        }
+
         res.status(200).send({
             id: user._id,
             username: user.username,

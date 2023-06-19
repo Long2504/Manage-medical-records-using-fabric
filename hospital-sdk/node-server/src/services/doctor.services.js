@@ -24,6 +24,11 @@ const getDoctorById = async (doctorId) => {
     return doctor;
 };
 
+const getDoctorByIdUser = async (userId) => {
+    const doctor = await Doctor.findOne({ user: userId }).select("-_id -__v").populate({ path: "specialityID", select: "_id name" });
+    return doctor;
+};
+
 const getAllDoctor = async () => {
     const doctor = await Doctor.find().select("-_id -__v").populate({ path: "specialityID", select: "_id name" });
     return doctor;
@@ -77,6 +82,7 @@ export default {
     getDoctorByIdSpeciality,
     checkDoctorExist,
     getDoctorById,
+    getDoctorByIdUser,
     getAllDoctor,
     getDoctorNotJoinChannel,
     updateIdUserOfDoctor,

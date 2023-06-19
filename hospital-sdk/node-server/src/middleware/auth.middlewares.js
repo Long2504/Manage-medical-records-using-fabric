@@ -16,7 +16,6 @@ const verifyToken = (req, res, next) => {
                     return res.status(401).send({ message: "Unauthorized!" });
                 }
                 req.id = decoded.id;
-                console.log(decoded.id, "id");
                 next();
             });
         } else {
@@ -55,8 +54,6 @@ const checkDuplicateUsernameOrEmail =
 const checkUserExists = (field) => async (req, res, next) => {
     try {
         const value = field === "id" ? req.id : req.body[field];
-
-        console.log(value, "value");
         const user = await User.findOne({ [field]: value });
         if (!user) {
             return res.status(404).send({ message: "User Not found." });
@@ -64,6 +61,7 @@ const checkUserExists = (field) => async (req, res, next) => {
         req.user = user;
         next();
     } catch (error) {
+        console.log(error, "error in check user exists");
         handleError(500, error, res);
     }
 };
@@ -83,6 +81,7 @@ const checkPassword = async (req, res, next) => {
         }
         next();
     } catch (error) {
+        console.log(error, "error in check password");
         handleError(500, error, res);
     }
 };

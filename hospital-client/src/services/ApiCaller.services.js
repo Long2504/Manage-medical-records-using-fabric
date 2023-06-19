@@ -4,7 +4,7 @@ import { LOCAL } from "../utils/constants";
 export const ApiCaller = (method, body, endpoint) => {
   return axios({
     method: method,
-    url: `https://localhost:8081/api/${endpoint}`,
+    url: `http://45.32.28.204:8081/api/${endpoint}`,
     headers: getHeader(),
     data: body,
     withCredentials: true,
