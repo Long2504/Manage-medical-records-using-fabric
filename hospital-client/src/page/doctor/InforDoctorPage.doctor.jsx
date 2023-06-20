@@ -8,6 +8,9 @@ function InforDoctor() {
       <h1>Thông tin bác sĩ</h1>
       <div >
         <div className="info-doctor-page__name">
+          <div>
+
+          </div>
           <p>{inforDoctor?.doctor.name}</p>
         </div>
         <p>{inforDoctor?.doctor.phone}</p>
