@@ -5,12 +5,12 @@ import { useSelector } from "react-redux";
 import HomePageDoctor from "./page/doctor/HomePage.doctor";
 import HomePageAdmin from "./page/admin/HomePage.admin";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 function App() {
   const { loggedIn, role } = useSelector((state) => state.authSlice);
-  console.log(loggedIn, "loggedIn");
-  console.log(role, "role");
-  useEffect(() => { }, [loggedIn]);
+  const dispatch = useDispatch();
+  useEffect(() => { }, [loggedIn, dispatch]);
   if (loggedIn) {
     if (role === "doctor") {
       return (
@@ -21,10 +21,7 @@ function App() {
     if (role === "admin") {
       return (
         <Router>
-          <Routes>
-            <Route element={<HomePageAdmin></HomePageAdmin>} path="/infor"></Route>
-
-          </Routes>
+          <HomePageAdmin></HomePageAdmin>
         </Router>)
     }
   }

@@ -3,10 +3,12 @@ import logger from 'redux-logger';
 import authSlice from './slice/auth.slice';
 import scheduleSlice from './slice/schedule.slice';
 import medicalRecordSlice from './slice/medicalRecord.slice';
+import doctorSlice from './slice/doctor.slice';
 const reducers = {
   authSlice: authSlice,
   scheduleSlice: scheduleSlice,
   medicalRecordSlice: medicalRecordSlice,
+  doctorSlice: doctorSlice,
 };
 
 const rootReducer = combineReducers(reducers);

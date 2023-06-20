@@ -3,6 +3,7 @@ import handleError from "../middleware/error.middewares.js";
 import doctorServices from "../services/doctor.services.js";
 import authServices from "../services/auth.services.js";
 import { registerUser } from "../../../fabric-network/app.js";
+import User from "../models/user.js";
 // register a new user
 const createAccountDoctor = async (req, res) => {
     try {
@@ -44,7 +45,7 @@ const createAccountDoctor = async (req, res) => {
         handleError(500, error, res);
     }
 };
-
+//register a new admin
 const createAdmin = async (req, res) => {
     try {
         const user = new User({

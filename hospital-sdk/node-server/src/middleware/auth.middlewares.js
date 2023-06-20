@@ -15,7 +15,8 @@ const verifyToken = (req, res, next) => {
                 if (err) {
                     return res.status(401).send({ message: "Unauthorized!" });
                 }
-                req.id = decoded.id;
+                console.log(decoded, "decoded");
+                req.user = decoded.id;
                 next();
             });
         } else {
@@ -28,7 +29,7 @@ const verifyToken = (req, res, next) => {
 
 const verifyRole = (role) => (req, res, next) => {
     let user = req.user;
-    if (user.role == role) {
+    if (user.roles == role) {
         next();
     } else {
         handleError(403, "access denied", res);

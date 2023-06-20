@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createMedicalRecord, getMedicalRecordByIdDoctor } from '../action/medicalRecord.action';
+import { createMedicalRecord, getAllMedicalRecord, getMedicalRecordByIdDoctor } from '../action/medicalRecord.action';
 const initialState = {
   loading: false,
   error: null,
   listMedicalRecord: [],
+  listAllMedicalRecord: [],
 };
 
 export const medicalRecordSlice = createSlice({
@@ -37,7 +38,22 @@ export const medicalRecordSlice = createSlice({
       state.listMedicalRecord = [];
     }
     );
-
+    builder.addCase(getAllMedicalRecord.pending, (state) => {
+      state.loading = true;
+      state.listAllMedicalRecord = [];
+    }
+    );
+    builder.addCase(getAllMedicalRecord.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.listAllMedicalRecord = payload;
+    }
+    );
+    builder.addCase(getAllMedicalRecord.rejected, (state, { payload }) => {
+      state.error = payload;
+      state.loading = false;
+      state.listAllMedicalRecord = [];
+    }
+    );
   }
 });
 

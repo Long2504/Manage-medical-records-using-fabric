@@ -35,8 +35,14 @@ const getAllDoctor = async () => {
 };
 
 const getDoctorNotJoinChannel = async () => {
-    const doctor = await Doctor.find({ joinedChannel: false }).select("-_id -__v").populate({ path: "specialityID", select: "_id name" });
-    return doctor;
+    const result = [];
+    const doctor = await Doctor.find().select("-__v").populate({ path: "specialityID", select: "_id name" });
+    for (let i = 0; i < doctor.length; i++) {
+        if (doctor[i].joinedChannel !== true) {
+            result.push(doctor[i]);
+        }
+    }
+    return result;
 }
 
 const updateIdUserOfDoctor = async (doctorId, idUser) => {

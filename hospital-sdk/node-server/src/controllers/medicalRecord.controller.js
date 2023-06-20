@@ -10,9 +10,7 @@ import patientServices from "../services/patient.services.js";
 const getAllMedicalRecord = async (req, res) => {
     try {
 
-        const medicalRecords = await getAllMedicalRecordsNetwork(
-            req.body.username
-        );
+        const medicalRecords = await getAllMedicalRecordsNetwork("admin");
         res.status(200).send(medicalRecords);
     } catch (error) {
         handleError(500, error, res);

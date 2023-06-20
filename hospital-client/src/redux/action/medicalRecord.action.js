@@ -21,3 +21,13 @@ export const getMedicalRecordByIdDoctor = createAsyncThunk('medicalRecord/getByI
   }
 }
 )
+
+export const getAllMedicalRecord = createAsyncThunk('medicalRecord/get-all', async () => {
+  try {
+    const { data } = await ApiCaller('GET', null, "medical-record/get-all");
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+)

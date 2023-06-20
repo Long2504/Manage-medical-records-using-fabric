@@ -9,6 +9,7 @@ Auth.setInfo = (data) => {
 Auth.removeInfo = () => {
   localStorage.removeItem(LOCAL.INFO);
   localStorage.removeItem(LOCAL.TOKEN);
+  localStorage.removeItem(LOCAL.ROLE);
 }
 
 Auth.getRole = () => {

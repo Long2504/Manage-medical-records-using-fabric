@@ -4,6 +4,13 @@ import doctorController from "../controllers/doctor.controller.js";
 import authMiddlewares from "../middleware/auth.middlewares.js";
 
 const router = Router();
+// register account for admin
+router.post(
+    "/create-account-admin",
+    adminController.createAdmin
+);
+
+
 
 // register account for doctor
 router.post(

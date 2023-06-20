@@ -1,5 +1,6 @@
 import axios from "axios";
 import { LOCAL } from "../utils/constants";
+import Auth from "../utils/helper/auth.helper";
 
 export const ApiCaller = (method, body, endpoint) => {
   return axios({
@@ -12,7 +13,7 @@ export const ApiCaller = (method, body, endpoint) => {
 };
 const getHeader = () => {
   if (localStorage.getItem(LOCAL.TOKEN) !== null) {
-    const token = localStorage.getItem(LOCAL.TOKEN);
+    const token = Auth.getToken();
     return {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,

@@ -37,7 +37,7 @@ const signup = async (req, res) => {
 const signin = async (req, res) => {
     try {
         const user = req.user;
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ id: user }, process.env.JWT_SECRET, {
             expiresIn: 86400, // 24 hours
         });
         if (user.roles.includes("doctor")) {
@@ -66,6 +66,7 @@ const signin = async (req, res) => {
             username: user.username,
             email: user.email,
             accessToken: token,
+            roles: user.roles,
         });
     } catch (error) {
         handleError(500, error, res);
