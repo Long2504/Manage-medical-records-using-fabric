@@ -4,10 +4,12 @@ function InforDoctor() {
   const inforDoctor = Auth.getInfo();
 
   return (
-    <div>
+    <div className="info-doctor-page">
       <h1>Thông tin bác sĩ</h1>
-      <div>
-        <p>{inforDoctor?.doctor.name}</p>
+      <div >
+        <div className="info-doctor-page__name">
+          <p>{inforDoctor?.doctor.name}</p>
+        </div>
         <p>{inforDoctor?.doctor.phone}</p>
         <p>{inforDoctor.email}</p>
         <p>{inforDoctor?.doctor.address}</p>
