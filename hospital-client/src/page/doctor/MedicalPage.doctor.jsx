@@ -1,22 +1,27 @@
-import Dropdown from 'react-bootstrap/Dropdown';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import Table from 'react-bootstrap/Table';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
+import { useDispatch, useSelector } from "react-redux";
+import { Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
-import { getMedicalRecordByIdDoctor } from '../../redux/action/medicalRecord.action';
-import Auth from '../../utils/helper/auth.helper';
+import { getMedicalRecordByIdDoctor } from "../../redux/action/medicalRecord.action";
+import Auth from "../../utils/helper/auth.helper";
+import { Colors } from "../../constants/Colors";
 
 function MedicalRecordPage() {
   const dispatch = useDispatch();
   const idDoctor = Auth.getIdDoctor();
-  const { listMedicalRecord } = useSelector(state => state.medicalRecordSlice);
+  const { listMedicalRecord } = useSelector(
+    (state) => state.medicalRecordSlice
+  );
 
   useEffect(() => {
-    dispatch(getMedicalRecordByIdDoctor({
-      doctorID: idDoctor,
-    }));
+    dispatch(
+      getMedicalRecordByIdDoctor({
+        doctorID: idDoctor,
+      })
+    );
   }, [dispatch]);
   const [show, setShow] = useState(false);
   const [medicalRecordCurrent, setMedicalRecordCurrent] = useState({});
@@ -24,21 +29,16 @@ function MedicalRecordPage() {
   const handleShow = (medicalRecord) => {
     setMedicalRecordCurrent(medicalRecord);
     setShow(true);
-  }
+  };
   console.log(listMedicalRecord);
   return (
     <div>
-      <h1>Medical Record Page</h1>
-      <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Dropdown Button
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-          <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+      <Typography
+        variant="h4"
+        sx={{ color: Colors.DEFAULT_COLOR, marginBottom: "20px" }}>
+        Đơn thuốc
+      </Typography>
+
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -50,40 +50,81 @@ function MedicalRecordPage() {
           </tr>
         </thead>
         <tbody>
-          {
-            listMedicalRecord.map((item, index) => {
-              return (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{item.patient.name}</td>
-                  <td>{item.patient.phone}</td>
-                  <td>{item.medicalRecords.date}</td>
-                  <td><Button variant="primary" onClick={() => handleShow(item)}>Xem</Button></td>
-                </tr>
-              )
-            }
-            )
-          }
-          <tr>
-          </tr>
+          {listMedicalRecord.map((item, index) => {
+            return (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{item.patient.name}</td>
+                <td>{item.patient.phone}</td>
+                <td>{item.medicalRecords.date}</td>
+                <td>
+                  <Button variant="success" onClick={() => handleShow(item)}>
+                    Xem
+                  </Button>
+                </td>
+              </tr>
+            );
+          })}
+          <tr></tr>
         </tbody>
-
       </Table>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} className="pt-5">
         <Modal.Header closeButton>
           <Modal.Title>Thông tin hồ sơ bệnh án</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
             <p>Thông tin bệnh nhân</p>
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: "flex" }}>
               <div>
-                <p>Họ tên</p>
-                <p>Ngày sinh</p>
-                <p>Địa chỉ</p>
-                <p>Số điện thoại</p>
-                <p>Mô tả của bệnh nhân</p>
-                <p>Người khám</p>
+                <p
+                  style={{
+                    color: Colors.DEFAULT_COLOR,
+                    fontWeight: "700",
+                    marginRight: "10px",
+                  }}>
+                  Họ tên
+                </p>
+                <p
+                  style={{
+                    color: Colors.DEFAULT_COLOR,
+                    fontWeight: "700",
+                    marginRight: "10px",
+                  }}>
+                  Ngày sinh
+                </p>
+                <p
+                  style={{
+                    color: Colors.DEFAULT_COLOR,
+                    fontWeight: "700",
+                    marginRight: "10px",
+                  }}>
+                  Địa chỉ
+                </p>
+                <p
+                  style={{
+                    color: Colors.DEFAULT_COLOR,
+                    fontWeight: "700",
+                    marginRight: "10px",
+                  }}>
+                  Số điện thoại
+                </p>
+                <p
+                  style={{
+                    color: Colors.DEFAULT_COLOR,
+                    fontWeight: "700",
+                    marginRight: "10px",
+                  }}>
+                  Mô tả của bệnh nhân
+                </p>
+                <p
+                  style={{
+                    color: Colors.DEFAULT_COLOR,
+                    fontWeight: "700",
+                    marginRight: "10px",
+                  }}>
+                  Người khám
+                </p>
               </div>
               <div>
                 <p>{medicalRecordCurrent.patient?.name}</p>
@@ -97,15 +138,64 @@ function MedicalRecordPage() {
           </div>
 
           <div>
-            <p>Thông tin bệnh án</p>
-            <div style={{ display: 'flex' }}>
+            <p
+              style={{
+                color: Colors.DEFAULT_COLOR,
+                fontWeight: "700",
+                marginRight: "10px",
+              }}>
+              Thông tin bệnh án
+            </p>
+            <div style={{ display: "flex" }}>
               <div>
-                <p>Triệu chứng</p>
-                <p>Chẩn đoán</p>
-                <p>Quá trình điều trị</p>
-                <p>Tiến trình bệnh</p>
-                <p>Đơn thuốc</p>
-                <p>Ghi chú</p>
+                <p
+                  style={{
+                    color: Colors.DEFAULT_COLOR,
+                    fontWeight: "700",
+                    marginRight: "10px",
+                  }}>
+                  Triệu chứng
+                </p>
+                <p
+                  style={{
+                    color: Colors.DEFAULT_COLOR,
+                    fontWeight: "700",
+                    marginRight: "10px",
+                  }}>
+                  Chẩn đoán
+                </p>
+                <p
+                  style={{
+                    color: Colors.DEFAULT_COLOR,
+                    fontWeight: "700",
+                    marginRight: "10px",
+                  }}>
+                  Quá trình điều trị
+                </p>
+                <p
+                  style={{
+                    color: Colors.DEFAULT_COLOR,
+                    fontWeight: "700",
+                    marginRight: "10px",
+                  }}>
+                  Tiến trình bệnh
+                </p>
+                <p
+                  style={{
+                    color: Colors.DEFAULT_COLOR,
+                    fontWeight: "700",
+                    marginRight: "10px",
+                  }}>
+                  Đơn thuốc
+                </p>
+                <p
+                  style={{
+                    color: Colors.DEFAULT_COLOR,
+                    fontWeight: "700",
+                    marginRight: "10px",
+                  }}>
+                  Ghi chú
+                </p>
               </div>
               <div>
                 <p>{medicalRecordCurrent.medicalRecord?.symptonOfDisease}</p>
@@ -117,7 +207,6 @@ function MedicalRecordPage() {
               </div>
             </div>
           </div>
-
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -125,9 +214,8 @@ function MedicalRecordPage() {
           </Button>
         </Modal.Footer>
       </Modal>
-
     </div>
-  )
-};
+  );
+}
 
 export default MedicalRecordPage;

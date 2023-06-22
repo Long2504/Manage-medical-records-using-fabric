@@ -1,37 +1,99 @@
+import { Avatar, Box, Typography, Divider } from "@mui/material";
 import Auth from "../../utils/helper/auth.helper";
+import logo from "../../assests/image/logo.png";
+import { Colors } from "../../constants/Colors";
 
 function InforDoctor() {
   const inforDoctor = Auth.getInfo();
-
+  console.log(inforDoctor);
   return (
-    <div className="info-doctor-page">
-      <h1>Thông tin bác sĩ</h1>
-      <div >
-        <div className="info-doctor-page__name">
+    <Box className="info-doctor-page">
+      <div>
+        <Box
+          className="info-doctor-page__name"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}>
           <div>
-
+            <Avatar alt="user" src={logo} sx={{ width: 100, height: 100 }} />
           </div>
-          <p>{inforDoctor?.doctor.name}</p>
-        </div>
-        <p>{inforDoctor?.doctor.phone}</p>
-        <p>{inforDoctor.email}</p>
-        <p>{inforDoctor?.doctor.address}</p>
-        <p>{inforDoctor?.doctor.description}</p>
-        <div>
-          <p>kinh nghiem</p>
-          {
-            inforDoctor?.doctor.experiences.map((item, index) => {
+          <Typography variant="h6">{inforDoctor?.doctor.name}</Typography>
+        </Box>
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+          }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              marginBottom: "20px",
+              marginTop: "20px",
+            }}>
+            <Box>
+              <Typography
+                sx={{ color: Colors.DEFAULT_COLOR, fontWeight: "700" }}>
+                Email
+              </Typography>
+              <Typography sx={{ color: Colors.GRAY }}>
+                {inforDoctor.email}
+              </Typography>
+            </Box>
+            <Box>
+              <Typography
+                sx={{ color: Colors.DEFAULT_COLOR, fontWeight: "700" }}>
+                Số điện thoại
+              </Typography>
+              <Typography sx={{ color: Colors.GRAY }}>
+                {inforDoctor?.doctor.phone}
+              </Typography>
+            </Box>
+            <Box>
+              <Typography
+                sx={{ color: Colors.DEFAULT_COLOR, fontWeight: "700" }}>
+                Địa chỉ
+              </Typography>
+              <Typography sx={{ color: Colors.GRAY }}>
+                {inforDoctor?.doctor.address}
+              </Typography>
+            </Box>
+          </Box>
+          <Divider />
+          <Box
+            sx={{
+              marginTop: "20px",
+              marginBottom: "20px",
+            }}>
+            <Typography sx={{ color: Colors.DEFAULT_COLOR, fontWeight: "700" }}>
+              Thông tin chi tiết
+            </Typography>
+            <Typography sx={{ color: Colors.GRAY }}>
+              {inforDoctor?.doctor.description}
+            </Typography>
+          </Box>
+          <Divider />
+
+          <Box sx={{ marginTop: "20px" }}>
+            <Typography sx={{ color: Colors.DEFAULT_COLOR, fontWeight: "700" }}>
+              Kinh nghiệm
+            </Typography>
+            {inforDoctor?.doctor.experiences.map((item, index) => {
               return (
                 <div key={index}>
-                  <p>{item}</p>
+                  <Typography sx={{ color: Colors.GRAY }}>{item}</Typography>
                 </div>
-              )
-            })
-          }
-        </div>
-
+              );
+            })}
+          </Box>
+        </Box>
       </div>
-    </div>
-  )
+    </Box>
+  );
 }
 export default InforDoctor;
