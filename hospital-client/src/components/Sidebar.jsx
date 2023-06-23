@@ -15,7 +15,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import logo from "../assests/image/logo.png";
+import logo from "../assests/image/Logo.png";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/slice/auth.slice";
@@ -111,7 +111,7 @@ export default function Sidebar({ children, menuItem }) {
     <Box
       sx={{
         display: "flex",
-        width: "80%",
+        width: "100%",
         alignItems: "center",
         justifyContent: "center",
       }}>
@@ -135,7 +135,15 @@ export default function Sidebar({ children, menuItem }) {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer
+        variant="permanent"
+        open={open}
+        sx={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          zIndex: 10,
+        }}>
         <DrawerHeader>
           <img
             src={logo}
@@ -200,7 +208,14 @@ export default function Sidebar({ children, menuItem }) {
           </ListItem>
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "60px" }}>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          marginTop: "60px",
+          marginLeft: !open ? "60px" : "240px",
+        }}>
         {children}
       </Box>
     </Box>

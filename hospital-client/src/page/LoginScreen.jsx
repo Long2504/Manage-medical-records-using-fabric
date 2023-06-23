@@ -24,9 +24,9 @@ function LoginScreen() {
     dispatch(Login(user)).then(() => navigate("/"));
   };
   return (
-    <div className="login-page">
+    <form className="login-page" type="submit" onSubmit={handleLogin}>
       <div className="login-page__center">
-        <h1 className="login-page__center__title">Welcome Back</h1>
+        <h1 className="login-page__center__title">Welcome</h1>
         <Box
           sx={{
             width: 400,
@@ -74,13 +74,12 @@ function LoginScreen() {
           />
         </Box>
         <div className="login-page__center__forgot">
-          <a href="#">Quên mật khẩu?</a>
+          <a href="/forgot-password">Quên mật khẩu?</a>
         </div>
         <Button
           className="login-page__center__btn-confirm"
           variant="contained"
-          type="submit"
-          onClick={(e) => handleLogin(e)}>
+          type="submit">
           Đăng nhập
         </Button>
       </div>
@@ -95,7 +94,7 @@ function LoginScreen() {
             d="M753.1,434.2c110.6,63.7,277.7,70.6,373.4,15.4L1905,0v555.9H0V0.2L753.1,434.2z"></path>
         </svg>
       </div>
-    </div>
+    </form>
   );
 }
 

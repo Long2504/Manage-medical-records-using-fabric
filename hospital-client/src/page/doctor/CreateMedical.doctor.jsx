@@ -72,13 +72,13 @@ function CreateMedical() {
             </p>
           </div>
           <div>
-            <p style={{ color: Colors.GRAY }}>{patient.name}</p>
-            <p style={{ color: Colors.GRAY }}>{patient.dateOfBirth}</p>
-            <p style={{ color: Colors.GRAY }}>Nam</p>
-            <p style={{ color: Colors.GRAY }}>{patient.address}</p>
-            <p style={{ color: Colors.GRAY }}>{patient.phone}</p>
-            <p style={{ color: Colors.GRAY }}>ấdfasd</p>
-            <p style={{ color: Colors.GRAY }}>{doctorName}</p>
+            <p style={{ color: Colors.BLACK }}>{patient.name}</p>
+            <p style={{ color: Colors.BLACK }}>{patient.dateOfBirth}</p>
+            <p style={{ color: Colors.BLACK }}>Nam</p>
+            <p style={{ color: Colors.BLACK }}>{patient.address}</p>
+            <p style={{ color: Colors.BLACK }}>{patient.phone}</p>
+            <p style={{ color: Colors.BLACK }}>ấdfasd</p>
+            <p style={{ color: Colors.BLACK }}>{doctorName}</p>
           </div>
         </div>
         <div>

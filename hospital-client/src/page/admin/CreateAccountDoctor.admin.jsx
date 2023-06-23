@@ -60,6 +60,7 @@ function CreateAccountDoctor() {
         sx={{
           color: Colors.DEFAULT_COLOR,
           marginBottom: "20px",
+          textAlign: "center",
         }}>
         Tạo tài khoản bác sĩ
       </Typography>
@@ -179,7 +180,7 @@ function CreateAccountDoctor() {
                       <td>{item.specialityID.name}</td>
                       <td>
                         <Button
-                          variant="primary"
+                          variant="success"
                           onClick={() => handleChoiceDoctor(item)}>
                           Chọn
                         </Button>

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getScheduleOfDoctorByDate } from "../../redux/action/schedule.action";
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import { Colors } from "../../constants/Colors";
 
 function SchedulePage() {
@@ -26,7 +26,7 @@ function SchedulePage() {
     navigate("/info-patient", { state: { patient: data.patient } });
   };
   return (
-    <div>
+    <Box className="doctor-page">
       <Typography
         variant="h4"
         sx={{ color: Colors.DEFAULT_COLOR, marginBottom: "20px" }}>
@@ -61,7 +61,7 @@ function SchedulePage() {
           })}
         </tbody>
       </Table>
-    </div>
+    </Box>
   );
 }
 export default SchedulePage;

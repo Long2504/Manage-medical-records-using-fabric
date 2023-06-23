@@ -1,14 +1,30 @@
-import { Avatar, Box, Typography, Divider } from "@mui/material";
+import { Avatar, Box, Typography, Divider, TextField } from "@mui/material";
 import Auth from "../../utils/helper/auth.helper";
-import logo from "../../assests/image/logo.png";
+import logo from "../../assests/image/Logo.png";
 import { Colors } from "../../constants/Colors";
+import CreateIcon from "@mui/icons-material/Create";
+import Button from "@mui/material/Button";
+import ClearIcon from "@mui/icons-material/Clear";
+import CheckIcon from "@mui/icons-material/Check";
+import { TextareaAutosize } from "@mui/base";
+import { useState } from "react";
 
 function InforDoctor() {
   const inforDoctor = Auth.getInfo();
-  console.log(inforDoctor);
+  const [isEdit, setIsEdit] = useState(false);
+
   return (
     <Box className="info-doctor-page">
-      <div>
+      <Box
+        sx={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "row",
+          aligItenms: "flex-start",
+          justifyContent: "center",
+          marginRight: "30px",
+        }}>
         <Box
           className="info-doctor-page__name"
           sx={{
@@ -16,83 +32,146 @@ function InforDoctor() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-          }}>
-          <div>
-            <Avatar alt="user" src={logo} sx={{ width: 100, height: 100 }} />
-          </div>
-          <Typography variant="h6">{inforDoctor?.doctor.name}</Typography>
-        </Box>
-
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
+            backgroundColor: Colors.DEFAULT_LIGHT_COLOR,
+            padding: "10px",
+            borderRadius: "10px",
+            border: "1px solid #f0f1f2",
+            marginRight: "10px",
           }}>
           <Box
             sx={{
+              width: "100%",
               display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-start",
-              marginBottom: "20px",
-              marginTop: "20px",
+              justifyContent: "flex-end",
+              paddingBottom: "20px",
             }}>
-            <Box>
-              <Typography
-                sx={{ color: Colors.DEFAULT_COLOR, fontWeight: "700" }}>
+            {!isEdit && (
+              <Button onClick={() => setIsEdit(true)}>
+                <CreateIcon color={Colors.DEFAULT_COLOR} />
+              </Button>
+            )}
+            {isEdit && (
+              <>
+                <Button onClick={() => {}}>
+                  <CheckIcon color={Colors.DEFAULT_COLOR} />
+                </Button>
+                <Button onClick={() => setIsEdit(false)}>
+                  <ClearIcon color={Colors.RED} />
+                </Button>
+              </>
+            )}
+          </Box>
+          <Box sx={{ marginBottom: "50px" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}>
+              <Avatar
+                alt="user"
+                src={logo}
+                sx={{ width: 100, height: 100, verticalAlign: "center" }}
+              />
+            </Box>
+
+            <Typography
+              variant="h6"
+              sx={{
+                width: "100%",
+                textAlign: "center",
+                borderBottom: "1px",
+                borderBottomColor: Colors.BLACK,
+              }}></Typography>
+          </Box>
+          <Divider />
+          <Box>
+            <Box sx={{ marginBottom: "10px" }}>
+              <Typography sx={{ color: Colors.BLACK, fontWeight: "700" }}>
                 Email
               </Typography>
-              <Typography sx={{ color: Colors.GRAY }}>
-                {inforDoctor.email}
-              </Typography>
+              <TextField
+                id="email"
+                variant="outlined"
+                value={inforDoctor.email}
+                disabled={!isEdit}
+              />
             </Box>
-            <Box>
-              <Typography
-                sx={{ color: Colors.DEFAULT_COLOR, fontWeight: "700" }}>
+            <Box sx={{ marginBottom: "10px" }}>
+              <Typography sx={{ color: Colors.BLACK, fontWeight: "700" }}>
                 Số điện thoại
               </Typography>
-              <Typography sx={{ color: Colors.GRAY }}>
-                {inforDoctor?.doctor.phone}
-              </Typography>
+              <TextField
+                id="phone"
+                variant="outlined"
+                value={inforDoctor?.doctor.phone}
+                disabled={!isEdit}
+              />
             </Box>
-            <Box>
-              <Typography
-                sx={{ color: Colors.DEFAULT_COLOR, fontWeight: "700" }}>
+            <Box sx={{ marginBottom: "10px" }}>
+              <Typography sx={{ color: Colors.BLACK, fontWeight: "700" }}>
                 Địa chỉ
               </Typography>
-              <Typography sx={{ color: Colors.GRAY }}>
-                {inforDoctor?.doctor.address}
-              </Typography>
+              <TextField
+                id="address"
+                variant="outlined"
+                value={inforDoctor?.doctor.address}
+                disabled={!isEdit}
+              />
             </Box>
           </Box>
-          <Divider />
-          <Box
+        </Box>
+        <Box
+          sx={{
+            width: "40%",
+            display: "flex",
+            flexDirection: "column",
+            backgroundColor: Colors.DEFAULT_LIGHT_COLOR,
+            padding: "30px",
+            borderRadius: "10px",
+            border: "1px solid #f0f1f2",
+            marginRight: "10px",
+          }}>
+          <Typography
             sx={{
-              marginTop: "20px",
+              color: Colors.BLACK,
+              fontWeight: "700",
               marginBottom: "20px",
             }}>
-            <Typography sx={{ color: Colors.DEFAULT_COLOR, fontWeight: "700" }}>
-              Thông tin chi tiết
-            </Typography>
-            <Typography sx={{ color: Colors.GRAY }}>
-              {inforDoctor?.doctor.description}
-            </Typography>
-          </Box>
-          <Divider />
-
-          <Box sx={{ marginTop: "20px" }}>
-            <Typography sx={{ color: Colors.DEFAULT_COLOR, fontWeight: "700" }}>
-              Kinh nghiệm
-            </Typography>
-            {inforDoctor?.doctor.experiences.map((item, index) => {
-              return (
-                <div key={index}>
-                  <Typography sx={{ color: Colors.GRAY }}>{item}</Typography>
-                </div>
-              );
-            })}
-          </Box>
+            Thông tin chi tiết
+          </Typography>
+          <Typography sx={{ color: Colors.BLACK }}>
+            {inforDoctor?.doctor.description}
+          </Typography>
         </Box>
-      </div>
+        <Box
+          sx={{
+            width: "40%",
+            display: "flex",
+            flexDirection: "column",
+            backgroundColor: Colors.DEFAULT_LIGHT_COLOR,
+            padding: "30px",
+            borderRadius: "10px",
+            border: "1px solid #f0f1f2",
+            marginRight: "10px",
+          }}>
+          <Typography
+            sx={{
+              color: Colors.BLACK,
+              fontWeight: "700",
+              marginBottom: "20px",
+            }}>
+            Kinh nghiệm
+          </Typography>
+          {inforDoctor?.doctor.experiences.map((item, index) => {
+            return (
+              <div key={index}>
+                <Typography sx={{ color: Colors.BLACK }}>{item}</Typography>
+              </div>
+            );
+          })}
+        </Box>
+      </Box>
     </Box>
   );
 }
