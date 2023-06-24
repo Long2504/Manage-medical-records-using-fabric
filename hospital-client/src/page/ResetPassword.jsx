@@ -1,19 +1,19 @@
 import { TextField, Button, Box, InputAdornment } from "@mui/material";
 import LockTwoToneIcon from "@mui/icons-material/LockTwoTone";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ResetPassword } from "../redux/action/auth.action";
 import Alert from "@mui/material/Alert";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Colors } from "../constants/Colors";
 import logo from "../assests/image/Logo.png";
 
 function ResetPasswordPage() {
   const [data, setData] = useState({
-    confirmationCode: "",
     newPassword: "",
     rePassword: "",
   });
+  const location = useLocation();
   const [alertShow, setAlertShow] = useState(false);
   const [error, setError] = useState(null);
   const onChange = (e) => {
@@ -22,6 +22,9 @@ function ResetPasswordPage() {
     setData({ ...data, [name]: value });
     console.log(data);
   };
+  useEffect(() => {
+    console.log(location.pathname.split("/")[2]);
+  });
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
@@ -31,17 +34,13 @@ function ResetPasswordPage() {
       setAlertShow(true);
       setError("Mật khẩu không khớp");
     } else {
-      if (
-        data.newPassword === "" ||
-        data.rePassword === "" ||
-        data.confirmationCode === ""
-      ) {
+      if (data.newPassword === "" || data.rePassword === "") {
         setAlertShow(true);
         setError("Vui lòng điền đẩy đủ thông tin");
       } else {
         dispatch(
           ResetPassword({
-            confirmationCode: data.confirmationCode,
+            confirmationCode: location.pathname.split("/")[2],
             newPassword: data.newPassword,
           })
         );
@@ -60,30 +59,7 @@ function ResetPasswordPage() {
           </Alert>
         )}
         <img src={logo} alt="logo" loading="lazy" height={"90px"} />
-        <Box
-          sx={{
-            withPassword: true,
-            width: 400,
-            maxWidth: "100%",
-          }}
-          className="login-page__center__input">
-          <TextField
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <LockTwoToneIcon />
-                </InputAdornment>
-              ),
-            }}
-            fullWidth
-            name="confirmationCode"
-            id="outlined-basic"
-            label="Mã xác nhận"
-            variant="outlined"
-            onChange={(e) => onChange(e)}
-            type="password"
-          />
-        </Box>
+
         <Box
           sx={{
             withPassword: true,

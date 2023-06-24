@@ -18,6 +18,7 @@ function ListMedicalRecord() {
   //  };
   useEffect(() => {
     dispatch(getAllMedicalRecord());
+    console.log(listAllMedicalRecord);
   }, [dispatch]);
 
   return (
@@ -40,20 +41,21 @@ function ListMedicalRecord() {
         <tbody>
           {listAllMedicalRecord.map((item) => {
             return (
-              <tr key={item.key}>
-                <td>{item.key}</td>
-                <td>{item}</td>
-                <td>{item}</td>
-                <td>{item}</td>
-                <td>
-                  <Button
-                    variant="primary"
-                    // onClick={() => handleShow(item)}
-                  >
-                    Xem chi tiết
-                  </Button>
-                </td>
-              </tr>
+              <></>
+              // <tr key={item.key}>
+              //   <td>{item.key}</td>
+              //   <td>{item}</td>
+              //   <td>{item}</td>
+              //   <td>{item}</td>
+              //   <td>
+              //     <Button
+              //       variant="primary"
+              //       // onClick={() => handleShow(item)}
+              //     >
+              //       Xem chi tiết
+              //     </Button>
+              //   </td>
+              // </tr>
             );
           })}
           <tr></tr>

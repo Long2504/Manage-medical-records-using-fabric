@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  FaCalendarAlt,
-  FaUserAlt,
-  FaBoxes,
-  FaKey,
-} from "react-icons/fa";
+import { FaCalendarAlt, FaUserAlt, FaBoxes, FaKey } from "react-icons/fa";
 import { Routes, Route } from "react-router-dom";
 import InforDoctor from "./InforDoctorPage.doctor";
 import SchedulePage from "./SchedulePage.doctor";
@@ -43,7 +38,7 @@ function HomePageDoctor() {
       <div className="home-page-doctor__content">
         <Sidebar menuItem={menuItem}>
           <Routes>
-            <Route path="/" element={<InforDoctor />} />
+            <Route path="/" element={<SchedulePage />} />
             <Route path="/infor" element={<InforDoctor />} />
             <Route path="/schedule" element={<SchedulePage />} />
             <Route path="/medical-record" element={<MedicalRecordPage />} />

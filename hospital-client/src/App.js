@@ -34,7 +34,9 @@ function App() {
       <div className="main">
         <Routes>
           <Route element={<LoginScreen />} path="/login"></Route>
-          <Route element={<ResetPassword />} path="/reset-password"></Route>
+          <Route
+            element={<ResetPassword />}
+            path="/password_reset/:code"></Route>
           <Route
             element={<ForgotPasswordPage />}
             path="/forgot-password"></Route>

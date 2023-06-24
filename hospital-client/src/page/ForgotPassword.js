@@ -3,22 +3,22 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ForgotPassword } from "../redux/action/auth.action";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assests/image/Logo.png";
 
 function ForgotPasswordPage() {
   const [email, setEmail] = useState();
-
+  const [isSendEmail, setIsSendEmail] = useState(false);
   const onChange = (e) => {
     console.log(email);
     setEmail(e.target.value);
   };
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(ForgotPassword(email));
-    navigate("/reset-password");
+    dispatch(ForgotPassword(email)).then(() => {
+      setIsSendEmail(true);
+    });
   };
   return (
     <form className="login-page" type="submit" onSubmit={handleSubmit}>
@@ -50,12 +50,19 @@ function ForgotPasswordPage() {
             onChange={(e) => onChange(e)}
           />
         </Box>
-        <Button
-          className="login-page__center__btn-confirm"
-          variant="contained"
-          type="submit">
-          Nhận mã
-        </Button>
+
+        {!isSendEmail ? (
+          <Button
+            className="login-page__center__btn-confirm"
+            variant="contained"
+            type="submit">
+            Nhận mã
+          </Button>
+        ) : (
+          <Link to="https://mail.google.com/mail" target="_blank">
+            Kiểm tra mail
+          </Link>
+        )}
       </div>
       <div className="login-page__background">
         <svg

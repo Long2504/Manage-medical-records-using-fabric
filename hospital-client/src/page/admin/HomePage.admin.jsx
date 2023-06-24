@@ -1,6 +1,4 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logout } from "../../redux/slice/auth.slice";
+import { Routes, Route } from "react-router-dom";
 import CreateAccountDoctor from "./CreateAccountDoctor.admin";
 import ListDoctorPage from "./ListDoctorPage.admin";
 import ListMedicalRecord from "./ListMedicalRecord.admin";

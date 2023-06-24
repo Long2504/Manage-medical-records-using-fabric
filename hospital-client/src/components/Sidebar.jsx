@@ -202,7 +202,9 @@ export default function Sidebar({ children, menuItem }) {
               </ListItemIcon>
               <ListItemText
                 primary={"Đăng xuất"}
-                sx={{ opacity: open ? 1 : 0 }}
+                sx={{
+                  opacity: open ? 1 : 0,
+                }}
               />
             </ListItemButton>
           </ListItem>

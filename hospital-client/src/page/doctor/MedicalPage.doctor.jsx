@@ -30,7 +30,7 @@ function MedicalRecordPage() {
     setMedicalRecordCurrent(medicalRecord);
     setShow(true);
   };
-  console.log(listMedicalRecord);
+  console.log(medicalRecordCurrent);
   return (
     <div>
       <Typography
@@ -109,14 +109,7 @@ function MedicalRecordPage() {
                   }}>
                   Số điện thoại
                 </p>
-                <p
-                  style={{
-                    color: Colors.DEFAULT_COLOR,
-                    fontWeight: "700",
-                    marginRight: "10px",
-                  }}>
-                  Mô tả của bệnh nhân
-                </p>
+
                 <p
                   style={{
                     color: Colors.DEFAULT_COLOR,
@@ -131,21 +124,13 @@ function MedicalRecordPage() {
                 <p>{medicalRecordCurrent.patient?.dateOfBirth}</p>
                 <p>{medicalRecordCurrent.patient?.address}</p>
                 <p>{medicalRecordCurrent.patient?.phone}</p>
-                <p>Đau bụng</p>
-                <p>{medicalRecordCurrent.medicalRecord?.doctor.name}</p>
+                <p>{medicalRecordCurrent.medicalRecords?.doctor.name}</p>
               </div>
             </div>
           </div>
 
           <div>
-            <p
-              style={{
-                color: Colors.DEFAULT_COLOR,
-                fontWeight: "700",
-                marginRight: "10px",
-              }}>
-              Thông tin bệnh án
-            </p>
+            <p>Thông tin bệnh án</p>
             <div style={{ display: "flex" }}>
               <div>
                 <p
@@ -198,12 +183,12 @@ function MedicalRecordPage() {
                 </p>
               </div>
               <div>
-                <p>{medicalRecordCurrent.medicalRecord?.symptonOfDisease}</p>
-                <p>{medicalRecordCurrent.medicalRecord?.diagosisOfDoctor}</p>
-                <p>{medicalRecordCurrent.medicalRecord?.treatmentProcess}</p>
-                <p>{medicalRecordCurrent.medicalRecord?.diseaseProgression}</p>
-                <p>{medicalRecordCurrent.medicalRecord?.prescription}</p>
-                <p>{medicalRecordCurrent.medicalRecord?.note}</p>
+                <p>{medicalRecordCurrent.medicalRecords?.symptonOfDisease}</p>
+                <p>{medicalRecordCurrent.medicalRecords?.diagosisOfDoctor}</p>
+                <p>{medicalRecordCurrent.medicalRecords?.treatmentProcess}</p>
+                <p>{medicalRecordCurrent.medicalRecords?.diseaseProgression}</p>
+                <p>{medicalRecordCurrent.medicalRecords?.prescription}</p>
+                <p>{medicalRecordCurrent.medicalRecords?.note}</p>
               </div>
             </div>
           </div>
