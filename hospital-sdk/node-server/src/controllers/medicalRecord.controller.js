@@ -6,12 +6,24 @@ import {
 } from "../../../fabric-network/app.js";
 import handleError from "../middleware/error.middewares.js";
 import patientServices from "../services/patient.services.js";
+import { checkFormatId } from "../utils/common.js";
 
 const getAllMedicalRecord = async (req, res) => {
     try {
 
         const medicalRecords = await getAllMedicalRecordsNetwork("admin");
-        res.status(200).send(medicalRecords);
+        const result = [];
+        for (let i = 0; i < medicalRecords.length; i++) {
+            console.log(medicalRecords[i].Record);
+            if (checkFormatId(medicalRecords[i].Record.patientID)) {
+                const patient = await patientServices.getPatientById(
+                    medicalRecords[i].Record.patientID
+                );
+                result.push({ medicalRecords: medicalRecords[i], patient });
+            }
+        }
+
+        res.status(200).send(result);
     } catch (error) {
         handleError(500, error, res);
     }

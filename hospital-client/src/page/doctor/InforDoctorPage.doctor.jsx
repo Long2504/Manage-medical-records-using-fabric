@@ -1,6 +1,6 @@
 import { Avatar, Box, Typography, Divider } from "@mui/material";
 import Auth from "../../utils/helper/auth.helper";
-import logo from "../../assests/image/logo.png";
+import logo from "../../assests/image/Logo.png";
 import { Colors } from "../../constants/Colors";
 
 function InforDoctor() {

@@ -11,7 +11,6 @@ router.post(
 );
 
 
-
 // register account for doctor
 router.post(
     "/doctor/create-account-doctor",
@@ -21,7 +20,6 @@ router.post(
 router.get(
     "/doctor/get-all-doctor",
     authMiddlewares.verifyToken,
-    authMiddlewares.verifyRole("admin"),
     doctorController.getAllDoctor
 )
 

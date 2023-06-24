@@ -30,7 +30,7 @@ const getDoctorByIdUser = async (userId) => {
 };
 
 const getAllDoctor = async () => {
-    const doctor = await Doctor.find().select("-_id -__v").populate({ path: "specialityID", select: "_id name" });
+    const doctor = await Doctor.find().select("-__v").populate({ path: "specialityID", select: "_id name" });
     return doctor;
 };
 

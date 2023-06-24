@@ -42,13 +42,13 @@ function ListMedicalRecord() {
             return (
               <tr key={item.key}>
                 <td>{item.key}</td>
-                <td>{item}</td>
-                <td>{item}</td>
-                <td>{item}</td>
+                <td>{item?.patient?.name}</td>
+                <td>{item.medicalRecords.Record.doctor?.name}</td>
+                <td>{item.medicalRecords.Record.date}</td>
                 <td>
                   <Button
                     variant="primary"
-                    // onClick={() => handleShow(item)}
+                  // onClick={() => handleShow(item)}
                   >
                     Xem chi tiết
                   </Button>

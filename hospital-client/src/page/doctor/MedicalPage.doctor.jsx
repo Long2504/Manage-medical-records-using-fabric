@@ -30,13 +30,13 @@ function MedicalRecordPage() {
     setMedicalRecordCurrent(medicalRecord);
     setShow(true);
   };
-  console.log(listMedicalRecord);
+
   return (
     <div>
       <Typography
         variant="h4"
         sx={{ color: Colors.DEFAULT_COLOR, marginBottom: "20px" }}>
-        Đơn thuốc
+        Hồ sơ bệnh án
       </Typography>
 
       <Table striped bordered hover>
@@ -198,12 +198,12 @@ function MedicalRecordPage() {
                 </p>
               </div>
               <div>
-                <p>{medicalRecordCurrent.medicalRecord?.symptonOfDisease}</p>
-                <p>{medicalRecordCurrent.medicalRecord?.diagosisOfDoctor}</p>
-                <p>{medicalRecordCurrent.medicalRecord?.treatmentProcess}</p>
-                <p>{medicalRecordCurrent.medicalRecord?.diseaseProgression}</p>
-                <p>{medicalRecordCurrent.medicalRecord?.prescription}</p>
-                <p>{medicalRecordCurrent.medicalRecord?.note}</p>
+                <p>{medicalRecordCurrent.medicalRecords?.symptonOfDisease}</p>
+                <p>{medicalRecordCurrent.medicalRecords?.diagosisOfDoctor}</p>
+                <p>{medicalRecordCurrent.medicalRecords?.treatmentProcess}</p>
+                <p>{medicalRecordCurrent.medicalRecords?.diseaseProgression}</p>
+                <p>{medicalRecordCurrent.medicalRecords?.prescription}</p>
+                <p>{medicalRecordCurrent.medicalRecords?.note}</p>
               </div>
             </div>
           </div>

@@ -22,7 +22,7 @@ const checkFieldUpdateDataPatient = async (data) => {
       error: "userID is not valid",
     };
   }
-  const user = await User.findOne({ _id: user });
+  const user = await User.findOne({ _id: userID });
   if (!user) {
     return {
       status: 404,
@@ -34,6 +34,7 @@ const checkFieldUpdateDataPatient = async (data) => {
 
 const updateDataPatient = async (data) => {
   try {
+    console.log(data);
     const patient = new Patient(data);
     return await patient.save();
   } catch (error) {

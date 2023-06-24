@@ -10,10 +10,8 @@ const updateDataPatient = async (req, res) => {
       address: req.body.address,
       userID: req.body.userId,
     }
-
     const errorCheckField = await patientServices.checkFieldUpdateDataPatient(data);
     if (errorCheckField.error) return res.status(errorCheckField.status).send(errorCheckField.error);
-
     const patient = await patientServices.updateDataPatient(data);
     return res.status(200).send(patient);
 
