@@ -1,7 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
-import Auth from '../../utils/helper/auth.helper';
-import { Login } from '../action/auth.action';
-
+import { createSlice } from "@reduxjs/toolkit";
+import Auth from "../../utils/helper/auth.helper";
+import {
+  Login,
+  ForgotPassword,
+  ResetPassword,
+  ChangePassword,
+} from "../action/auth.action";
 
 const initialState = {
   loading: false,
@@ -11,28 +15,57 @@ const initialState = {
 };
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     logout: (state) => {
       Auth.removeInfo();
       state.loggedIn = false;
       state.role = null;
-    }
+    },
   },
   extraReducers(builder) {
-    builder
-      .addCase(Login.pending, (state, action) => {
-        state.loading = true;
-      })
-      .addCase(Login.fulfilled, (state, action) => {
-        state.loading = false;
-        state.loggedIn = true;
-        state.role = Auth.getRole();
-      })
-      .addCase((state, action) => {
-        state.error = action;
-      });
+    builder.addCase(Login.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(Login.fulfilled, (state, action) => {
+      state.loading = false;
+      state.loggedIn = true;
+      state.role = Auth.getRole();
+    });
+    builder.addCase(Login.rejected, (state, action) => {
+      state.error = action;
+    });
+
+    builder.addCase(ForgotPassword.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(ForgotPassword.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(ForgotPassword.rejected, (state, action) => {
+      state.error = action;
+    });
+
+    builder.addCase(ResetPassword.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(ResetPassword.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(ResetPassword.rejected, (state, action) => {
+      state.error = action;
+    });
+
+    builder.addCase(ChangePassword.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(ChangePassword.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(ChangePassword.rejected, (state, action) => {
+      state.error = action;
+    });
   },
 });
 

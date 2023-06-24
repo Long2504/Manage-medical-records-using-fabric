@@ -1,10 +1,10 @@
-import { TextField, Button, Box, InputAdornment, Input } from "@mui/material";
+import { TextField, Button, Box, InputAdornment } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import LockTwoToneIcon from "@mui/icons-material/LockTwoTone";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Login } from "../redux/action/auth.action";
-import { Form, useNavigate } from "react-router-dom";
+import {  NavLink, useNavigate } from "react-router-dom";
 
 function LoginScreen() {
   const [user, setUser] = useState({
@@ -74,7 +74,7 @@ function LoginScreen() {
           />
         </Box>
         <div className="login-page__center__forgot">
-          <a href="/forgot-password">Quên mật khẩu?</a>
+          <NavLink to="/forgot-password">Quên mật khẩu?</NavLink>
         </div>
         <Button
           className="login-page__center__btn-confirm"
