@@ -1,17 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
 import { Provider } from "react-redux";
 import store from "./redux/index.redux";
 import "./assests/sass/index.scss";
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#00867E",
+    },
+    secondary: {
+      main: "#11cb5f",
+    },
+  },
+});
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <React.StrictMode>
+    <ThemeProvider theme={theme}>
       <App />
-
-    </React.StrictMode>
+    </ThemeProvider>
   </Provider>
 );
-
-

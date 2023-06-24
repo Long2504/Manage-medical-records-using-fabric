@@ -1,13 +1,19 @@
-import InputGroup from 'react-bootstrap/InputGroup';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Table from 'react-bootstrap/Table';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { createAccountDoctor, getAllDoctorNotJoinChannel } from '../../redux/action/doctor.action';
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Table from "react-bootstrap/Table";
+import { Box, Typography, TextField } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import {
+  createAccountDoctor,
+  getAllDoctorNotJoinChannel,
+} from "../../redux/action/doctor.action";
+import { Colors } from "../../constants/Colors";
+
 function CreateAccountDoctor() {
-  const { listDoctorNotJoinChannel } = useSelector(state => state.doctorSlice);
+  const { listDoctorNotJoinChannel } = useSelector(
+    (state) => state.doctorSlice
+  );
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -30,12 +36,13 @@ function CreateAccountDoctor() {
     email: "",
     doctorId: "",
   });
-  //handle 
+  //handle
   const handleChoiceDoctor = (doctor) => {
+    console.log("doctor", doctor);
     setDoctorCurrent(doctor);
     setDoctorCreated({ ...doctorCreated, doctorId: doctor._id });
     setShow(false);
-  }
+  };
   const onChange = (e) => {
     var name = e.target.name;
     var value = e.target.value;
@@ -43,68 +50,110 @@ function CreateAccountDoctor() {
   };
   const handleConfirm = () => {
     dispatch(createAccountDoctor(doctorCreated));
-  }
+  };
   //-----------------------
 
   return (
-    <div>
-      <h1>Create Account Doctor</h1>
+    <div style={{ marginTop: "60px" }}>
+      <Typography
+        variant="h4"
+        sx={{
+          color: Colors.DEFAULT_COLOR,
+          marginBottom: "20px",
+          textAlign: "center",
+        }}>
+        Tạo tài khoản bác sĩ
+      </Typography>
       <div>
-        <p>Thông tin tài khoản của bác sĩ</p>
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1">Username</InputGroup.Text>
-          <Form.Control
-            name="username"
-            onChange={(e) => onChange(e)}
-          />
-        </InputGroup>
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
-          <Form.Control
-            name='email'
-            onChange={(e) => onChange(e)}
-          />
-        </InputGroup>
+        <Typography
+          sx={{
+            color: Colors.DEFAULT_COLOR,
+            marginTop: "30px",
+            marginBottom: "10px",
+            fontSize: "20px",
+          }}>
+          Thông tin tài khoản của bác sĩ
+        </Typography>
+        <TextField
+          id="username"
+          label="Tên đăng nhập"
+          name="username"
+          variant="outlined"
+          onChange={(e) => onChange(e)}
+          sx={{ marginRight: "50px", marginBottom: "30px" }}
+        />
+        <TextField
+          id="email"
+          label="Email"
+          name="email"
+          type="email"
+          variant="outlined"
+          onChange={(e) => onChange(e)}
+        />
       </div>
       <div>
-        <p>Thông tin bác sĩ</p>
-        <Button className="mb-3" variant="primary" onClick={() => handleShow()}>Chọn thông tin bác sĩ</Button>
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1">Họ tên</InputGroup.Text>
-          <Form.Control
+        <Typography
+          sx={{
+            color: Colors.DEFAULT_COLOR,
+            fontSize: "20px",
+            marginBottom: "10px",
+          }}>
+          Thông tin bác sĩ
+        </Typography>
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Button
+            className="mb-3"
+            variant="success"
+            onClick={() => handleShow()}>
+            Chọn thông tin bác sĩ
+          </Button>
+          <TextField
+            sx={{ marginBottom: "20px" }}
+            id="doctorname"
+            label="Họ tên"
+            variant="outlined"
             value={doctorCurrent.name}
           />
-        </InputGroup>
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1">Chuyên khoa</InputGroup.Text>
-          <Form.Control
+          <TextField
+            sx={{ marginBottom: "20px" }}
+            id="speciality"
+            label="Chuyên khoa"
+            variant="outlined"
             value={doctorCurrent.specialityID.name}
           />
-        </InputGroup>
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1">Số điện thoại</InputGroup.Text>
-          <Form.Control
+          <TextField
+            sx={{ marginBottom: "20px" }}
+            id="phone"
+            label="Số điện thoại"
+            variant="outlined"
             value={doctorCurrent.phone}
           />
-        </InputGroup>
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1">Thông tin chi tiết</InputGroup.Text>
-          <Form.Control as="textarea" aria-label="With textarea"
+          <TextField
+            sx={{ marginBottom: "20px" }}
+            id="description"
+            label="Thông tin chi tiết"
+            multiline
+            rows={5}
+            variant="outlined"
             value={doctorCurrent.description}
           />
-        </InputGroup>
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1">Kinh nghiệm</InputGroup.Text>
-          <Form.Control
-            as="textarea" aria-label="With textarea" value={doctorCurrent.experiences} />
-        </InputGroup>
+          <TextField
+            sx={{ marginBottom: "20px" }}
+            id="experiences"
+            label="Kinh nghiệm"
+            multiline
+            rows={5}
+            variant="outlined"
+            value={doctorCurrent.experiences}
+          />
+        </Box>
       </div>
       <div>
-        <Button variant="primary" type="submit" onClick={() => handleConfirm()}>
+        <Button variant="success" type="submit" onClick={() => handleConfirm()}>
           Tạo tài khoản
         </Button>
       </div>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} className="pt-5">
         <Modal.Header closeButton>
           <Modal.Title>Danh sách các bác sĩ</Modal.Title>
         </Modal.Header>
@@ -122,27 +171,25 @@ function CreateAccountDoctor() {
                 </tr>
               </thead>
               <tbody>
-                {
-                  listDoctorNotJoinChannel.map((item, index) => {
-                    return (
-                      <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>{item.name}</td>
-                        <td>{item.phone}</td>
-                        <td>{item.specialityID.name}</td>
-                        <td>
-                          <Button variant="primary" onClick={() => handleChoiceDoctor(item)}>
-                            Chọn
-                          </Button>
-                        </td>
-                      </tr>
-                    )
-                  })
-                }
-                <tr>
-                </tr>
+                {listDoctorNotJoinChannel.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.name}</td>
+                      <td>{item.phone}</td>
+                      <td>{item.specialityID.name}</td>
+                      <td>
+                        <Button
+                          variant="success"
+                          onClick={() => handleChoiceDoctor(item)}>
+                          Chọn
+                        </Button>
+                      </td>
+                    </tr>
+                  );
+                })}
+                <tr></tr>
               </tbody>
-
             </Table>
           </div>
         </Modal.Body>
@@ -153,7 +200,7 @@ function CreateAccountDoctor() {
         </Modal.Footer>
       </Modal>
     </div>
-  )
+  );
 }
 
-export default CreateAccountDoctor
+export default CreateAccountDoctor;
