@@ -1,6 +1,7 @@
 ####
 //no update yet
-POST http://localhost:8080/api/speciality/create HTTP/1.1
+# POST http://localhost:8080/api/speciality/create HTTP/1.1
+POST http://20.0.246.105:8081/api/speciality/create HTTP/1.1
 Content-Type: application/json
 
 {
@@ -8,8 +9,9 @@ Content-Type: application/json
 }
 
 #### GET ALL SPECIALITIES ####
-GET http://localhost:8081/api/speciality/get-all HTTP/1.1
+# GET http://localhost:8081/api/speciality/get-all HTTP/1.1
+GET http://20.0.246.105:8081/api/speciality/get-all HTTP/1.1
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NzZjZmY0OWE0OTU4MWIzMDUwZGE0NCIsImlhdCI6MTY4NjgwMjU3MCwiZXhwIjoxNjg2ODg4OTcwfQ.N3CP_gX2mA8naoC7R12-6kiK1G72hvI3oMBufQKkG20
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NzZjZmY0OWE0OTU4MWIzMDUwZGE0NCIsImlhdCI6MTY4Njk4Mzg0MSwiZXhwIjoxNjg3MDcwMjQxfQ.6AgudJzcOV7yPXmfhFDyA25HcPztSWDh12Dqxnv2hw8
 
 

@@ -50,8 +50,29 @@ const getUserByUserName = async (userName) => {
     console.error(error);
   }
 };
+
+const updateAccountDoctor = async (data) => {
+  try {
+    const user = await User.findOne({ username: data.username });
+    if (user) {
+      const userUpdate = await User.findByIdAndUpdate(user._id, {
+        email: data.email,
+      });
+      return userUpdate;
+    }
+    return {
+      status: 404,
+      error: "User is not found",
+    }
+
+  }
+  catch (error) {
+    console.error(error);
+  }
+};
 export default {
   getUserByUserName,
   createUser,
   checkUser,
+  updateAccountDoctor
 };

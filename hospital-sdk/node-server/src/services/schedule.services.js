@@ -355,8 +355,6 @@ const handleAndUpdateScheduleDocTor = async (
     }
 };
 
-
-
 const getAppointmentScheduleByDoctor = async (doctorId, Date) => {
     try {
         const scheduleDoctor = await AppointmentSchedule.find({

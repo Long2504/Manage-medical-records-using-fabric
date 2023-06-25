@@ -1,13 +1,26 @@
-###
-POST http://localhost:8080/api/admin/create-account-doctor
+### create account admin
+POST http://45.32.28.204:8081/api/admin/create-account-admin HTTP/1.1
 Content-Type: application/json
 
 {
-  "username": "doctor",
+  "username": "admin",
+  "email": "thanhlong25042001@gmail.com"
+}
+
+
+
+###
+POST http://45.32.28.204:8081/api/admin/doctor/create-account-doctor
+Content-Type: application/json
+
+{
+  "username": "doctor12345",
+  "email": "123456@gmail.com",
+  "doctorId":"647f0f9c56926b0f05f07ed4"
 }
 
 ###
-POST http://localhost:8081/api/admin/get-all-medical-record HTTP/1.1
+GET http://45.32.28.204:8081/api/medical-record/get-all HTTP/1.1
 Content-Type: application/json
 
 {
@@ -22,4 +35,31 @@ Content-Type: application/json
 {
   "specialtyId": "123123"
 }
+###
+// get all doctor
+GET http://45.32.28.204:8081/api/admin/doctor/get-all-doctor HTTP/1.1
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6eyJzdGF0dXMiOiJBY3RpdmUiLCJyb2xlcyI6ImFkbWluIiwiX2lkIjoiNjQ5MTA3ODA1ZmY2ODY2Y2ViMTNmOGNkIiwidXNlcm5hbWUiOiJhZG1pbiIsImVtYWlsIjoidGhhbmhsb25nMjUwNDIwMDFAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmEkMDgkUHlTLnVUZTlkR05aV0FudEVZZ3oxLnNsNE5vQlB1QmhMQW1qbTRrN1RvTmNSOXBNQ2x5S3EiLCJfX3YiOjB9LCJpYXQiOjE2ODcyMjkyMTksImV4cCI6MTY4NzMxNTYxOX0.Zg_mkDe5C2qdbrTgyxg6iYh26L5fIxznr72cEBs4hXk
 
+
+
+###
+// get all doctor not join channel
+GET http://45.32.28.204:8081/api/admin/doctor/get-doctor-not-join-channel HTTP/1.1
+Content-Type: application/json
+
+
+###
+// get all account doctor
+GET http://45.32.28.204:8081/api/admin/doctor/get-all-account-doctor HTTP/1.1
+Content-Type: application/json
+
+###
+// update account doctor
+POST http://45.32.28.204:8081/api/admin/doctor/update-account-doctor HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "qwerwqe",
+  "email": "aaa@gmail.com"
+}

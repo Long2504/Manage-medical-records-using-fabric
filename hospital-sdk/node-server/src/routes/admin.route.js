@@ -2,6 +2,7 @@ import { Router } from "express";
 import adminController from "../controllers/admin.controller.js";
 import doctorController from "../controllers/doctor.controller.js";
 import authMiddlewares from "../middleware/auth.middlewares.js";
+import authController from "../controllers/auth.controller.js";
 
 const router = Router();
 // register account for admin
@@ -15,6 +16,11 @@ router.post(
 router.post(
     "/doctor/create-account-doctor",
     adminController.createAccountDoctor
+);
+// get all account doctor
+router.get(
+    "/doctor/get-all-account-doctor",
+    doctorController.getAllAccountDoctor
 );
 //get all doctor
 router.get(
@@ -30,6 +36,12 @@ router.get(
     // authMiddlewares.verifyRole("admin"),
     doctorController.getDoctorNotJoinChannel
 )
+
+// update account doctor
+router.post(
+    "/doctor/update-account-doctor",
+    authController.updateAccountDoctor,
+);
 
 
 export default router;

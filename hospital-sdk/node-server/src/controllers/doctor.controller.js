@@ -30,6 +30,34 @@ const createDoctor = async (req, res) => {
     }
 };
 
+const updateDoctor = async (req, res) => {
+    try {
+        const doctor = {
+            name: req.body.name,
+            phone: req.body.phone,
+            address: req.body.address,
+            description: req.body.description,
+            certifications: req.body.certifications,
+            experiences: req.body.experiences,
+        };
+        const doctorID = req.body._id;
+        if (!doctorID)
+            return res.status(400).send({
+                message: "doctorID is required",
+            });
+        // check speciality in correct format mongo
+        if (!mongoose.Types.ObjectId.isValid(doctorID))
+            return res.status(400).send({
+                message: "doctorID is not correct format",
+            });
+        const doctorUpdate = await doctorServices.updateProfileDoctor(doctorID, doctor);
+        return res.status(200).send(doctorUpdate);
+    } catch (error) {
+        handleError(500, error, res);
+    }
+};
+
+
 const initDoctor = async (req, res) => {
     try {
         const specialities = await Speciality.find();
@@ -279,6 +307,15 @@ const getAllDoctor = async (req, res) => {
     }
 };
 
+const getAllAccountDoctor = async (req, res) => {
+    try {
+        const doctors = await doctorServices.getAllAccountDoctor();
+        res.status(200).send(doctors);
+    } catch (error) {
+        handleError(500, error, res);
+    }
+}
+
 const getDoctorNotJoinChannel = async (req, res) => {
     try {
         const doctors = await doctorServices.getDoctorNotJoinChannel();
@@ -288,6 +325,16 @@ const getDoctorNotJoinChannel = async (req, res) => {
     }
 };
 
+const getDoctorById = async (req, res) => {
+    try {
+        const doctor = await doctorServices.getDoctorById(req.body.doctorID);
+        return res.status(200).send(doctor);
+
+    } catch (error) {
+        handleError(500, error, res);
+    }
+
+};
 const getScheduleOfDoctorByDate = async (req, res) => {
     try {
         const listSchedule = await scheduleServices.getAppointmentScheduleByDoctor(req.body.doctorID, req.body.date);
@@ -307,5 +354,8 @@ export default {
     getAllDoctor,
     getDoctorNotJoinChannel,
     createMedicalRecordWithTest,
-    getScheduleOfDoctorByDate
+    getScheduleOfDoctorByDate,
+    updateDoctor,
+    getDoctorById,
+    getAllAccountDoctor,
 };

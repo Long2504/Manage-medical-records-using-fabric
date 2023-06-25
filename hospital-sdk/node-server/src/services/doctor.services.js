@@ -20,7 +20,7 @@ const getDoctorByIdSpeciality = async (specialityId) => {
 };
 
 const getDoctorById = async (doctorId) => {
-    const doctor = await Doctor.findOne({ doctorID: doctorId }).select("-_id -__v").populate({ path: "specialityID", select: "_id name" });
+    const doctor = await Doctor.findOne({ _id: doctorId }).select("-_id -__v").populate({ path: "specialityID", select: "_id name" });
     return doctor;
 };
 
@@ -31,6 +31,11 @@ const getDoctorByIdUser = async (userId) => {
 
 const getAllDoctor = async () => {
     const doctor = await Doctor.find().select("-__v").populate({ path: "specialityID", select: "_id name" });
+    return doctor;
+};
+
+const getAllAccountDoctor = async () => {
+    const doctor = await Doctor.find({ joinedChannel: true }).select("-description -experiences -certifications -__v").populate({ path: "specialityID", select: "_id name" }).populate({ path: "user", select: "_id email username" });
     return doctor;
 };
 
@@ -53,6 +58,16 @@ const updateIdUserOfDoctor = async (doctorId, idUser) => {
 const updateJoinedChannel = async (doctorId, joinedChannel) => {
     const doctor = await Doctor.findOneAndUpdate({ _id: doctorId }, { joinedChannel: joinedChannel });
     return doctor;
+};
+
+const updateProfileDoctor = async (doctorId, data) => {
+    try {
+        const doctor = await Doctor.findByIdAndUpdate({ _id: doctorId }, data, { new: true }).select("-__v").populate({ path: "specialityID", select: "_id name" });
+        return doctor;
+    } catch (error) {
+        console.error(error);
+        throw new Error(error);
+    }
 };
 
 const checkFieldOfCreateMedicordRecord = async (doctorId, patientId) => {
@@ -93,5 +108,7 @@ export default {
     getDoctorNotJoinChannel,
     updateIdUserOfDoctor,
     updateJoinedChannel,
-    checkFieldOfCreateMedicordRecord
+    updateProfileDoctor,
+    checkFieldOfCreateMedicordRecord,
+    getAllAccountDoctor
 };

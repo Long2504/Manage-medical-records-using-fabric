@@ -1,16 +1,17 @@
+//create medical record
 ###
-POST http://localhost:8081/api/doctor/create-medical-record
+POST http://45.32.28.204:8081/api/doctor/create-medical-record
 Content-Type: application/json
 
 {
-  "patientID": "123452131212",
-  "doctorID": "long",
-  "symptonOfDisease": "Khó thở (triệu chứng)",
-  "diagosisOfDoctor": "Bệnh nhân bị viêm phổi (chuẩn đoán của bác sĩ)",
-  "treatmentProcess": "Quá trình điều trị",
-  "diseaseProgression": "Tiến trình bệnh",
-  "prescription": "Đơn thuốc",
-  "note": "Ghi chú"
+    "patientID": "649024b1a50a7a36982b5999",
+    "doctorID": "647f0f9c56926b0f05f07ed4",
+    "symptonOfDisease": "",
+    "diagosisOfDoctor": "",
+    "treatmentProcess": "",
+    "diseaseProgression": "",
+    "prescription": "",
+    "note": ""
 }
 
 ### update medical record
@@ -37,11 +38,60 @@ Content-Type: application/json
   "doctorID": "long"
 }
 
+### update test and photo record
+POST http://localhost:8081/api/doctor/update-test-and-photo-record
+Content-Type: application/json
+
+{
+  "medicalRecordID": "MR1686712604278",
+  "testResult": "Kết quả xét nghiệm",
+  "photoResult": "Kết quả chụp X-quang"
+}
+
 ### get doctors by speciality
 POST http://localhost:8081/api/doctor/get-doctors-by-speciality
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NzZjZmY0OWE0OTU4MWIzMDUwZGE0NCIsImlhdCI6MTY4NjgwMjU3MCwiZXhwIjoxNjg2ODg4OTcwfQ.N3CP_gX2mA8naoC7R12-6kiK1G72hvI3oMBufQKkG20
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NzZjZmY0OWE0OTU4MWIzMDUwZGE0NCIsImlhdCI6MTY4Njk4NTUxOCwiZXhwIjoxNjg3MDcxOTE4fQ.TAQvMlrj_yx4cvzJjTeXdiAAUNoS8md_jCCZjjSbZ-Q
 
 {
   "specialtyId": "647ee9e5aee1ff0c2b4ded1a"
+}
+
+### get schedule of doctor by date
+POST http://45.32.28.204:8081/api/doctor/get-schedule-doctor HTTP/1.1
+Content-Type: application/json
+
+{
+  "doctorID": "64532f139ec3cad23c35c889",
+  "date": "2021-05-01"
+}
+
+
+### get doctor by id
+POST http://45.32.28.204:8081/api/doctor/get-doctor-by-id HTTP/1.1
+Content-Type: application/json
+
+{
+  "doctorID": "647f0f9c56926b0f05f07ece"
+}
+
+
+### update doctor by id
+POST http://45.32.28.204:8081/api/doctor/update-doctor HTTP/1.1
+Content-Type: application/json
+
+{
+  "_id": "647f0f9c56926b0f05f07ece",
+  "certifications": [],
+  "experiences": [
+    "Khoa Hồi sức cấp cứu - Bệnh viện Công cộng",
+    "Phòng khám Quốc tế Family Medical thành phố Hồ Chí Minh",
+    "Bệnh viện Gregorio Maranon, Madrid, Tây Ban Nha",
+    "Bệnh viện Đa khoa Quốc tế Vinmec - Cơ sở Phú Quốc "
+  ],
+  "joinedChannel": true,
+  "name": "Bác sĩ Moreyra Francisco Carlos",
+  "phone": "123",
+  "address": "Đà Nẵng1",
+  "description": "Bác sĩ Carlos đã có 23 năm kinh nghiệm điều trị các bệnh lý về tim mạch.\nHiện bác sĩ đang là Bác sĩ Nội tim mạch -  Khoa Khám bệnh và Nội khoa - Bệnh viện Đa khoa Quốc tế Vinmec Nha Trang."
 }

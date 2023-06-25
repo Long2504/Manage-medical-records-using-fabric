@@ -7,7 +7,7 @@ import { randomBytes } from "crypto";
 import handleError from "../middleware/error.middewares.js";
 import doctorServices from "../services/doctor.services.js";
 import patientServices from "../services/patient.services.js";
-
+import authServices from "../services/auth.services.js";
 // register a new user
 const signup = async (req, res) => {
     try {
@@ -125,10 +125,32 @@ const resetPassword = async (req, res) => {
     }
 };
 
+//update gmail for account doctor
+const updateAccountDoctor = async (req, res) => {
+    try {
+        const username = req.body.username;
+        const email = req.body.email;
+        console.log(username, email);
+        if (!username || !email) {
+            return res.status(400).send({ message: "Username or email is empty" });
+        }
+        const userUpdate = authServices.updateAccountDoctor({ username: username, email: email });
+        if (userUpdate.error) {
+            return res.status(userUpdate.status).send({ message: userUpdate.error });
+        }
+        return res.status(200).send({ message: "Update account success" });
+
+    }
+    catch (error) {
+        handleError(500, error, res);
+    }
+};
+
 export default {
     signup,
     signin,
     verifyUser,
     forgotPassword,
     resetPassword,
+    updateAccountDoctor
 };
