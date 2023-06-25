@@ -1,21 +1,23 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Table from "react-bootstrap/Table";
-import Spinner from "react-bootstrap/Spinner";
 import { Box, Typography, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   createAccountDoctor,
   getAllDoctorNotJoinChannel,
 } from "../../redux/action/doctor.action";
 import { Colors } from "../../constants/Colors";
 
-function CreateAccountDoctor() {
-  const state = useSelector((state) => state);
-  const { listDoctorNotJoinChannel } = state.doctorSlice;
-  const navigate = useNavigate();
+function UpdateAccountDoctor() {
+  const location = useLocation();
+  console.log(location.pathname.split("/")[2]);
+  const { listDoctorNotJoinChannel } = useSelector(
+    (state) => state.doctorSlice
+  );
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllDoctorNotJoinChannel());
@@ -60,18 +62,9 @@ function CreateAccountDoctor() {
     setDoctorCreated({ ...doctorCreated, [name]: value });
   };
   const handleConfirm = () => {
-    if (doctorCreated.name === "" || doctorCreated.email === "") {
-      setError("Vui lòng nhập đầy đủ thông tin");
-    } else {
-      dispatch(createAccountDoctor(doctorCreated)).then((res) => {
-        if (res.error.message) {
-          setError("Tên đăng nhập đã tồn tại");
-        } else {
-          navigate("/");
-        }
-      });
-    }
+    dispatch(createAccountDoctor(doctorCreated));
   };
+  //-----------------------
 
   return (
     <div style={{ marginTop: "60px" }}>
@@ -179,16 +172,8 @@ function CreateAccountDoctor() {
         </Box>
       </div>
       <div>
-        <Button
-          variant="success"
-          type="submit"
-          onClick={() => handleConfirm()}
-          style={{ width: "150px" }}>
-          {state.doctorSlice.loading ? (
-            <Spinner animation="border" variant="light" size="sm" />
-          ) : (
-            "Tạo tài khoản"
-          )}
+        <Button variant="success" type="submit" onClick={() => handleConfirm()}>
+          Tạo tài khoản
         </Button>
       </div>
       <Modal show={show} onHide={handleClose} className="pt-5">
@@ -241,4 +226,4 @@ function CreateAccountDoctor() {
   );
 }
 
-export default CreateAccountDoctor;
+export default UpdateAccountDoctor;

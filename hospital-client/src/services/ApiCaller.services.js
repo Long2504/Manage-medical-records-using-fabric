@@ -3,10 +3,14 @@ import { LOCAL } from "../utils/constants";
 import Auth from "../utils/helper/auth.helper";
 
 export const ApiCaller = (method, body, endpoint) => {
+  const headers = getHeader();
+  console.log("body", body);
+  console.log("headers", headers);
+  console.log("method", method);
   return axios({
     method: method,
     url: `http://45.32.28.204:8081/api/${endpoint}`,
-    headers: getHeader(),
+    headers: headers,
     data: body,
     withCredentials: true,
   });

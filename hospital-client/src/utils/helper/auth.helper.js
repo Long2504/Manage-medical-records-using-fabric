@@ -27,7 +27,7 @@ Auth.getInfo = () => {
 
 Auth.getIdDoctor = () => {
   const info = localStorage.getItem(LOCAL.INFO);
-  return info ? JSON.parse(info).doctor._id : null;
+  return info ? JSON.parse(info).doctor?._id : null;
 };
 Auth.getNameDoctor = () => {
   const info = localStorage.getItem(LOCAL.INFO);

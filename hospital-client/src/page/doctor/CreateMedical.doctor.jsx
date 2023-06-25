@@ -18,7 +18,7 @@ function CreateMedical() {
   const doctorName = Auth.getNameDoctor();
   const dispatch = useDispatch();
   const [medicalRecord, setMedicalRecord] = useState({
-    patientID: location.state.patient?._id,
+    patientID: location.state?.patient?._id,
     doctorID: doctorId,
     symptonOfDisease: "",
     diagosisOfDoctor: "",
@@ -36,6 +36,7 @@ function CreateMedical() {
   };
 
   const handleCreateMedicalRecord = () => {
+    console.log("medicalRecord1", medicalRecord);
     dispatch(createMedicalRecord(medicalRecord)).then(() => {
       navigate("/schedule");
     });

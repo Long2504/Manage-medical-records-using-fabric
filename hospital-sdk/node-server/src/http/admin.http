@@ -14,9 +14,9 @@ POST http://45.32.28.204:8081/api/admin/doctor/create-account-doctor
 Content-Type: application/json
 
 {
-  "username": "doctor12345",
-  "email": "123456@gmail.com",
-  "doctorId":"647f0f9c56926b0f05f07ed4"
+  "username": "doctor123451xds1",
+  "email": "suongphandsffsxd3@gmail.com",
+  "doctorId":"647f0f9e56926b0f05f07efe"
 }
 
 ###

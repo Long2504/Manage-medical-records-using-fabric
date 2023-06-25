@@ -8,21 +8,32 @@ import { useEffect, useState } from "react";
 import { getMedicalRecordByIdDoctor } from "../../redux/action/medicalRecord.action";
 import Auth from "../../utils/helper/auth.helper";
 import { Colors } from "../../constants/Colors";
+import { searchRecordByDoctor } from "../../redux/slice/medicalRecord.slice";
 
 function MedicalRecordPage() {
   const dispatch = useDispatch();
   const idDoctor = Auth.getIdDoctor();
-  const { listMedicalRecord } = useSelector(
+  const { listMedicalRecord, filterMedicalRecord } = useSelector(
     (state) => state.medicalRecordSlice
   );
-
+  console.log("listMedicalRecord", listMedicalRecord);
+  console.log(filterMedicalRecord);
+  const [search, setSearch] = useState("");
+  const changeSearch = (e) => {
+    setSearch(e.target.value);
+  };
   useEffect(() => {
-    dispatch(
-      getMedicalRecordByIdDoctor({
-        doctorID: idDoctor,
-      })
-    );
-  }, [dispatch]);
+    const getRecordByDoctor = async () => {
+      await dispatch(
+        getMedicalRecordByIdDoctor({
+          doctorID: idDoctor,
+        })
+      );
+      dispatch(searchRecordByDoctor(search));
+    };
+    getRecordByDoctor();
+  }, [search, dispatch]);
+
   const [show, setShow] = useState(false);
   const [medicalRecordCurrent, setMedicalRecordCurrent] = useState({});
   const handleClose = () => setShow(false);
@@ -37,7 +48,24 @@ function MedicalRecordPage() {
         sx={{ color: Colors.DEFAULT_COLOR, marginBottom: "20px" }}>
         Hồ sơ bệnh án
       </Typography>
-
+      <input
+        placeholder="Tìm kiếm"
+        onChange={changeSearch}
+        type="text"
+        value={search}
+        style={{
+          marginBottom: "10px",
+          padding: "5px",
+          width: "100%",
+          height: "40px",
+          border: "1px solid",
+          borderColor: Colors.GRAY,
+          borderRadius: "5px",
+          ":focus": {
+            borderColor: Colors.DEFAULT_COLOR,
+          },
+        }}
+      />
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -49,7 +77,7 @@ function MedicalRecordPage() {
           </tr>
         </thead>
         <tbody>
-          {listMedicalRecord.map((item, index) => {
+          {filterMedicalRecord.map((item, index) => {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>
@@ -119,11 +147,21 @@ function MedicalRecordPage() {
                 </p>
               </div>
               <div>
-                <p>{medicalRecordCurrent.patient?.name}</p>
-                <p>{medicalRecordCurrent.patient?.dateOfBirth}</p>
-                <p>{medicalRecordCurrent.patient?.address}</p>
-                <p>{medicalRecordCurrent.patient?.phone}</p>
-                <p>{medicalRecordCurrent.medicalRecords?.doctor.name}</p>
+                <p style={{ height: "24px" }}>
+                  {medicalRecordCurrent.patient?.name}
+                </p>
+                <p style={{ height: "24px" }}>
+                  {medicalRecordCurrent.patient?.dateOfBirth}
+                </p>
+                <p style={{ height: "24px" }}>
+                  {medicalRecordCurrent.patient?.address}
+                </p>
+                <p style={{ height: "24px" }}>
+                  {medicalRecordCurrent.patient?.phone}
+                </p>
+                <p style={{ height: "24px" }}>
+                  {medicalRecordCurrent.medicalRecords?.doctor?.name}
+                </p>
               </div>
             </div>
           </div>
@@ -182,12 +220,24 @@ function MedicalRecordPage() {
                 </p>
               </div>
               <div>
-                <p>{medicalRecordCurrent.medicalRecords?.symptonOfDisease}</p>
-                <p>{medicalRecordCurrent.medicalRecords?.diagosisOfDoctor}</p>
-                <p>{medicalRecordCurrent.medicalRecords?.treatmentProcess}</p>
-                <p>{medicalRecordCurrent.medicalRecords?.diseaseProgression}</p>
-                <p>{medicalRecordCurrent.medicalRecords?.prescription}</p>
-                <p>{medicalRecordCurrent.medicalRecords?.note}</p>
+                <p style={{ height: "24px" }}>
+                  {medicalRecordCurrent.medicalRecords?.symptonOfDisease}
+                </p>
+                <p style={{ height: "24px" }}>
+                  {medicalRecordCurrent.medicalRecords?.diagosisOfDoctor}
+                </p>
+                <p style={{ height: "24px" }}>
+                  {medicalRecordCurrent.medicalRecords?.treatmentProcess}
+                </p>
+                <p style={{ height: "24px" }}>
+                  {medicalRecordCurrent.medicalRecords?.diseaseProgression}
+                </p>
+                <p style={{ height: "24px" }}>
+                  {medicalRecordCurrent.medicalRecords?.prescription}
+                </p>
+                <p style={{ height: "24px" }}>
+                  {medicalRecordCurrent.medicalRecords?.note}
+                </p>
               </div>
             </div>
           </div>
