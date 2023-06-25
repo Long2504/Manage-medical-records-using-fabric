@@ -250,8 +250,7 @@ const updateMedicalRecordWithTestAndPhoto = async (req, res) => {
 
 const getDoctorsBySpeciality = async (req, res) => {
     try {
-        const specialityID = req.body.specialtyId;
-        console.log(specialityID);
+        const specialityID = req.body.specialtyID;
         if (!specialityID)
             return res.status(400).send({
                 message: "SpecialityID is required",

@@ -18,7 +18,8 @@ export const getUniqueElement = (array1, array2) => {
 };
 
 export const checkFormatDate = (dateString) => {
-    return moment(dateString, "DD-MM-YYYY", true).isValid();
+    // return moment(dateString, "DD-MM-YYYY", true).isValid();
+    return moment(dateString, "YYYY-MM-DD", true).isValid();
 };
 
 export const checkFormatTime = (time) => {

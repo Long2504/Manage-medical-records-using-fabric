@@ -31,6 +31,12 @@ const arrayTimeBoolean = [
     false,
     false,
     false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
 ];
 
 const getIndexOfArrayTime = (time) => {
@@ -74,26 +80,26 @@ const checkCreateScheduleBySpeciality = async (specialityId, Date, Time, patient
         if (!checkFormatId(specialityId) || !checkFormatId(patientID)) {
             return {
                 status: 400,
-                message: "SpecialityID or patientID is not valid",
+                error: "SpecialityID or patientID is not valid",
             };
         }
         if (!checkFormatTime(Time)) {
             return {
                 status: 400,
-                message: "Time is not valid",
+                error: "Time is not valid",
             };
         }
         if (!checkFormatDate(Date)) {
             return {
                 status: 400,
-                message: "Date is not valid",
+                error: "Date is not valid",
             };
         }
         return false;
     }
     return {
         status: 400,
-        message: "Field is empty",
+        error: "Field is empty",
     }
 
 };
@@ -136,14 +142,38 @@ const getScheduleBySpeciality = async (specialityId, Date) => {
 
 //get schedule by doctorID
 const getScheduleByDoctor = async (doctorId, Date) => {
-    const scheduleDoctor = await ScheduleDoctor.findOne({
-        doctorID: doctorId,
-        appointmentDate: Date,
-    });
-    //if doctor have not schedule => return arrayTime (full schedule)
-    if (!scheduleDoctor) return false;
-    return handleTimeFromDB(scheduleDoctor.appointmentTime);
+    try {
+        const scheduleDoctor = await ScheduleDoctor.findOne({
+            doctorID: doctorId,
+            appointmentDate: Date,
+        });
+        console.log(scheduleDoctor, "scheduleDoctor");
+        //if doctor have not schedule => return arrayTime (full schedule)
+        if (!scheduleDoctor) return false;
+        return handleTimeFromDB(scheduleDoctor.appointmentTime);
+    } catch (error) {
+        console.log(error, "getScheduleByDoctor error");
+    }
 };
+
+const getScheduleOfDoctor = async (doctorId, Date) => {
+
+    try {
+        const scheduleDoctor = await ScheduleDoctor.findOne({
+            doctorID: doctorId,
+            appointmentDate: Date,
+        });
+        //if doctor have not schedule => return arrayTime (full schedule)
+        if (!scheduleDoctor) return false;
+        return {
+            appointmentTime: scheduleDoctor.appointmentTime,
+            id: scheduleDoctor._id,
+        };
+    } catch (error) {
+        console.log(error, "getScheduleByDoctor error");
+    }
+};
+
 
 // check if doctor have schedule empty in speciality => return true
 const handleTimeFromDB = (times) => {
@@ -306,6 +336,27 @@ const handleAndCreateScheduleDocTor = async (
     }
 };
 
+const handleAndUpdateScheduleDocTor = async (
+    id,
+    appoinmentTimeArray,
+    appoinmentTime,
+) => {
+    try {
+        const index = getIndexOfArrayTime(appoinmentTime.toString());
+        appoinmentTimeArray[index] = true;
+        await ScheduleDoctor.findByIdAndUpdate(id, {
+            $set: {
+                appointmentTime: appoinmentTimeArray,
+            },
+        });
+    }
+    catch (error) {
+        console.error(error, "error in handleAndUpdateScheduleDocTor");
+    }
+};
+
+
+
 const getAppointmentScheduleByDoctor = async (doctorId, Date) => {
     try {
         const scheduleDoctor = await AppointmentSchedule.find({
@@ -336,10 +387,12 @@ const getAppointmentScheduleByDoctor = async (doctorId, Date) => {
 export default {
     getScheduleBySpeciality,
     getScheduleByDoctor,
+    getScheduleOfDoctor,
     createDoctorSchedule,
     createOrUpdateScheduleDoctor,
     createAppointmentSchedule,
     handleAndCreateScheduleDocTor,
+    handleAndUpdateScheduleDocTor,
     checkCreateScheduleBySpeciality,
     getAppointmentScheduleByDoctor,
 };

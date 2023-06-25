@@ -36,7 +36,7 @@ function InforPatient() {
           }}>
           Họ tên:
         </Typography>
-        <Typography sx={{ color: Colors.GRAY, fontSize: "20px" }}>
+        <Typography sx={{ color: Colors.BLACK, fontSize: "20px" }}>
           {patient.name}
         </Typography>
       </Box>
@@ -51,7 +51,7 @@ function InforPatient() {
           }}>
           Ngày sinh:
         </Typography>
-        <Typography sx={{ color: Colors.GRAY, fontSize: "20px" }}>
+        <Typography sx={{ color: Colors.BLACK, fontSize: "20px" }}>
           {patient.dateOfBirth}
         </Typography>
       </Box>
@@ -66,7 +66,7 @@ function InforPatient() {
           }}>
           Điện thoại:
         </Typography>
-        <Typography sx={{ color: Colors.GRAY, fontSize: "20px" }}>
+        <Typography sx={{ color: Colors.BLACK, fontSize: "20px" }}>
           {patient.phone}
         </Typography>
       </Box>
@@ -81,7 +81,7 @@ function InforPatient() {
           }}>
           Địa chỉ:
         </Typography>
-        <Typography sx={{ color: Colors.GRAY, fontSize: "20px" }}>
+        <Typography sx={{ color: Colors.BLACK, fontSize: "20px" }}>
           {patient.address}
         </Typography>
       </Box>

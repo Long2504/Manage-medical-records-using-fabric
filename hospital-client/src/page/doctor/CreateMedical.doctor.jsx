@@ -1,5 +1,5 @@
 import Button from "react-bootstrap/Button";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { useDispatch } from "react-redux";
@@ -11,13 +11,14 @@ import { Colors } from "../../constants/Colors";
 import "./doctor.scss";
 function CreateMedical() {
   const location = useLocation();
+  const navigate = useNavigate();
   const patient = location.state.patient;
   console.log(patient);
   const doctorId = Auth.getIdDoctor();
   const doctorName = Auth.getNameDoctor();
   const dispatch = useDispatch();
   const [medicalRecord, setMedicalRecord] = useState({
-    patientID: location.state.patient._id,
+    patientID: location.state.patient?._id,
     doctorID: doctorId,
     symptonOfDisease: "",
     diagosisOfDoctor: "",
@@ -35,7 +36,9 @@ function CreateMedical() {
   };
 
   const handleCreateMedicalRecord = () => {
-    dispatch(createMedicalRecord(medicalRecord));
+    dispatch(createMedicalRecord(medicalRecord)).then(() => {
+      navigate("/schedule");
+    });
   };
 
   return (
@@ -72,13 +75,13 @@ function CreateMedical() {
             </p>
           </div>
           <div>
-            <p style={{ color: Colors.GRAY }}>{patient.name}</p>
-            <p style={{ color: Colors.GRAY }}>{patient.dateOfBirth}</p>
-            <p style={{ color: Colors.GRAY }}>Nam</p>
-            <p style={{ color: Colors.GRAY }}>{patient.address}</p>
-            <p style={{ color: Colors.GRAY }}>{patient.phone}</p>
-            <p style={{ color: Colors.GRAY }}>ấdfasd</p>
-            <p style={{ color: Colors.GRAY }}>{doctorName}</p>
+            <p style={{ color: Colors.BLACK }}>{patient?.name}</p>
+            <p style={{ color: Colors.BLACK }}>{patient?.dateOfBirth}</p>
+            <p style={{ color: Colors.BLACK }}>{"nam"}</p>
+            <p style={{ color: Colors.BLACK }}>{patient?.address}</p>
+            <p style={{ color: Colors.BLACK }}>{patient?.phone}</p>
+            <p style={{ color: Colors.BLACK }}>ấdfasd</p>
+            <p style={{ color: Colors.BLACK }}>{doctorName}</p>
           </div>
         </div>
         <div>

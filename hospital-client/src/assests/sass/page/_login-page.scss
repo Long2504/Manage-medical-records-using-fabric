@@ -9,7 +9,8 @@
   &__center {
     width: 100%;
     max-width: 450px;
-    height: 500px;
+    height: fit-content;
+    max-height: 550px;
     padding: 20px;
     border-radius: 5px;
     background: #fff;
@@ -22,10 +23,14 @@
     position: relative;
     z-index: 21;
 
-
     &__title {
       font-size: 35px;
       font-weight: 700;
+      margin-bottom: 40px;
+    }
+    &__subtitle {
+      font-size: 15px;
+      font-weight: 500;
       margin-bottom: 40px;
     }
 
@@ -44,7 +49,6 @@
       width: 100%;
       height: 50px;
     }
-
   }
 
   &__background {
@@ -59,7 +63,7 @@
     min-width: 1920px;
     user-select: none;
     transform: translateX(-50%);
-    background: linear-gradient(90deg, #021048, #1e38a3);
+    background: linear-gradient(90deg, #00867e, #00867e);
 
     svg {
       position: absolute;
@@ -72,6 +76,5 @@
         fill: #fff;
       }
     }
-
   }
 }

@@ -1,9 +1,9 @@
 const doctorRouter = [
   {
-    path: '/infor-doctor',
-    name: 'HomePageDoctor',
-    component: HomePageDoctor,
-    layout: '/doctor',
+    path: "/infor-doctor",
+    name: "HomePageDoctor",
+    // component: HomePageDoctor,
+    layout: "/doctor",
   },
 ];
 

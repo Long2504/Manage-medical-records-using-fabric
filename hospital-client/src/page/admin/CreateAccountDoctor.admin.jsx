@@ -36,6 +36,11 @@ function CreateAccountDoctor() {
     email: "",
     doctorId: "",
   });
+  const [error, setError] = useState(null);
+  const isValidEmail = (email) => {
+    return /\S+@\S+\.\S+/.test(email);
+  };
+
   //handle
   const handleChoiceDoctor = (doctor) => {
     console.log("doctor", doctor);
@@ -46,6 +51,11 @@ function CreateAccountDoctor() {
   const onChange = (e) => {
     var name = e.target.name;
     var value = e.target.value;
+    if (!isValidEmail(e.target.value)) {
+      setError("Email không hợp lệ");
+    } else {
+      setError(null);
+    }
     setDoctorCreated({ ...doctorCreated, [name]: value });
   };
   const handleConfirm = () => {
@@ -60,6 +70,7 @@ function CreateAccountDoctor() {
         sx={{
           color: Colors.DEFAULT_COLOR,
           marginBottom: "20px",
+          textAlign: "center",
         }}>
         Tạo tài khoản bác sĩ
       </Typography>
@@ -73,22 +84,32 @@ function CreateAccountDoctor() {
           }}>
           Thông tin tài khoản của bác sĩ
         </Typography>
-        <TextField
-          id="username"
-          label="Tên đăng nhập"
-          name="username"
-          variant="outlined"
-          onChange={(e) => onChange(e)}
-          sx={{ marginRight: "50px", marginBottom: "30px" }}
-        />
-        <TextField
-          id="email"
-          label="Email"
-          name="email"
-          type="email"
-          variant="outlined"
-          onChange={(e) => onChange(e)}
-        />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            marginBottom: "30px",
+          }}>
+          <TextField
+            id="username"
+            label="Tên đăng nhập"
+            name="username"
+            variant="outlined"
+            onChange={(e) => onChange(e)}
+            sx={{ marginRight: "50px" }}
+          />
+          <TextField
+            id="email"
+            label="Email"
+            name="email"
+            type="email"
+            variant="outlined"
+            sx={{ marginRight: "20px" }}
+            onChange={(e) => onChange(e)}
+          />
+          {error && <Typography sx={{ color: "red" }}>{error}</Typography>}
+        </Box>
       </div>
       <div>
         <Typography
@@ -179,7 +200,7 @@ function CreateAccountDoctor() {
                       <td>{item.specialityID.name}</td>
                       <td>
                         <Button
-                          variant="primary"
+                          variant="success"
                           onClick={() => handleChoiceDoctor(item)}>
                           Chọn
                         </Button>

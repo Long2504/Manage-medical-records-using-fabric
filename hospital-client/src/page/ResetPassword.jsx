@@ -1,34 +1,68 @@
 import { TextField, Button, Box, InputAdornment } from "@mui/material";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import LockTwoToneIcon from "@mui/icons-material/LockTwoTone";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Login } from "../redux/action/auth.action";
-import {  NavLink, useNavigate } from "react-router-dom";
+import { ResetPassword } from "../redux/action/auth.action";
+import Alert from "@mui/material/Alert";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Colors } from "../constants/Colors";
+import logo from "../assests/image/Logo.png";
 
-function LoginScreen() {
-  const [user, setUser] = useState({
-    username: "",
-    password: "",
+function ResetPasswordPage() {
+  const [data, setData] = useState({
+    newPassword: "",
+    rePassword: "",
   });
-
+  const location = useLocation();
+  const [alertShow, setAlertShow] = useState(false);
+  const [error, setError] = useState(null);
   const onChange = (e) => {
     var name = e.target.name;
     var value = e.target.value;
-    setUser({ ...user, [name]: value });
+    setData({ ...data, [name]: value });
+    console.log(data);
   };
+  useEffect(() => {
+    console.log(location.pathname.split("/")[2]);
+  });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(Login(user)).then(() => navigate("/"));
+
+    if (data.newPassword !== data.rePassword) {
+      setAlertShow(true);
+      setError("Mật khẩu không khớp");
+    } else {
+      if (data.newPassword === "" || data.rePassword === "") {
+        setAlertShow(true);
+        setError("Vui lòng điền đẩy đủ thông tin");
+      } else {
+        dispatch(
+          ResetPassword({
+            confirmationCode: location.pathname.split("/")[2],
+            newPassword: data.newPassword,
+          })
+        );
+        navigate("/login");
+        console.log("đổi mk ");
+      }
+    }
   };
   return (
-    <form className="login-page" type="submit" onSubmit={handleLogin}>
+    <form className="login-page" type="submit" onSubmit={handleSubmit}>
       <div className="login-page__center">
-        <h1 className="login-page__center__title">Welcome</h1>
+        <h2 style={{ color: Colors.DEFAULT_COLOR }}>Đổi mật khẩu</h2>
+        {alertShow && (
+          <Alert severity="error" onClose={() => setAlertShow(false)}>
+            {error}
+          </Alert>
+        )}
+        <img src={logo} alt="logo" loading="lazy" height={"90px"} />
+
         <Box
           sx={{
+            withPassword: true,
             width: 400,
             maxWidth: "100%",
           }}
@@ -37,16 +71,17 @@ function LoginScreen() {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <AccountCircle />
+                  <LockTwoToneIcon />
                 </InputAdornment>
               ),
             }}
             fullWidth
-            name="username"
+            name="newPassword"
             id="outlined-basic"
-            label="Tài khoản"
+            label="Mật khẩu mới"
             variant="outlined"
             onChange={(e) => onChange(e)}
+            type="password"
           />
         </Box>
         <Box
@@ -65,22 +100,20 @@ function LoginScreen() {
               ),
             }}
             fullWidth
-            name="password"
+            name="rePassword"
             id="outlined-basic"
-            label="Mật khẩu"
+            label="Nhập lại mật khẩu"
             variant="outlined"
             onChange={(e) => onChange(e)}
             type="password"
           />
         </Box>
-        <div className="login-page__center__forgot">
-          <NavLink to="/forgot-password">Quên mật khẩu?</NavLink>
-        </div>
+
         <Button
           className="login-page__center__btn-confirm"
           variant="contained"
           type="submit">
-          Đăng nhập
+          Đổi mật khẩu
         </Button>
       </div>
       <div className="login-page__background">
@@ -98,4 +131,4 @@ function LoginScreen() {
   );
 }
 
-export default LoginScreen;
+export default ResetPasswordPage;

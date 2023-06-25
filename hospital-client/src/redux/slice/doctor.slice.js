@@ -54,8 +54,6 @@ export const doctorSlice = createSlice({
       state.loading = false;
     }
     );
-
-
   }
 }
 );

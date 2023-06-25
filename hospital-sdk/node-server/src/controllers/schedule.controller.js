@@ -4,6 +4,7 @@ import scheduleServices from "../services/schedule.services.js";
 import handleError from "../middleware/error.middewares.js";
 import validationServices from "../services/validation.services.js";
 
+
 const arrayTime = [
     "08:00",
     "08:30",
@@ -157,7 +158,7 @@ const getScheduleBySpeciality = async (req, res) => {
         );
         res.status(200).send(arrayTime);
     } catch (error) {
-        console.error("error in getScheduleBySpeciality",error);
+        console.error("error in getScheduleBySpeciality", error);
         handleError(500, error, res);
     }
 };
@@ -166,6 +167,8 @@ const getScheduleByDoctor = async (req, res) => {
     try {
         const doctorID = req.body.doctorID;
         const appointmentDate = req.body.appointmentDate;
+        console.log("doctorID", doctorID);
+        console.log("appointmentDate", appointmentDate);
         let listTime = await scheduleServices.getScheduleByDoctor(
             doctorID,
             appointmentDate
@@ -185,7 +188,7 @@ const createAppointmentScheduleBySpeciality = async (req, res) => {
         const appointmentDate = req.body.appointmentDate;
         const appointmentTime = req.body.appointmentTime;
         const patientID = req.body.patientID;
-        const errorCheckCreate = await scheduleServices.checkCreateScheduleBySpeciality(specialityId, appointmentDate, appointmentTime,patientID);
+        const errorCheckCreate = await scheduleServices.checkCreateScheduleBySpeciality(specialityId, appointmentDate, appointmentTime, patientID);
         if (errorCheckCreate) {
             return res.status(errorCheckCreate.status).send(errorCheckCreate.message);
         }
@@ -196,7 +199,7 @@ const createAppointmentScheduleBySpeciality = async (req, res) => {
                 appointmentTime
             );
         if (!scheduleDoctor) {
-            res.status(200).send({message:"Không có lịch trống"});
+            res.status(200).send({ message: "Không có lịch trống" });
             return;
         }
         const schedule = {
@@ -252,28 +255,29 @@ const createAppointmentScheduleByDoctor = async (req, res) => {
 
 const createAppointmentSchedule = async (req, res) => {
     try {
-
         const specialityId = req.body.specialityID;
         const appointmentDate = req.body.appointmentDate;
         const appointmentTime = req.body.appointmentTime;
         const patientID = req.body.patientID;
         const doctorId = req.body.doctorID;
-        const errorCheckCreate = await scheduleServices.checkCreateScheduleBySpeciality(specialityId, appointmentDate, appointmentTime,patientID);
+
+        const errorCheckCreate = await scheduleServices.checkCreateScheduleBySpeciality(specialityId, appointmentDate, appointmentTime, patientID);
         if (errorCheckCreate) {
-            return res.status(errorCheckCreate.status).send(errorCheckCreate.message);
+            return res.status(errorCheckCreate.status).send(errorCheckCreate.error);
         }
-        const errorCheckExist = await validationServices.checkExistOfCreateSchedule(specialityId,patientID);
-        if(errorCheckExist){
-            return res.status(errorCheckExist.status).send(errorCheckExist.message);
+        const errorCheckExist = await validationServices.checkExistOfCreateSchedule(specialityId, patientID);
+        if (errorCheckExist) {
+            return res.status(errorCheckExist.status).send(errorCheckExist.error);
         }
+
         // create doctor schedule
-        console.log("doctorId",doctorId);
-        if(doctorId){
+        if (doctorId) {
             const errorIsDoctor = await validationServices.isDoctorOfCreateSchedule(doctorId);
-            if(errorIsDoctor){
+
+            if (errorIsDoctor) {
                 return res.status(errorIsDoctor.status).send(errorIsDoctor.message);
             }
-            const scheduleOfDoctor = await scheduleServices.getScheduleByDoctor(
+            const scheduleOfDoctor = await scheduleServices.getScheduleOfDoctor(
                 doctorId,
                 appointmentDate
             );
@@ -296,13 +300,30 @@ const createAppointmentSchedule = async (req, res) => {
                 };
                 const appointmentSchedule =
                     await scheduleServices.createAppointmentSchedule(schedule);
-                res.status(200).send(appointmentSchedule);
+                return res.status(200).send(appointmentSchedule);
+            }
+            else {
+                await scheduleServices.handleAndUpdateScheduleDocTor(scheduleOfDoctor.id, scheduleOfDoctor.appointmentTime, appointmentTime);
+                const schedule = {
+                    patientID: patientID,
+                    specialityID: specialityId,
+                    doctorID: doctorId,
+                    appointmentDate: appointmentDate,
+                    appointmentTime: appointmentTime,
+                    status: req.body.status,
+                    description: req.body.description,
+                };
+                const appointmentSchedule =
+                    await scheduleServices.createAppointmentSchedule(schedule);
+                return res.status(200).send(appointmentSchedule);
             }
         }
         // create schedule by speciality
+
         if (errorCheckCreate) {
             return res.status(errorCheckCreate.status).send(errorCheckCreate.message);
         }
+
         const scheduleDoctor =
             await scheduleServices.createOrUpdateScheduleDoctor(
                 specialityId,
@@ -310,8 +331,7 @@ const createAppointmentSchedule = async (req, res) => {
                 appointmentTime
             );
         if (!scheduleDoctor) {
-            res.status(200).send({message:"Không có lịch trống"});
-            return;
+            return res.status(200).send({ message: "Không có lịch trống" });
         }
         const schedule = {
             patientID: req.body.patientID,

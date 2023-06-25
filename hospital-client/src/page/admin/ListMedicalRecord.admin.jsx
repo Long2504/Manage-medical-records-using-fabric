@@ -18,6 +18,7 @@ function ListMedicalRecord() {
   //  };
   useEffect(() => {
     dispatch(getAllMedicalRecord());
+    console.log(listAllMedicalRecord);
   }, [dispatch]);
 
   return (

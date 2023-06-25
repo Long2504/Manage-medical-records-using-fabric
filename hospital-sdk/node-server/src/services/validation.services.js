@@ -1,7 +1,7 @@
 
 import Doctor from "../models/doctor.js";
+import Patient from "../models/patient.js";
 import Speciality from "../models/speciality.js";
-import User from "../models/user.js";
 import { checkFormatDate, checkFormatId } from "../utils/common.js";
 const checkModelExits = async (model, field, value) => {
 	const data = await model.findOne({ [field]: value });
@@ -18,12 +18,12 @@ const checkExistOfCreateSchedule = async (specialityId, patientID) => {
 	try {
 		const speciality = await checkModelExits(Speciality, "_id", specialityId);
 		if (speciality) return speciality;
-		const patient = await checkModelExits(User, "_id", patientID);
+		const patient = await checkModelExits(Patient, "_id", patientID);
 		if (patient) return patient;
 	} catch (error) {
 		return {
 			status: 500,
-			message: error
+			error: error
 		};
 	}
 };

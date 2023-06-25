@@ -30,7 +30,6 @@ function MedicalRecordPage() {
     setMedicalRecordCurrent(medicalRecord);
     setShow(true);
   };
-
   return (
     <div>
       <Typography
@@ -109,14 +108,7 @@ function MedicalRecordPage() {
                   }}>
                   Số điện thoại
                 </p>
-                <p
-                  style={{
-                    color: Colors.DEFAULT_COLOR,
-                    fontWeight: "700",
-                    marginRight: "10px",
-                  }}>
-                  Mô tả của bệnh nhân
-                </p>
+
                 <p
                   style={{
                     color: Colors.DEFAULT_COLOR,
@@ -131,21 +123,13 @@ function MedicalRecordPage() {
                 <p>{medicalRecordCurrent.patient?.dateOfBirth}</p>
                 <p>{medicalRecordCurrent.patient?.address}</p>
                 <p>{medicalRecordCurrent.patient?.phone}</p>
-                <p>Đau bụng</p>
-                <p>{medicalRecordCurrent.medicalRecord?.doctor.name}</p>
+                <p>{medicalRecordCurrent.medicalRecords?.doctor.name}</p>
               </div>
             </div>
           </div>
 
           <div>
-            <p
-              style={{
-                color: Colors.DEFAULT_COLOR,
-                fontWeight: "700",
-                marginRight: "10px",
-              }}>
-              Thông tin bệnh án
-            </p>
+            <p>Thông tin bệnh án</p>
             <div style={{ display: "flex" }}>
               <div>
                 <p

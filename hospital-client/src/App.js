@@ -6,23 +6,27 @@ import HomePageDoctor from "./page/doctor/HomePage.doctor";
 import HomePageAdmin from "./page/admin/HomePage.admin";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import ForgotPasswordPage from "./page/ForgotPassword";
+import ResetPassword from "./page/ResetPassword";
 
 function App() {
   const { loggedIn, role } = useSelector((state) => state.authSlice);
   const dispatch = useDispatch();
-  useEffect(() => { }, [loggedIn, dispatch]);
+  useEffect(() => {}, [loggedIn, dispatch]);
   if (loggedIn) {
     if (role === "doctor") {
       return (
         <Router>
           <HomePageDoctor></HomePageDoctor>
-        </Router>)
+        </Router>
+      );
     }
     if (role === "admin") {
       return (
         <Router>
           <HomePageAdmin></HomePageAdmin>
-        </Router>)
+        </Router>
+      );
     }
   }
   return (
@@ -30,6 +34,12 @@ function App() {
       <div className="main">
         <Routes>
           <Route element={<LoginScreen />} path="/login"></Route>
+          <Route
+            element={<ResetPassword />}
+            path="/password_reset/:code"></Route>
+          <Route
+            element={<ForgotPasswordPage />}
+            path="/forgot-password"></Route>
           <Route element={<Navigate to="/login" replace />} path="*"></Route>
         </Routes>
       </div>

@@ -3,5 +3,6 @@ export const Colors = {
   DEFAULT_LIGHT_COLOR: "#F4FBFA",
   WHITE: "#fff",
   BLACK: "#000",
-  GRAY: "#6c757d",
+  GRAY: "#f0f1f2",
+  RED: "#d34848",
 };
