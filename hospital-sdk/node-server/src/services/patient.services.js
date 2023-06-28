@@ -1,6 +1,7 @@
 import Patient from "../models/patient.js";
 import User from "../models/user.js";
-import { checkFormatDate, checkFormatId } from "../utils/common.js";
+import { checkFormatId } from "../utils/common.js";
+import moment from "moment";
 
 const checkFieldUpdateDataPatient = async (data) => {
   const { name, dateOfBirth, phone, address, userID } = data;
@@ -10,7 +11,7 @@ const checkFieldUpdateDataPatient = async (data) => {
       error: "Missing field",
     };
   }
-  if (!checkFormatDate(dateOfBirth)) {
+  if (!moment(dateOfBirth, "DD-MM-YYYY", true).isValid()) {
     return {
       status: 400,
       error: "Date of birth is not valid",
@@ -34,9 +35,15 @@ const checkFieldUpdateDataPatient = async (data) => {
 
 const updateDataPatient = async (data) => {
   try {
-    console.log(data);
-    const patient = new Patient(data);
-    return await patient.save();
+    if (data._id) {
+      const patient = await Patient.findByIdAndUpdate(data._id, data, { new: true });
+      return patient;
+    }
+    else {
+      const patient = new Patient(data);
+      await patient.save();
+      return patient;
+    }
   } catch (error) {
     console.error(error);
     throw new Error(error);

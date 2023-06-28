@@ -22,6 +22,7 @@ export const checkFormatDate = (dateString) => {
     return moment(dateString, "YYYY-MM-DD", true).isValid();
 };
 
+
 export const checkFormatTime = (time) => {
     const arrayTime = [
         "08:00",

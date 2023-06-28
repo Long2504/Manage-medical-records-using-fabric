@@ -4,7 +4,7 @@ const handleError = async (code, error, res) => {
 		return res.status(code).send(error);
 	}
 
-	return res.status(code).send(errorMessage);
+	return res.status(code).send({ message: errorMessage });
 };
 
 export default handleError;

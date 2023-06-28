@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+m
 import { ApiCaller } from "../../services/ApiCaller.services";
 
 export const getAllDoctor = createAsyncThunk(

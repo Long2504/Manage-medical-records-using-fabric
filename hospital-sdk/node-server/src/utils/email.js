@@ -3,7 +3,6 @@ import { createTransport } from "nodemailer";
 // sendEmail function takes 3 parameters
 const sendEmail = async (email, subject, mailContent) => {
 	try {
-		console.log(process.env.EMAIL, process.env.PASS);
 		const transporter = createTransport({
 			service: "Gmail",
 			auth: {

@@ -56,14 +56,24 @@ const getMedicalRecordByIdDoctor = async (req, res) => {
 const getMedicalRecordByIdPatient = async (req, res) => {
     try {
         const idPatient = req.body.patientId;
-        if ((await checkUserExists(idPatient)) === false) {
-            res.status(404).send({ message: "User not found" });
+        const patient = await patientServices.getPatientById(idPatient);
+        if (!patient) {
+            res.status(404).send({ message: "Patient not found" });
             return;
         }
         const medicalRecords = await getMedicalRecordByIdPatientNetwork(
             idPatient
         );
-        res.status(200).send(medicalRecords);
+        if (medicalRecords.status) {
+            if (medicalRecords.status === 404) {
+                return res.status(200).send([]);
+            }
+            if (medicalRecords.status === 500) {
+                res.status(medicalRecords.status).send({ message: medicalRecords.error });
+                return;
+            }
+        }
+        return res.status(200).send(medicalRecords);
     } catch (error) {
         handleError(500, error, res);
     }

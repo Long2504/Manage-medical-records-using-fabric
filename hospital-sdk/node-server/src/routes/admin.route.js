@@ -11,17 +11,18 @@ router.post(
     adminController.createAdmin
 );
 
-
 // register account for doctor
 router.post(
     "/doctor/create-account-doctor",
     adminController.createAccountDoctor
 );
+
 // get all account doctor
 router.get(
     "/doctor/get-all-account-doctor",
     doctorController.getAllAccountDoctor
 );
+
 //get all doctor
 router.get(
     "/doctor/get-all-doctor",

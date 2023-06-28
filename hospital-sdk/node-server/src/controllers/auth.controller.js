@@ -8,18 +8,17 @@ import handleError from "../middleware/error.middewares.js";
 import doctorServices from "../services/doctor.services.js";
 import patientServices from "../services/patient.services.js";
 import authServices from "../services/auth.services.js";
+import { randomConfirmCode } from "../utils/common.js";
+
 // register a new user
 const signup = async (req, res) => {
     try {
-        const token = jwt.sign(
-            { email: req.body.email },
-            process.env.JWT_SECRET + req.body.email
-        );
+        const code = randomConfirmCode();
         const user = new User({
             username: req.body.username,
             email: req.body.email,
             password: bcrypt.hashSync(req.body.password, 8),
-            confirmationCode: token,
+            confirmationCode: code,
         });
         await user.save();
         sendEmail(
@@ -27,7 +26,7 @@ const signup = async (req, res) => {
             "Please confirm your account",
             mailContent.mailResgist(user.username, user.confirmationCode)
         );
-        res.status(200).send("User was registered successfully!");
+        return res.status(200).send("User was registered successfully!");
     } catch (error) {
         handleError(500, error, res);
     }
@@ -61,7 +60,7 @@ const signin = async (req, res) => {
             });
         }
 
-        res.status(200).send({
+        return res.status(200).send({
             id: user._id,
             username: user.username,
             email: user.email,
@@ -76,13 +75,19 @@ const signin = async (req, res) => {
 // confirm email address
 const verifyUser = async (req, res) => {
     try {
+        const username = req.body.username;
         const user = await User.findOne({
-            confirmationCode: req.params.confirmationCode,
+            username: username,
         });
+
         if (!user) {
             return res.status(404).send({ message: "User Not found." });
         }
+        if (user.confirmationCode !== req.body.confirmationCode) {
+            return res.status(400).send({ message: "Invalid confirmation code." });
+        }
         user.status = "Active";
+        user.confirmationCode = null;
         await user.save();
         return res
             .status(200)
@@ -95,16 +100,42 @@ const verifyUser = async (req, res) => {
 // forgot password
 const forgotPassword = async (req, res) => {
     try {
-        const token = randomBytes(20).toString("hex");
+        const code = randomConfirmCode();
         const user = req.user;
-        user.confirmationCode = token;
+        console.log(user, "user");
+        user.confirmationCode = code;
         user.resetTokenExpiry = Date.now() + 3600000; // Token is valid for 1 hour
         await user.save();
         sendEmail(
             user.email,
             "Please reset your password",
-            mailContent.mailForgot(user.name, token)
+            mailContent.mailForgot(user.username, code)
         );
+        return res.status(200).send({ email: user.email, username: user.username });
+    } catch (error) {
+        handleError(500, error, res);
+    }
+};
+
+// verify reset password
+const verifyResetPassword = async (req, res) => {
+    try {
+        const username = req.body.username;
+        const user = await User.findOne({
+            username: username,
+        });
+        if (!user) {
+            return res.status(404).send({ message: "User Not found." });
+        }
+        console.log(user, "user");
+        console.log(req.body.confirmationCode, "req.body.confirmationCode");
+        console.log(user.confirmationCode, "user.confirmationCode");
+        if (user.confirmationCode !== req.body.confirmationCode) {
+            return res.status(400).send({ message: "Invalid confirmation code." });
+        }
+        user.confirmationCode = null;
+        await user.save();
+        return res.status(200).send({ id: user._id });
     } catch (error) {
         handleError(500, error, res);
     }
@@ -152,5 +183,6 @@ export default {
     verifyUser,
     forgotPassword,
     resetPassword,
-    updateAccountDoctor
+    updateAccountDoctor,
+    verifyResetPassword
 };

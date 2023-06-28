@@ -8,7 +8,7 @@ const router = Router();
 // register a new user
 router.post(
     "/signup",
-    authMiddlewares.checkDuplicateUsernameOrEmail(User, "email"),
+    // authMiddlewares.checkDuplicateUsernameOrEmail(User, "email"),
     authMiddlewares.checkDuplicateUsernameOrEmail(User, "username"),
     authController.signup
 );
@@ -22,27 +22,31 @@ router.post(
 );
 
 // confirm email address
-router.get("/confirm/:confirmationCode", authController.verifyUser);
+router.post("/confirm", authController.verifyUser);
 
 // forgot password
 router.post(
     "/forgotpassword",
-    authMiddlewares.checkUserExists("email"),
+    authMiddlewares.checkUserExists("username"),
     authController.forgotPassword
 );
-
+// verify email
+router.post(
+    "/verify-forget-password",
+    authController.verifyResetPassword
+);
 // reset password
 router.post(
-    "/password_reset",
+    "/password-reset",
     authMiddlewares.checkResetToken,
     authController.resetPassword
 );
 
 // change password
 router.post(
-    "/change_password",
+    "/change-password",
     authMiddlewares.verifyToken,
-    authMiddlewares.checkUserExists("id"),
+    authMiddlewares.checkUserExists("_id"),
     authMiddlewares.checkPassword,
     authController.resetPassword
 );

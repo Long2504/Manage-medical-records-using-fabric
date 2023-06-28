@@ -62,7 +62,10 @@ export const connectToNetwork = async (id) => {
 				`An identity for the user ${id} does not exist in the wallet`
 			);
 			console.log("Run the registerUser.js application before retrying");
-			return;
+			return {
+				status: 404,
+				error: `An identity for the user ${id} does not exist in the wallet`,
+			}
 		}
 
 		await gateway.connect(cpp, {
@@ -83,7 +86,12 @@ export const connectToNetwork = async (id) => {
 		console.log("Succesfully connected to the network.");
 		return networkObj;
 	} catch (error) {
+
 		console.error(`Failed to submit transaction (connectToNetwork): ${error}`);
+		return {
+			status: 500,
+			error: `Failed to submit transaction (connectToNetwork): ${error}`,
+		}
 	}
 };
 
@@ -167,6 +175,10 @@ export const invoke = async (networkObj, isQuery, fcn, args) => {
 		return result.toString();
 	} catch (error) {
 		console.error(`Failed to submit transaction (invoke): ${error}`);
+		return {
+			error: error,
+			status: 500,
+		}
 	}
 };
 
@@ -236,6 +248,10 @@ export const getAllMedicalRecordsNetwork = async (id) => {
 export const getMedicalRecordByIdPatientNetwork = async (idPatient) => {
 	try {
 		const networkObj = await connectToNetwork(idPatient);
+		console.log(networkObj, "networkObj");
+		if (networkObj.error) {
+			return networkObj;
+		}
 		let data = [idPatient];
 		let result = await invoke(
 			networkObj,
@@ -243,6 +259,9 @@ export const getMedicalRecordByIdPatientNetwork = async (idPatient) => {
 			"getMedicalRecordByIdPatient",
 			data
 		);
+		if (result.error) {
+			return result;
+		}
 		return JSON.parse(result);
 	} catch (error) {
 		console.error(

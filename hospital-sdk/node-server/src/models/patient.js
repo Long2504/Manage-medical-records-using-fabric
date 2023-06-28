@@ -14,6 +14,12 @@ const patientSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
+    email: {
+        type: String,
+    },
+    sex: {
+        type: String,
+    },
     address: {
         type: String,
         required: true,

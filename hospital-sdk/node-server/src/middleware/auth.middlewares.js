@@ -15,7 +15,6 @@ const verifyToken = (req, res, next) => {
                 if (err) {
                     return res.status(401).send({ message: "Unauthorized!" });
                 }
-                console.log(decoded, "decoded");
                 req.user = decoded.id;
                 next();
             });
@@ -41,8 +40,8 @@ const checkDuplicateUsernameOrEmail =
         try {
             const value = req.body[field];
             const user = await model.findOne({ [field]: value });
-            if (user) {
-                return res.status(409).json({
+            if (user !== null) {
+                return res.status(400).json({
                     message: `The ${field} is already in use`,
                 });
             }
@@ -54,7 +53,8 @@ const checkDuplicateUsernameOrEmail =
 
 const checkUserExists = (field) => async (req, res, next) => {
     try {
-        const value = field === "id" ? req.id : req.body[field];
+
+        const value = field === '_id' ? req.user[field] : req.body[field];
         const user = await User.findOne({ [field]: value });
         if (!user) {
             return res.status(404).send({ message: "User Not found." });
@@ -90,6 +90,7 @@ const checkPassword = async (req, res, next) => {
 const checkResetToken = async (req, res, next) => {
     try {
         const user = await User.findOne({
+            _id: req.body._id,
             confirmationCode: req.body.confirmationCode,
             resetTokenExpiry: { $gt: Date.now() },
         });
