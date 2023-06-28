@@ -16,6 +16,33 @@ export const getAllDoctor = createAsyncThunk(
     }
   }
 );
+export const getAllSpeciality = createAsyncThunk(
+  "doctor/get-all-speciality",
+  async () => {
+    try {
+      const { data } = await ApiCaller("GET", null, "speciality/get-all");
+      return data;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+);
+
+export const getAllAccountDoctor = createAsyncThunk(
+  "doctor/get-all-account-doctor",
+  async () => {
+    try {
+      const { data } = await ApiCaller(
+        "GET",
+        null,
+        "admin/doctor/get-all-account-doctor"
+      );
+      return data;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+);
 
 export const getAllDoctorNotJoinChannel = createAsyncThunk(
   "doctor/get-all-doctor-not-join-channel",
@@ -32,10 +59,35 @@ export const getAllDoctorNotJoinChannel = createAsyncThunk(
     }
   }
 );
-
+export const createDoctor = createAsyncThunk(
+  "doctor/create-doctor",
+  async (body, { rejectWithValue }) => {
+    try {
+      const { data } = await ApiCaller(
+        "POST",
+        body,
+        "admin/doctor/create-doctor"
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+export const updateDoctor = createAsyncThunk(
+  "doctor/update-doctor",
+  async (body, { rejectWithValue }) => {
+    try {
+      const { data } = await ApiCaller("POST", body, "doctor/update-doctor");
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 export const createAccountDoctor = createAsyncThunk(
   "doctor/create-account-doctor",
-  async (body) => {
+  async (body, { rejectWithValue }) => {
     try {
       const { data } = await ApiCaller(
         "POST",
@@ -44,22 +96,22 @@ export const createAccountDoctor = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      throw new Error(error);
+      return rejectWithValue(error);
     }
   }
 );
 export const updateAccountDoctor = createAsyncThunk(
   "doctor/update-account-doctor",
-  async (body) => {
+  async (body, { rejectWithValue }) => {
     try {
       const { data } = await ApiCaller(
         "POST",
         body,
-        "admin/doctor/create-account-doctor"
+        "admin/doctor/update-account-doctor"
       );
       return data;
     } catch (error) {
-      throw new Error(error);
+      return rejectWithValue(error);
     }
   }
 );

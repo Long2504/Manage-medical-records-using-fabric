@@ -6,13 +6,13 @@ import CreateIcon from "@mui/icons-material/Create";
 import Button from "@mui/material/Button";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
-import { TextareaAutosize } from "@mui/base";
 import { useState } from "react";
 
 function InforDoctor() {
   const inforDoctor = Auth.getInfo();
+  console.log(inforDoctor);
   const [isEdit, setIsEdit] = useState(false);
-
+  const updateDoctor = () => {};
   return (
     <Box className="info-doctor-page">
       <Box
@@ -28,6 +28,7 @@ function InforDoctor() {
         <Box
           className="info-doctor-page__name"
           sx={{
+            height: "100%",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -52,7 +53,10 @@ function InforDoctor() {
             )}
             {isEdit && (
               <>
-                <Button onClick={() => {}}>
+                <Button
+                  onClick={() => {
+                    updateDoctor();
+                  }}>
                   <CheckIcon color={Colors.DEFAULT_COLOR} />
                 </Button>
                 <Button onClick={() => setIsEdit(false)}>
@@ -85,37 +89,66 @@ function InforDoctor() {
               }}></Typography>
           </Box>
           <Divider />
+
           <Box>
             <Box sx={{ marginBottom: "10px" }}>
-              <Typography sx={{ color: Colors.BLACK, fontWeight: "700" }}>
+              <Typography
+                sx={{ color: Colors.DEFAULT_COLOR, fontWeight: "700" }}>
+                Tên
+              </Typography>
+              <TextField
+                id="name"
+                variant="outlined"
+                value={inforDoctor?.doctor?.name}
+                disabled={!isEdit}
+              />
+            </Box>
+
+            <Box sx={{ marginBottom: "10px" }}>
+              <Typography
+                sx={{ color: Colors.DEFAULT_COLOR, fontWeight: "700" }}>
                 Email
               </Typography>
               <TextField
                 id="email"
                 variant="outlined"
-                value={inforDoctor.email}
+                value={inforDoctor?.email}
                 disabled={!isEdit}
               />
             </Box>
             <Box sx={{ marginBottom: "10px" }}>
-              <Typography sx={{ color: Colors.BLACK, fontWeight: "700" }}>
+              <Typography
+                sx={{ color: Colors.DEFAULT_COLOR, fontWeight: "700" }}>
                 Số điện thoại
               </Typography>
               <TextField
                 id="phone"
                 variant="outlined"
-                value={inforDoctor?.doctor.phone}
+                value={inforDoctor?.doctor?.phone}
                 disabled={!isEdit}
               />
             </Box>
             <Box sx={{ marginBottom: "10px" }}>
-              <Typography sx={{ color: Colors.BLACK, fontWeight: "700" }}>
+              <Typography
+                sx={{ color: Colors.DEFAULT_COLOR, fontWeight: "700" }}>
                 Địa chỉ
               </Typography>
               <TextField
                 id="address"
                 variant="outlined"
-                value={inforDoctor?.doctor.address}
+                value={inforDoctor?.doctor?.address}
+                disabled={!isEdit}
+              />
+            </Box>
+            <Box sx={{ marginBottom: "10px" }}>
+              <Typography
+                sx={{ color: Colors.DEFAULT_COLOR, fontWeight: "700" }}>
+                Khoa
+              </Typography>
+              <TextField
+                id="specialityID"
+                variant="outlined"
+                value={inforDoctor?.doctor?.specialityID?.name}
                 disabled={!isEdit}
               />
             </Box>
@@ -141,7 +174,7 @@ function InforDoctor() {
             Thông tin chi tiết
           </Typography>
           <Typography sx={{ color: Colors.BLACK }}>
-            {inforDoctor?.doctor.description}
+            {inforDoctor?.doctor?.description}
           </Typography>
         </Box>
         <Box
@@ -163,7 +196,7 @@ function InforDoctor() {
             }}>
             Kinh nghiệm
           </Typography>
-          {inforDoctor?.doctor.experiences.map((item, index) => {
+          {inforDoctor?.doctor?.experiences.map((item, index) => {
             return (
               <div key={index}>
                 <Typography sx={{ color: Colors.BLACK }}>{item}</Typography>

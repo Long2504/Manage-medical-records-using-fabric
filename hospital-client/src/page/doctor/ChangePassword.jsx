@@ -6,8 +6,6 @@ import Alert from "@mui/material/Alert";
 import { Colors } from "../../constants/Colors";
 import logo from "../../assests/image/Logo.png";
 import { ChangePassword } from "../../redux/action/auth.action";
-import { logout } from "../../redux/slice/auth.slice";
-import { useNavigate } from "react-router-dom";
 
 function ChangePasswordPage() {
   const [data, setData] = useState({
@@ -17,7 +15,6 @@ function ChangePasswordPage() {
   });
   const [alertShow, setAlertShow] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
   const onChange = (e) => {
     var name = e.target.name;
     var value = e.target.value;
@@ -45,8 +42,8 @@ function ChangePasswordPage() {
             newPassword: data.newPassword,
           })
         ).then(() => {
-          dispatch(logout());
-          navigate("/login");
+          setAlertShow(true);
+          setError("Đổi mật khẩu thành công");
         });
       }
     }
