@@ -13,23 +13,23 @@ GET http://localhost:8081/api/auth/confirm/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
 content-type: application/json
 
 ### forgot password
-POST http://localhost:8081/api/auth/forgotpassword HTTP/1.1
+POST http://45.32.28.204:8081/api/auth/forgotpassword HTTP/1.1
 content-type: application/json
 
 {
-  "username": "long"
+  "username": "doctor2"
 }
 
 ### reset password
-POST http://localhost:8081/api/auth/verify-forget-password HTTP/1.1
+POST http://45.32.28.204:8081/api/auth/verify-forget-password HTTP/1.1
 Content-Type: application/json
 
 {
-  "confirmationCode": "535920",
-  "username": "long"
+  "confirmationCode": "176164",
+  "username": "doctor2"
 }
 ### password reset
-POST http://localhost:8081/api/auth/password-reset HTTP/1.1
+POST http://45.32.28.204:8081/api/auth/password-reset HTTP/1.1
 Content-Type: application/json
 
 {

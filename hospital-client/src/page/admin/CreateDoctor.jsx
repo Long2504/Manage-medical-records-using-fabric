@@ -4,7 +4,7 @@ import { Box, Typography, TextField } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import { Colors } from "../../constants/Colors";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -134,17 +134,17 @@ export default function CreateDoctor() {
           alignItems: "center",
           marginBottom: "30px",
         }}>
-        <Button
-          variant="success"
-          type="submit"
-          style={{ width: "150px" }}
-          onClick={() => handleConfirm()}>
-          {loading ? (
-            <Spinner animation="border" variant="light" size="sm" />
-          ) : (
-            "Tạo tài khoản"
-          )}
-        </Button>
+        {loading ? (
+          <Spinner animation="border" variant="success" size="sm" />
+        ) : (
+          <Button
+            variant="success"
+            type="submit"
+            style={{ width: "150px" }}
+            onClick={() => handleConfirm()}>
+            Tạo tài khoản
+          </Button>
+        )}
         {error && (
           <Typography sx={{ color: "red", marginLeft: "30px" }}>
             {error}

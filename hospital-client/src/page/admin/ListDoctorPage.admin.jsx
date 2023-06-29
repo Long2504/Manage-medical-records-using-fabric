@@ -11,7 +11,6 @@ import { searchDoctor } from "../../redux/slice/doctor.slice";
 import { useNavigate } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 
-
 function ListDoctorPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();

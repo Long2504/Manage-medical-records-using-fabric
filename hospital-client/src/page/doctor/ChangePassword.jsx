@@ -6,8 +6,12 @@ import Alert from "@mui/material/Alert";
 import { Colors } from "../../constants/Colors";
 import logo from "../../assests/image/Logo.png";
 import { ChangePassword } from "../../redux/action/auth.action";
+import { logout } from "../../redux/slice/auth.slice";
+import { useNavigate } from "react-router-dom";
+import { ApiCaller } from "../../services/ApiCaller.services";
 
 function ChangePasswordPage() {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     password: "",
     newPassword: "",
@@ -22,7 +26,7 @@ function ChangePasswordPage() {
     console.log(data);
   };
   const dispatch = useDispatch();
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
       data.newPassword === "" ||
@@ -36,15 +40,23 @@ function ChangePasswordPage() {
         setAlertShow(true);
         setError("Mật khẩu không khớp");
       } else {
-        dispatch(
-          ChangePassword({
+        await ApiCaller(
+          "POST",
+          {
             password: data.password,
             newPassword: data.newPassword,
+          },
+          "auth/change-password"
+        )
+          .then(() => {
+            setAlertShow(true);
+            setError("Đổi mật khẩu thành công");
+            dispatch(logout());
+            navigate("/login");
           })
-        ).then(() => {
-          setAlertShow(true);
-          setError("Đổi mật khẩu thành công");
-        });
+          .catch(() => {
+            setError("Đổi mật khẩu thất bại");
+          });
       }
     }
   };
