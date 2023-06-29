@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import ForgotPasswordPage from "./page/ForgotPassword";
 import ResetPassword from "./page/ResetPassword";
+import PasswordConfirmCode from "./page/PasswordConfirmCode";
 
 function App() {
   const { loggedIn, role } = useSelector((state) => state.authSlice);
@@ -34,12 +35,13 @@ function App() {
       <div className="main">
         <Routes>
           <Route element={<LoginScreen />} path="/login"></Route>
-          <Route
-            element={<ResetPassword />}
-            path="/password_reset/:code"></Route>
+          <Route element={<ResetPassword />} path="/password_reset"></Route>
           <Route
             element={<ForgotPasswordPage />}
             path="/forgot-password"></Route>
+          <Route
+            element={<PasswordConfirmCode />}
+            path="/verify-code"></Route>
           <Route element={<Navigate to="/login" replace />} path="*"></Route>
         </Routes>
       </div>

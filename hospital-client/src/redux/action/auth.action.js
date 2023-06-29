@@ -13,14 +13,29 @@ export const Login = createAsyncThunk("auth/signin", async (body) => {
 });
 export const ForgotPassword = createAsyncThunk(
   "auth/forgotPassword",
-  async (email) => {
+  async (username) => {
     try {
       const { data } = await ApiCaller(
         "POST",
-        { email },
+        { username },
         "auth/forgotpassword"
       );
-      console.log(data);
+      return data;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+);
+export const ConfirmPasswordCode = createAsyncThunk(
+  "auth/ConfirmPasswordCode",
+  async (data) => {
+    try {
+      const { result } = await ApiCaller(
+        "POST",
+        data,
+        "auth/verify-forget-password"
+      );
+      return result;
     } catch (error) {
       throw new Error(error);
     }
@@ -41,7 +56,7 @@ export const ChangePassword = createAsyncThunk(
   "auth/ChangePassword",
   async (data) => {
     try {
-      const { result } = await ApiCaller("POST", data, "auth/change_password");
+      const { result } = await ApiCaller("POST", data, "auth/change-password");
       console.log(result);
     } catch (error) {
       throw new Error(error);

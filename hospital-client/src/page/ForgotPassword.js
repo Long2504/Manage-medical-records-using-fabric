@@ -1,23 +1,24 @@
 import { TextField, Button, Box, InputAdornment } from "@mui/material";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ForgotPassword } from "../redux/action/auth.action";
-import { Link, useNavigate } from "react-router-dom";
 import logo from "../assests/image/Logo.png";
+import { useNavigate } from "react-router-dom";
+import Spinner from "react-bootstrap/esm/Spinner";
 
 function ForgotPasswordPage() {
-  const [email, setEmail] = useState();
-  const [isSendEmail, setIsSendEmail] = useState(false);
-  const onChange = (e) => {
-    console.log(email);
-    setEmail(e.target.value);
-  };
+  const navigate = useNavigate();
+  const [username, setUsername] = useState();
   const dispatch = useDispatch();
+  const state = useSelector((state) => state.authSlice);
+  const onChange = (e) => {
+    setUsername(e.target.value);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(ForgotPassword(email)).then(() => {
-      setIsSendEmail(true);
+    dispatch(ForgotPassword(username)).then(() => {
+      navigate("/verify-code", { state: { username: username } });
     });
   };
   return (
@@ -25,8 +26,8 @@ function ForgotPasswordPage() {
       <div className="login-page__center">
         <img src={logo} alt="logo" loading="lazy" />
         <h7 className="login-page__center__subtitle">
-          Nhập địa chỉ email đã được xác minh tài khoản người dùng của bạn và
-          chúng tôi sẽ gửi cho bạn mã để đặt lại mật khẩu.
+          Nhập tên đăng nhập đã được cung cấp và chúng tôi sẽ gửi cho bạn mã qua
+          email của bạn để đặt lại mật khẩu.
         </h7>
         <Box
           sx={{
@@ -43,25 +44,23 @@ function ForgotPasswordPage() {
               ),
             }}
             fullWidth
-            name="Email"
+            name="username"
             id="outlined-basic"
-            label="Email"
+            label="Tên đăng nhập"
             variant="outlined"
             onChange={(e) => onChange(e)}
           />
         </Box>
 
-        {!isSendEmail ? (
+        {state.loading ? (
+          <Spinner animation="border" variant="success" size="sm" />
+        ) : (
           <Button
             className="login-page__center__btn-confirm"
             variant="contained"
             type="submit">
             Nhận mã
           </Button>
-        ) : (
-          <Link to="https://mail.google.com/mail" target="_blank">
-            Kiểm tra mail
-          </Link>
         )}
       </div>
       <div className="login-page__background">

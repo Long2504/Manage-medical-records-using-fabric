@@ -1,6 +1,5 @@
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Table from "react-bootstrap/Table";
+
 import { Box, Typography, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "react-bootstrap/Spinner";
@@ -145,13 +144,16 @@ export default function UpdateDoctor() {
         </Box>
       </div>
       <div>
-        <Button variant="success" type="submit" onClick={() => handleConfirm()}>
-          {state.doctorSlice.loading ? (
-            <Spinner animation="border" variant="light" size="sm" />
-          ) : (
-            "Cập nhật"
-          )}
-        </Button>
+        {state.doctorSlice.loading ? (
+          <Spinner animation="border" variant="success" size="sm" />
+        ) : (
+          <Button
+            variant="success"
+            type="submit"
+            onClick={() => handleConfirm()}>
+            Cập nhật
+          </Button>
+        )}
       </div>
     </div>
   );

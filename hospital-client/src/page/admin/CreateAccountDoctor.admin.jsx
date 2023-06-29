@@ -179,17 +179,17 @@ function CreateAccountDoctor() {
         </Box>
       </div>
       <div>
-        <Button
-          variant="success"
-          type="submit"
-          onClick={() => handleConfirm()}
-          style={{ width: "150px" }}>
-          {state.doctorSlice.loading ? (
-            <Spinner animation="border" variant="light" size="sm" />
-          ) : (
-            "Tạo tài khoản"
-          )}
-        </Button>
+        {state.doctorSlice.loading ? (
+          <Spinner animation="border" variant="light" size="sm" />
+        ) : (
+          <Button
+            variant="success"
+            type="submit"
+            onClick={() => handleConfirm()}
+            style={{ width: "150px" }}>
+            Tạo tài khoản
+          </Button>
+        )}
       </div>
       <Modal show={show} onHide={handleClose} className="pt-5">
         <Modal.Header closeButton>

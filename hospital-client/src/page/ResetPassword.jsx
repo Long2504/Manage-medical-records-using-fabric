@@ -9,11 +9,12 @@ import { Colors } from "../constants/Colors";
 import logo from "../assests/image/Logo.png";
 
 function ResetPasswordPage() {
+  const location = useLocation();
   const [data, setData] = useState({
+    _id: location?.state?._id,
     newPassword: "",
     rePassword: "",
   });
-  const location = useLocation();
   const [alertShow, setAlertShow] = useState(false);
   const [error, setError] = useState(null);
   const onChange = (e) => {
@@ -22,9 +23,7 @@ function ResetPasswordPage() {
     setData({ ...data, [name]: value });
     console.log(data);
   };
-  useEffect(() => {
-    console.log(location.pathname.split("/")[2]);
-  });
+  useEffect(() => {}, []);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
@@ -40,12 +39,12 @@ function ResetPasswordPage() {
       } else {
         dispatch(
           ResetPassword({
-            confirmationCode: location.pathname.split("/")[2],
+            _id: data._id,
             newPassword: data.newPassword,
           })
         );
         navigate("/login");
-        console.log("đổi mk ");
+        console.log("đổi mk ok");
       }
     }
   };

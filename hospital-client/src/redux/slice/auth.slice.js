@@ -5,6 +5,7 @@ import {
   ForgotPassword,
   ResetPassword,
   ChangePassword,
+  ConfirmPasswordCode,
 } from "../action/auth.action";
 
 const initialState = {
@@ -56,7 +57,16 @@ export const authSlice = createSlice({
     builder.addCase(ResetPassword.rejected, (state, action) => {
       state.error = action;
     });
-
+    builder.addCase(ConfirmPasswordCode.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(ConfirmPasswordCode.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(ConfirmPasswordCode.rejected, (state, action) => {
+      state.error = action;
+      state.loading = false;
+    });
     builder.addCase(ChangePassword.pending, (state, action) => {
       state.loading = true;
     });

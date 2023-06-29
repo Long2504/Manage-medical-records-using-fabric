@@ -4,7 +4,7 @@ import LockTwoToneIcon from "@mui/icons-material/LockTwoTone";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Login } from "../redux/action/auth.action";
-import {  NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function LoginScreen() {
   const [user, setUser] = useState({
