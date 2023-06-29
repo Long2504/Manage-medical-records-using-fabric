@@ -139,6 +139,11 @@ const createMedicalRecord = async (req, res) => {
                 message: responeErrorCreate.error,
             });
         }
+        await scheduleServices.updateStatusAppointmentSchedule(
+            req.body.idSchedule,
+            "completed"
+        );
+
         return res.status(201).send(medicalRecord);
     } catch (error) {
         handleError(500, error, res);

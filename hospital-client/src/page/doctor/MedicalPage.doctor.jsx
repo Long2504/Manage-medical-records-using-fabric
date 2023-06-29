@@ -16,8 +16,8 @@ function MedicalRecordPage() {
   const { listMedicalRecord, filterMedicalRecord } = useSelector(
     (state) => state.medicalRecordSlice
   );
-  console.log("listMedicalRecord", listMedicalRecord);
-  console.log(filterMedicalRecord);
+
+
   const [search, setSearch] = useState("");
   const changeSearch = (e) => {
     setSearch(e.target.value);
@@ -81,9 +81,9 @@ function MedicalRecordPage() {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{item.patient.name}</td>
-                <td>{item.patient.phone}</td>
-                <td>{item.medicalRecords.date}</td>
+                <td>{item?.patient?.name}</td>
+                <td>{item?.patient?.phone}</td>
+                <td>{item?.medicalRecords?.date}</td>
                 <td>
                   <Button variant="success" onClick={() => handleShow(item)}>
                     Xem

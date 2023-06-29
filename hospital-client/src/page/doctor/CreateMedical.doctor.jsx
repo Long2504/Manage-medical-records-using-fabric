@@ -13,7 +13,7 @@ function CreateMedical() {
   const location = useLocation();
   const navigate = useNavigate();
   const patient = location.state.patient;
-  console.log(patient);
+  const scheduleDoctor = location.state.scheduleDoctor;
   const doctorId = Auth.getIdDoctor();
   const doctorName = Auth.getNameDoctor();
   const dispatch = useDispatch();
@@ -81,7 +81,7 @@ function CreateMedical() {
             <p style={{ color: Colors.BLACK }}>{"nam"}</p>
             <p style={{ color: Colors.BLACK }}>{patient?.address}</p>
             <p style={{ color: Colors.BLACK }}>{patient?.phone}</p>
-            <p style={{ color: Colors.BLACK }}>ấdfasd</p>
+            <p style={{ color: Colors.BLACK }}>{scheduleDoctor.description}</p>
             <p style={{ color: Colors.BLACK }}>{doctorName}</p>
           </div>
         </div>

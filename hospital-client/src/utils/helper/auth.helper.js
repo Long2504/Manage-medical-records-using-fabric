@@ -1,5 +1,6 @@
 import { LOCAL } from "../constants";
 const Auth = {};
+
 Auth.setInfo = (data) => {
   localStorage.setItem(
     LOCAL.INFO,

@@ -360,7 +360,9 @@ const getAppointmentScheduleByDoctor = async (doctorId, Date) => {
         const scheduleDoctor = await AppointmentSchedule.find({
             doctorID: doctorId,
             appointmentDate: Date,
+            status: "booked",
         });
+        console.log(scheduleDoctor, "scheduleDoctor");
         const result = [];
         for (let i = 0; i < scheduleDoctor.length; i++) {
             const patient = await patientServices.getPatientById(
@@ -382,6 +384,24 @@ const getAppointmentScheduleByDoctor = async (doctorId, Date) => {
 
 };
 
+const updateStatusAppointmentSchedule = async (id, status) => {
+    try {
+        const schedule = await AppointmentSchedule.findByIdAndUpdate(
+            id,
+            {
+                $set: {
+                    status: status,
+                },
+            },
+            { new: true }
+        );
+        return schedule;
+    }
+    catch (error) {
+        console.error(error);
+    }
+};
+
 export default {
     getScheduleBySpeciality,
     getScheduleByDoctor,
@@ -393,4 +413,5 @@ export default {
     handleAndUpdateScheduleDocTor,
     checkCreateScheduleBySpeciality,
     getAppointmentScheduleByDoctor,
+    updateStatusAppointmentSchedule
 };

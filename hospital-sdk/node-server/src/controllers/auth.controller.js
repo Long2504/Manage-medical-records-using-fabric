@@ -140,6 +140,7 @@ const verifyResetPassword = async (req, res) => {
         handleError(500, error, res);
     }
 };
+
 // reset password
 const resetPassword = async (req, res) => {
     try {

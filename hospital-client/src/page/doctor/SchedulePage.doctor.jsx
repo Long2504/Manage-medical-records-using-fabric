@@ -7,23 +7,25 @@ import { useDispatch } from "react-redux";
 import { getScheduleOfDoctorByDate } from "../../redux/action/schedule.action";
 import { Typography, Box } from "@mui/material";
 import { Colors } from "../../constants/Colors";
+import Auth from "../../utils/helper/auth.helper";
 
 function SchedulePage() {
   const { listScheduleByDate } = useSelector((state) => state.scheduleSlice);
   const dispatch = useDispatch();
+  const idDoctor = Auth.getIdDoctor();
+  console.log(idDoctor);
   useEffect(() => {
     dispatch(
       getScheduleOfDoctorByDate({
-        doctorID: "64532f139ec3cad23c35c889",
-        date: "2021-05-01",
+        doctorID: idDoctor,
+        date: "2023-06-30",
       })
     );
   }, [dispatch]);
-  console.log(listScheduleByDate);
 
   const navigate = useNavigate();
   const handleSelect = (data) => {
-    navigate("/info-patient", { state: { patient: data.patient } });
+    navigate("/info-patient", { state: { patient: data.patient, scheduleDoctor: data.scheduleDoctor } });
   };
   return (
     <Box className="doctor-page">

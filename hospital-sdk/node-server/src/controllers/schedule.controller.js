@@ -44,108 +44,6 @@ const update = async (req, res) => {
         handleError(500, error, res);
     }
 };
-// const createScheduleDoctor = async (req, res) => {
-// 	try {
-// 		const schedule = {
-// 			appointmentDate: req.body.appointmentDate,
-// 			appoinmentTime: req.body.appoinmentTime,
-// 			doctorID: req.body.doctorID,
-// 			specialityID: req.body.specialityID,
-// 			patientID: req.body.patientID,
-// 			status: req.body.status,
-// 			description: req.body.description,
-// 		};
-// 		const checkScheduleExists =
-// 			await scheduleServices.checkScheduleExistsOfSpeciality(
-// 				req.body.specialityID,
-// 				req.body.appointmentDate,
-// 				req.body.appoinmentTime
-// 			);
-// 		// await scheduleServices.createAppointmentSchedule(schedule);
-// 		res.status(201).send(checkScheduleExists);
-// 	} catch (error) {
-// 		handleError(500, error, res);
-// 	}
-// };
-// const createScheduleDoctor = async (req, res) => {
-// 	try {
-// 		const scheduleDoctor = [
-// 			{
-// 				specialityID: "64532f139ec3cad23c35c886",
-// 				doctorID: "64532f139ec3cad23c35c886",
-// 				appointmentDate: "2021-05-01",
-// 				appointmentTime: timeArray,
-// 			},
-// 			{
-// 				specialityID: "64532f139ec3cad23c35c886",
-// 				doctorID: "64532f139ec3cad23c35c886",
-// 				appointmentDate: "2021-05-01",
-// 				appointmentTime: timeArray,
-// 			},
-// 			{
-// 				specialityID: "64532f139ec3cad23c35c886",
-// 				doctorID: "64532f139ec3cad23c35c886",
-// 				appointmentDate: "2021-05-01",
-// 				appointmentTime: timeArray,
-// 			},
-// 			{
-// 				specialityID: "64532f139ec3cad23c35c886",
-// 				doctorID: "64532f139ec3cad23c35c886",
-// 				appointmentDate: "2021-05-01",
-// 				appointmentTime: timeArray,
-// 			},
-// 			{
-// 				specialityID: "64532f139ec3cad23c35c886",
-// 				doctorID: "64532f139ec3cad23c35c886",
-// 				appointmentDate: "2021-05-01",
-// 				appointmentTime: timeArray,
-// 			},
-// 			{
-// 				specialityID: "64532f139ec3cad23c35c886",
-// 				doctorID: "64532f139ec3cad23c35c886",
-// 				appointmentDate: "2021-05-01",
-// 				appointmentTime: timeArray,
-// 			},
-// 			{
-// 				specialityID: "64532f139ec3cad23c35c886",
-// 				doctorID: "64532f139ec3cad23c35c886",
-// 				appointmentDate: "2021-05-01",
-// 				appointmentTime: timeArray,
-// 			},
-// 			{
-// 				specialityID: "64532f139ec3cad23c35c886",
-// 				doctorID: "64532f139ec3cad23c35c886",
-// 				appointmentDate: "2021-05-01",
-// 				appointmentTime: timeArray,
-// 			},
-// 			{
-// 				specialityID: "64532f139ec3cad23c35c886",
-// 				doctorID: "64532f139ec3cad23c35c886",
-// 				appointmentDate: "2021-05-01",
-// 				appointmentTime: timeArray,
-// 			},
-// 			{
-// 				specialityID: "64532f139ec3cad23c35c886",
-// 				doctorID: "64532f139ec3cad23c35c886",
-// 				appointmentDate: "2021-05-01",
-// 				appointmentTime: timeArray,
-// 			},
-// 			{
-// 				specialityID: "64532f139ec3cad23c35c886",
-// 				doctorID: "64532f139ec3cad23c35c886",
-// 				appointmentDate: "2021-05-01",
-// 				appointmentTime: timeArray,
-// 			},
-// 		];
-// 		for (const item of scheduleDoctor) {
-// 			const scheupdateduleDoctor = new ScheduleDoctor(item);
-// 			await scheduleDoctor.save();
-// 		}
-// 		res.status(201).send("DONE");
-// 	} catch (error) {
-// 		handleError(500, error, res);
-// 	}
-// };
 
 // done
 const getScheduleBySpeciality = async (req, res) => {
@@ -167,8 +65,6 @@ const getScheduleByDoctor = async (req, res) => {
     try {
         const doctorID = req.body.doctorID;
         const appointmentDate = req.body.appointmentDate;
-        console.log("doctorID", doctorID);
-        console.log("appointmentDate", appointmentDate);
         let listTime = await scheduleServices.getScheduleByDoctor(
             doctorID,
             appointmentDate
@@ -261,6 +157,7 @@ const createAppointmentSchedule = async (req, res) => {
         const patientID = req.body.patientID;
         const doctorId = req.body.doctorID;
 
+
         const errorCheckCreate = await scheduleServices.checkCreateScheduleBySpeciality(specialityId, appointmentDate, appointmentTime, patientID);
         if (errorCheckCreate) {
             return res.status(errorCheckCreate.status).send(errorCheckCreate.error);
@@ -275,6 +172,7 @@ const createAppointmentSchedule = async (req, res) => {
             const errorIsDoctor = await validationServices.isDoctorOfCreateSchedule(doctorId);
 
             if (errorIsDoctor) {
+                console.log(errorIsDoctor, "errorIsDoctor");
                 return res.status(errorIsDoctor.status).send(errorIsDoctor.message);
             }
             const scheduleOfDoctor = await scheduleServices.getScheduleOfDoctor(

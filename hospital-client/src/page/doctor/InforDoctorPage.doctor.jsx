@@ -10,9 +10,8 @@ import { useState } from "react";
 
 function InforDoctor() {
   const inforDoctor = Auth.getInfo();
-  console.log(inforDoctor);
   const [isEdit, setIsEdit] = useState(false);
-  const updateDoctor = () => {};
+  const updateDoctor = () => { };
   return (
     <Box className="info-doctor-page">
       <Box

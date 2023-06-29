@@ -7,9 +7,9 @@ function InforPatient() {
   const navigate = useNavigate();
   const location = useLocation();
   const patient = location.state.patient;
-  console.log(patient);
+  const scheduleDoctor = location.state.scheduleDoctor;
   const handleCreateMedicalRecord = () => {
-    navigate("/create-medical-record", { state: { patient: patient } });
+    navigate("/create-medical-record", { state: { patient: patient, scheduleDoctor: scheduleDoctor } });
   };
   return (
     <Box
@@ -32,7 +32,7 @@ function InforPatient() {
             fontWeight: "700",
             fontSize: "20px",
             marginRight: "30px",
-            width: "100px",
+            width: "300px",
           }}>
           Họ tên:
         </Typography>
@@ -47,7 +47,7 @@ function InforPatient() {
             fontWeight: "700",
             fontSize: "20px",
             marginRight: "30px",
-            width: "100px",
+            width: "300px",
           }}>
           Ngày sinh:
         </Typography>
@@ -62,7 +62,7 @@ function InforPatient() {
             fontWeight: "700",
             fontSize: "20px",
             marginRight: "30px",
-            width: "100px",
+            width: "300px",
           }}>
           Điện thoại:
         </Typography>
@@ -77,12 +77,27 @@ function InforPatient() {
             fontWeight: "700",
             fontSize: "20px",
             marginRight: "30px",
-            width: "100px",
+            width: "300px",
           }}>
           Địa chỉ:
         </Typography>
         <Typography sx={{ color: Colors.BLACK, fontSize: "20px" }}>
           {patient.address}
+        </Typography>
+      </Box>
+      <Box sx={{ display: "flex", paddingTop: "20px" }}>
+        <Typography
+          sx={{
+            color: Colors.DEFAULT_COLOR,
+            fontWeight: "700",
+            fontSize: "20px",
+            marginRight: "30px",
+            width: "300px",
+          }}>
+          Mô tả bênh của bệnh nhân:
+        </Typography>
+        <Typography sx={{ color: Colors.BLACK, fontSize: "20px" }}>
+          {scheduleDoctor.description}
         </Typography>
       </Box>
 

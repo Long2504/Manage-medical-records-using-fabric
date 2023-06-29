@@ -30,11 +30,13 @@ router.post(
     authMiddlewares.checkUserExists("username"),
     authController.forgotPassword
 );
+
 // verify email
 router.post(
     "/verify-forget-password",
     authController.verifyResetPassword
 );
+
 // reset password
 router.post(
     "/password-reset",
