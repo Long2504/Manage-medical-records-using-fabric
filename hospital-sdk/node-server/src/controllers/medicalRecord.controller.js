@@ -61,9 +61,13 @@ const getMedicalRecordByIdPatient = async (req, res) => {
             res.status(404).send({ message: "Patient not found" });
             return;
         }
-        const medicalRecords = await getMedicalRecordByIdPatientNetwork(
-            idPatient
-        );
+        // const medicalRecords = await getMedicalRecordByIdPatientNetwork(
+        //     idPatient
+        // );
+        const medicalRecords = await getAllMedicalRecordsNetwork("admin");
+        const result = [];
+
+
         if (medicalRecords.status) {
             if (medicalRecords.status === 404) {
                 return res.status(200).send([]);
@@ -73,7 +77,12 @@ const getMedicalRecordByIdPatient = async (req, res) => {
                 return;
             }
         }
-        return res.status(200).send(medicalRecords);
+        for (let i = 0; i < medicalRecords.length; i++) {
+            if (medicalRecords[i].Record.patientID === idPatient) {
+                result.push(medicalRecords[i]);
+            }
+        }
+        return res.status(200).send(result);
     } catch (error) {
         handleError(500, error, res);
     }

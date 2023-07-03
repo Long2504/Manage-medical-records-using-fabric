@@ -35,21 +35,20 @@ const verifyRole = (role) => (req, res, next) => {
     }
 };
 
-const checkDuplicateUsernameOrEmail =
-    (model, field) => async (req, res, next) => {
-        try {
-            const value = req.body[field];
-            const user = await model.findOne({ [field]: value });
-            if (user !== null) {
-                return res.status(400).json({
-                    message: `The ${field} is already in use`,
-                });
-            }
-            next();
-        } catch (error) {
-            handleError(500, error, res);
+const checkDuplicateUsernameOrEmail = (model, field) => async (req, res, next) => {
+    try {
+        const value = req.body[field];
+        const user = await model.findOne({ [field]: value });
+        if (user !== null) {
+            return res.status(400).json({
+                message: `The ${field} is already in use`,
+            });
         }
-    };
+        next();
+    } catch (error) {
+        handleError(500, error, res);
+    }
+};
 
 const checkUserExists = (field) => async (req, res, next) => {
     try {

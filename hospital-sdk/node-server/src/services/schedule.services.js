@@ -147,7 +147,6 @@ const getScheduleByDoctor = async (doctorId, Date) => {
             doctorID: doctorId,
             appointmentDate: Date,
         });
-        console.log(scheduleDoctor, "scheduleDoctor");
         //if doctor have not schedule => return arrayTime (full schedule)
         if (!scheduleDoctor) return false;
         return handleTimeFromDB(scheduleDoctor.appointmentTime);
@@ -357,9 +356,13 @@ const handleAndUpdateScheduleDocTor = async (
 
 const getAppointmentScheduleByDoctor = async (doctorId, Date) => {
     try {
+        // const scheduleDoctor = await AppointmentSchedule.find({
+        //     doctorID: doctorId,
+        //     appointmentDate: Date,
+        //     status: "booked",
+        // });
         const scheduleDoctor = await AppointmentSchedule.find({
             doctorID: doctorId,
-            appointmentDate: Date,
             status: "booked",
         });
         console.log(scheduleDoctor, "scheduleDoctor");

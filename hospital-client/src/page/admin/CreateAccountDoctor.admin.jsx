@@ -64,8 +64,10 @@ function CreateAccountDoctor() {
       setError("Vui lòng nhập đầy đủ thông tin");
     } else {
       dispatch(createAccountDoctor(doctorCreated)).then((res) => {
-        if (res.error.message) {
-          setError("Tên đăng nhập đã tồn tại");
+        if (res.error) {
+          if (res.error.response.status === 400) {
+            setError("Tên đăng nhập đã tồn tại");
+          }
         } else {
           navigate("/");
         }

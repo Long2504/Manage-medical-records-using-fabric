@@ -164,6 +164,9 @@ export const invoke = async (networkObj, isQuery, fcn, args) => {
 	try {
 		const contract = networkObj.contract;
 		let result;
+		console.log("isQuery: ", isQuery);
+		console.log("fcn: ", fcn);
+		console.log("args: ", args);
 		if (isQuery) {
 			result = await contract.evaluateTransaction(fcn, ...args);
 		} else {
@@ -248,7 +251,6 @@ export const getAllMedicalRecordsNetwork = async (id) => {
 export const getMedicalRecordByIdPatientNetwork = async (idPatient) => {
 	try {
 		const networkObj = await connectToNetwork(idPatient);
-		console.log(networkObj, "networkObj");
 		if (networkObj.error) {
 			return networkObj;
 		}
@@ -260,6 +262,7 @@ export const getMedicalRecordByIdPatientNetwork = async (idPatient) => {
 			data
 		);
 		if (result.error) {
+			console.log(result.error);
 			return result;
 		}
 		return JSON.parse(result);

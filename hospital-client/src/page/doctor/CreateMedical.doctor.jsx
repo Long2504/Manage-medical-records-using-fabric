@@ -26,6 +26,7 @@ function CreateMedical() {
     diseaseProgression: "",
     prescription: "",
     note: "",
+    idSchedule: scheduleDoctor._id
   });
 
   const onChange = (e) => {

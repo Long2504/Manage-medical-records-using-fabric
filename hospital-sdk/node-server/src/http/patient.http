@@ -3,7 +3,7 @@ POST http://45.32.28.204:8081/api/patient/get-medical-record HTTP/1.1
 Content-Type: application/json
 
 {
-  "patientId": "123452131212"
+  "patientId": "6493a3a563561b691315b459"
 }
 
 ### get schedule speciality

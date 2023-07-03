@@ -36,7 +36,7 @@ POST http://localhost:8081/api/doctor/get-all-medical-record
 Content-Type: application/json
 
 {
-  "doctorID": "long"
+  "doctorID": "647f0f9c56926b0f05f07ece"
 }
 
 ### update test and photo record
@@ -50,7 +50,7 @@ Content-Type: application/json
 }
 
 ### get doctors by speciality
-POST http://localhost:8081/api/doctor/get-doctors-by-speciality
+POST http://45.32.28.204:8081/api/doctor/get-doctors-by-speciality
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NzZjZmY0OWE0OTU4MWIzMDUwZGE0NCIsImlhdCI6MTY4Njk4NTUxOCwiZXhwIjoxNjg3MDcxOTE4fQ.TAQvMlrj_yx4cvzJjTeXdiAAUNoS8md_jCCZjjSbZ-Q
 

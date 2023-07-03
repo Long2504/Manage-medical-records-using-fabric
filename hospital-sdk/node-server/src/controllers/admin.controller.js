@@ -35,7 +35,7 @@ const createAccountDoctor = async (req, res) => {
             experiences: doctor.experiences,
             email: user.email,
         }
-        const errorRegister = await registerUser(user._id.toString());
+        const errorRegister = await registerUser(req.body.doctorId.toString());
         if (errorRegister.error) {
             return res.status(errorRegister.status).send(errorRegister.error);
         }

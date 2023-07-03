@@ -10,7 +10,7 @@ const router = Router();
 export default router;
 //get medical record by id patient
 // not yet fix bug
-router.post("/get-medical-record", authMiddlewares.verifyToken, medicalRecordController.getMedicalRecordByIdPatient);
+router.post("/get-medical-record", medicalRecordController.getMedicalRecordByIdPatient);
 
 // get schedule by speciality
 //not yet fix bug
