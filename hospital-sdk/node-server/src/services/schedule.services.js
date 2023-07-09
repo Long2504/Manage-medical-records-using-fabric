@@ -387,6 +387,17 @@ const getAppointmentScheduleByDoctor = async (doctorId, Date) => {
 
 };
 
+const getAppointmentScheduleByPatient = async (patientId) => {
+    try {
+        const scheduleDoctor = await AppointmentSchedule.find({
+            patientID: patientId,
+        }).select("-_v").populate([{ path: "specialityID", select: "_id name" }, { path: "doctorID", select: "_id name" }]);
+        return scheduleDoctor;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 const updateStatusAppointmentSchedule = async (id, status) => {
     try {
         const schedule = await AppointmentSchedule.findByIdAndUpdate(
@@ -416,5 +427,6 @@ export default {
     handleAndUpdateScheduleDocTor,
     checkCreateScheduleBySpeciality,
     getAppointmentScheduleByDoctor,
+    getAppointmentScheduleByPatient,
     updateStatusAppointmentSchedule
 };

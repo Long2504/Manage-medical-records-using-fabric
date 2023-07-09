@@ -20,8 +20,12 @@ moment.locale("vi");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/api", cors(corsOptions), route);
-
-const port = process.env.PORT || 8081;
+app.get("/123", (req, res) => {
+    res.send("Hello World!");
+  });
+  
+  
+const port = process.env.PORT || 5000;
 app.listen(port, "0.0.0.0", () => {
     console.log(`Listening on port ${port}...`)
     logger.info(`Server running at http://45.32.28.204:${port}/`);

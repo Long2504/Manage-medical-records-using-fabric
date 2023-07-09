@@ -7,6 +7,10 @@ import {
 import handleError from "../middleware/error.middewares.js";
 import patientServices from "../services/patient.services.js";
 import { checkFormatId } from "../utils/common.js";
+import doctorServices from "../services/doctor.services.js";
+import moment from "moment";
+import { registerUser, createMedicalRecordNetwork } from "../../../fabric-network/app.js";
+import scheduleServices from "../services/schedule.services.js";
 
 const getAllMedicalRecord = async (req, res) => {
     try {
@@ -22,7 +26,6 @@ const getAllMedicalRecord = async (req, res) => {
                 result.push({ medicalRecords: medicalRecords[i], patient });
             }
         }
-
         res.status(200).send(result);
     } catch (error) {
         handleError(500, error, res);
@@ -87,9 +90,72 @@ const getMedicalRecordByIdPatient = async (req, res) => {
         handleError(500, error, res);
     }
 };
+const createMedicalRecord = async (req, res) => {
+    try {
+        const date = new Date();
+        const utc = moment.utc(date).toDate();
+        const dateTime = moment(utc)
+            .local()
+            .format("dddd, hh:mm:ss, DD/MM/YYYY");
+        // check null of fields or not exist
+        const errorCheckFields = await doctorServices.checkFieldOfCreateMedicordRecord(req.body.doctorID, req.body.patientID);
 
+        if (errorCheckFields.error) {
+            return res.status(errorCheckFields.status).send({
+                message: errorCheckFields.error,
+            });
+        }
+
+        const medicalRecord = {
+            medicalRecordID: `MR${Date.now()}`,
+            patientID: req.body.patientID,
+            doctor: {
+                doctorID: req.body.doctorID,
+                name: errorCheckFields.name,
+            },
+            resultTestAndPhotos: {},
+            date: dateTime,
+            symptonOfDisease: req.body.symptonOfDisease,
+            diagosisOfDoctor: req.body.diagosisOfDoctor,
+            treatmentProcess: req.body.treatmentProcess,
+            diseaseProgression: req.body.diseaseProgression,
+            prescription: req.body.prescription,
+            note: req.body.note,
+        };
+
+
+        // check doctor join network
+        if (!(await checkUserExists(medicalRecord.doctor.doctorID))) {
+            res.status(400).send({
+                message: "Doctor does not exist",
+            });
+            return;
+        }
+        //check patient join network
+        if (!(await checkUserExists(medicalRecord.patientID))) {
+            await registerUser(medicalRecord.patientID);
+        }
+        const responeErrorCreate = await createMedicalRecordNetwork(
+            medicalRecord
+        );
+        if (responeErrorCreate) {
+            return res.status(responeErrorCreate.status).send({
+                message: responeErrorCreate.error,
+            });
+        }
+        await scheduleServices.updateStatusAppointmentSchedule(
+            req.body.idSchedule,
+            "completed"
+        );
+
+        return res.status(201).send(medicalRecord);
+    } catch (error) {
+        handleError(500, error, res);
+    }
+};
 export default {
     getAllMedicalRecord,
     getMedicalRecordByIdDoctor,
     getMedicalRecordByIdPatient,
+    createMedicalRecord,
 };

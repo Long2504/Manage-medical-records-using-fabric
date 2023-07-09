@@ -9,11 +9,11 @@ import patientRoute from "./patient.route.js";
 const route = express.Router();
 
 route.use("/auth", authRoute);
-// route.use("/schedule", scheduleRoute);
+route.use("/schedule", scheduleRoute);
 route.use("/doctor", doctorRoute);
 route.use("/speciality", specialityRoute);
 route.use("/admin", adminRoute);
 route.use("/medical-record", medicalRecordRoute);
-route.use("/patient",patientRoute)
+route.use("/patient", patientRoute)
 
 export default route;

@@ -26,7 +26,7 @@ export const authSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(Login.pending, (state, action) => {
+    builder.addCase(Login.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(Login.fulfilled, (state, action) => {
@@ -34,8 +34,9 @@ export const authSlice = createSlice({
       state.loggedIn = true;
       state.role = Auth.getRole();
     });
-    builder.addCase(Login.rejected, (state, action) => {
-      state.error = action;
+    builder.addCase(Login.rejected, (state, { payload }) => {
+      state.error = payload;
+      state.loading = false;
     });
 
     builder.addCase(ForgotPassword.pending, (state, action) => {

@@ -9,6 +9,7 @@ import doctorServices from "../services/doctor.services.js";
 import patientServices from "../services/patient.services.js";
 import authServices from "../services/auth.services.js";
 import { randomConfirmCode } from "../utils/common.js";
+import { Console, log } from "console";
 
 // register a new user
 const signup = async (req, res) => {

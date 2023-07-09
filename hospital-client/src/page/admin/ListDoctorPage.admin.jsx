@@ -97,7 +97,7 @@ function ListDoctorPage() {
         <tbody>
           {filterDoctors.map((item, index) => {
             return (
-              <tr key={index}>
+              <tr key={index} >
                 <td>{index + 1}</td>
                 <td>{item.name}</td>
                 <td>{item.phone}</td>
@@ -140,7 +140,6 @@ function ListDoctorPage() {
               }}>
               Thông tin bác sĩ
             </Typography>
-
             <div style={{ display: "flex" }}>
               <div>
                 <Typography

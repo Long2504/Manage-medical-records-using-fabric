@@ -159,12 +159,14 @@ const createAppointmentSchedule = async (req, res) => {
 
 
         const errorCheckCreate = await scheduleServices.checkCreateScheduleBySpeciality(specialityId, appointmentDate, appointmentTime, patientID);
+
         if (errorCheckCreate) {
             return res.status(errorCheckCreate.status).send(errorCheckCreate.error);
         }
         const errorCheckExist = await validationServices.checkExistOfCreateSchedule(specialityId, patientID);
+        console.log(errorCheckExist, "errorCheckExist");
         if (errorCheckExist) {
-            return res.status(errorCheckExist.status).send(errorCheckExist.error);
+            return res.status(errorCheckExist.status).send(errorCheckExist.message);
         }
 
         // create doctor schedule
@@ -269,6 +271,22 @@ const checkUpdate = async (req, res) => {
     }
 };
 
+const getScheduleByIdPatient = async (req, res) => {
+    try {
+        const schedule = await scheduleServices.getAppointmentScheduleByPatient(req.body.patientID);
+        res.status(200).send(schedule);
+    } catch (error) {
+        handleError(500, error, res);
+    }
+};
+const getScheduleOfDoctorByDate = async (req, res) => {
+    try {
+        const listSchedule = await scheduleServices.getAppointmentScheduleByDoctor(req.body.doctorID, req.body.date);
+        res.status(200).send(listSchedule);
+    } catch (error) {
+        handleError(500, error, res);
+    }
+};
 export default {
     update,
     getScheduleBySpeciality,
@@ -277,4 +295,6 @@ export default {
     createAppointmentScheduleByDoctor,
     createAppointmentSchedule,
     checkUpdate,
+    getScheduleByIdPatient,
+    getScheduleOfDoctorByDate,
 };

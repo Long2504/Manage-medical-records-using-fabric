@@ -21,6 +21,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../redux/slice/auth.slice";
 import { FaSignOutAlt } from "react-icons/fa";
 import { Colors } from "../constants/Colors";
+import Auth from "../utils/helper/auth.helper";
 
 const drawerWidth = 240;
 
@@ -91,6 +92,7 @@ const Drawer = styled(MuiDrawer, {
 export default function Sidebar({ children, menuItem }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const roles = Auth.getRole();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -160,6 +162,14 @@ export default function Sidebar({ children, menuItem }) {
         </DrawerHeader>
         <Divider />
         <List>
+          {open ? <p style={{
+            color: Colors.DEFAULT_COLOR,
+            fontSize: "1.2rem",
+            fontWeight: "bold",
+            textAlign: "center",
+            marginTop: "1rem",
+
+          }}>{roles === "admin" ? "Quản trị viên" : "Bác sĩ"}</p> : ''}
           {menuItem.map((item, index) => (
             <ListItem key={index} disablePadding sx={{ display: "block" }}>
               <ListItemButton
@@ -182,9 +192,11 @@ export default function Sidebar({ children, menuItem }) {
                   sx={{ opacity: open ? 1 : 0 }}
                 />
               </ListItemButton>
+              <Divider />
             </ListItem>
           ))}
           <ListItem key={"logout"} disablePadding sx={{ display: "block" }}>
+            <Divider />
             <ListItemButton
               onClick={() => handleLogout()}
               sx={{

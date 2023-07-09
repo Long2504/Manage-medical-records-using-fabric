@@ -15,12 +15,12 @@ const checkDoctorExist = async (doctorId) => {
 };
 
 const getDoctorByIdSpeciality = async (specialityId) => {
-    const doctor = await Doctor.find({ specialityID: specialityId }).select("-_id -__v").populate({ path: "specialityID", select: "_id name" });
+    const doctor = await Doctor.find({ specialityID: specialityId }).select("-__v").populate({ path: "specialityID", select: "_id name" });
     return doctor;
 };
 
 const getDoctorById = async (doctorId) => {
-    const doctor = await Doctor.findOne({ _id: doctorId }).select("-_id -__v").populate({ path: "specialityID", select: "_id name" });
+    const doctor = await Doctor.findOne({ _id: doctorId }).select("-__v").populate({ path: "specialityID", select: "_id name" });
     return doctor;
 };
 
@@ -98,6 +98,7 @@ const checkFieldOfCreateMedicordRecord = async (doctorId, patientId) => {
         };
     }
 };
+
 export default {
     create,
     getDoctorByIdSpeciality,

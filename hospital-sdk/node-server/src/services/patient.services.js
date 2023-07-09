@@ -52,7 +52,7 @@ const updateDataPatient = async (data) => {
 
 const getPatientByUserId = async (userId) => {
   try {
-    const patient = await Patient.findOne({ userID: userId }).select("-__v");
+    const patient = await Patient.findOne({ userID: userId }).select("-__v -userID");
     return patient;
   } catch (error) {
     console.error(error);

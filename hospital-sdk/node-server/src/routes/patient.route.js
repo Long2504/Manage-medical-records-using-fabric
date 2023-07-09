@@ -18,7 +18,7 @@ router.post("/get-schedule-speciality", authMiddlewares.verifyToken, scheduleCon
 
 // get schedule by doctor
 // not yet fix bug
-router.post("/get-schedule-doctor", authMiddlewares.verifyToken, scheduleController.getScheduleByDoctor);
+router.post("/get-schedule-doctor", scheduleController.getScheduleByDoctor);
 
 // //create appointment schedule by speciality
 // // not yet fix bug
@@ -33,3 +33,6 @@ router.post("/create-schedule", scheduleController.createAppointmentSchedule);
 
 //update data of patient
 router.post("/update-patient", patientController.updateDataPatient);
+
+// get schedule by id patient
+// router.post("/get-schedule-by-id-patient", scheduleController.getScheduleByIdPatient);

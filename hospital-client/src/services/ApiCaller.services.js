@@ -4,12 +4,9 @@ import Auth from "../utils/helper/auth.helper";
 
 export const ApiCaller = (method, body, endpoint) => {
   const headers = getHeader();
-  console.log("body", body);
-  console.log("headers", headers);
-  console.log("method", method);
   return axios({
     method: method,
-    url: `http://45.32.28.204:8081/api/${endpoint}`,
+    url: `https://d38d-42-1-94-27.ngrok-free.app/api/${endpoint}`,
     headers: headers,
     data: body,
     withCredentials: true,

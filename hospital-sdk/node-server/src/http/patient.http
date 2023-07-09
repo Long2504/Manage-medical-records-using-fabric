@@ -12,18 +12,18 @@ POST http://45.32.28.204:8081/api/patient/get-schedule-speciality HTTP/1.1
 Content-Type: application/json
 
 {
-  "specialityID": "64532f139ec3cad23c35c886",
+  "specialityID": "647f0f9c56926b0f05f07ece",
   "appointmentDate": "2021-05-01"
 }
 
 ### get schedule doctor
 //done
-POST http://45.32.28.204:8081/api/patient/get-schedule-doctor HTTP/1.1
+POST https://160b-42-1-94-27.ngrok-free.app/api/patient/get-schedule-doctor HTTP/1.1
 Content-Type: application/json
 
 {
-  "doctorID": "647f0fa156926b0f05f07f74",
-  "appointmentDate": "2021-05-01"
+  "doctorID": "647f0f9c56926b0f05f07ece",
+  "appointmentDate": "2023-07-05"
 }
 
 ### create appointment schedule by speciality
@@ -56,11 +56,12 @@ Content-Type: application/json
 
 ### create appointment schedule doctor
 //done 90% check error
-POST http://45.32.28.204:8081/api/patient/create-schedule HTTP/1.1
+# POST http://45.32.28.204:8081/api/patient/create-schedule HTTP/1.1
+POST http://localhost:5000/api/patient/create-schedule HTTP/1.1
 Content-Type: application/json
 
 {
-  "appointmentDate": "22-05-2021",
+  "appointmentDate": "2023-07-06",
   "appointmentTime": "10:00",
   "specialityID": "647ee9e5aee1ff0c2b4ded18",
   "patientID": "64532f139ec3cad23c35c886",

@@ -8,7 +8,7 @@ export const getAllDoctor = createAsyncThunk(
       const { data } = await ApiCaller(
         "GET",
         null,
-        "admin/doctor/get-all-doctor"
+        "doctor/get-all-doctor"
       );
       return data;
     } catch (error) {

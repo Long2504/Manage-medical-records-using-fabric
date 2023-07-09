@@ -44,7 +44,6 @@ function CreateAccountDoctor() {
 
   //handle
   const handleChoiceDoctor = (doctor) => {
-    console.log("doctor", doctor);
     setDoctorCurrent(doctor);
     setDoctorCreated({ ...doctorCreated, doctorId: doctor._id });
     setShow(false);
@@ -165,7 +164,7 @@ function CreateAccountDoctor() {
             id="description"
             label="Thông tin chi tiết"
             multiline
-            rows={5}
+            // rows={5}
             variant="outlined"
             value={doctorCurrent.description}
           />
@@ -193,53 +192,56 @@ function CreateAccountDoctor() {
           </Button>
         )}
       </div>
-      <Modal show={show} onHide={handleClose} className="pt-5">
-        <Modal.Header closeButton>
-          <Modal.Title>Danh sách các bác sĩ</Modal.Title>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        className="pt-4"
+        size="xl"
+      >
+        <Modal.Header closeButton >
+          <Modal.Title centered>Danh sách các bác sĩ</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <div>
-            <p>Thông tin bác sĩ</p>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Tên</th>
-                  <th>Số điện thoại</th>
-                  <th>Chuyên khoa</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {listDoctorNotJoinChannel.map((item, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td>{item.name}</td>
-                      <td>{item.phone}</td>
-                      <td>{item.specialityID.name}</td>
-                      <td>
-                        <Button
-                          variant="success"
-                          onClick={() => handleChoiceDoctor(item)}>
-                          Chọn
-                        </Button>
-                      </td>
-                    </tr>
-                  );
-                })}
-                <tr></tr>
-              </tbody>
-            </Table>
-          </div>
+        <Modal.Body >
+          <p>Thông tin bác sĩ</p>
+          <Table striped bordered hover >
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Tên</th>
+                <th>Số điện thoại</th>
+                <th>Chuyên khoa</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody >
+              {listDoctorNotJoinChannel.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{item.name}</td>
+                    <td>{item.phone}</td>
+                    <td>{item.specialityID.name}</td>
+                    <td>
+                      <Button
+                        variant="success"
+                        onClick={() => handleChoiceDoctor(item)}>
+                        Chọn
+                      </Button>
+                    </td>
+                  </tr>
+                );
+              })}
+              <tr></tr>
+            </tbody>
+          </Table>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer >
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </div >
   );
 }
 

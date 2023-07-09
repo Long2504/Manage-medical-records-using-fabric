@@ -88,7 +88,6 @@ function InforDoctor() {
               }}></Typography>
           </Box>
           <Divider />
-
           <Box>
             <Box sx={{ marginBottom: "10px" }}>
               <Typography
